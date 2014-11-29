@@ -1,0 +1,116 @@
+\usepackage[utf8]{inputenc}
+\usepackage[ngerman]{babel}
+
+\usepackage{ngerman}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amssymb}
+\usepackage{mathrsfs}
+\usepackage{amstext}
+\usepackage{amsfonts}
+\usepackage{mathtools}
+\usepackage{enumitem}
+%\usepackage{extarrows}
+\usepackage{tikz}
+
+\setlength{\parindent}{0pt}
+\renewcommand{\baselinestretch}{1.0}
+\usepackage[inner=2cm,outer=2cm,top=1.5cm,bottom=1.5cm,includeheadfoot]{geometry}
+\theoremstyle{remark}
+
+
+
+% math environments
+
+\newtheorem{problem}{Problem}
+\newtheorem*{problem*}{Problem}
+\newtheorem{theorem}{Theorem}
+\newtheorem*{theorem*}{Theorem}
+\newenvironment{beweis}{\begin{proof}[Beweis]}{\end{proof}}  
+\newenvironment{beweisidee}{\begin{proof}[Beweisidee]}{\end{proof}}
+
+\newcommand{\markdef}[1]{\textbf{#1}}  
+\newcommand{\norm}[1]{\ensuremath{|#1|}}
+\newcommand{\nnorm}[1]{\ensuremath{\|#1\|}}
+\newcommand{\nnnorm}[1]{\ensuremath{\||#1\||}}
+\newcommand{\set}[1]{\left\{ #1 \right\}}
+\newcommand{\abl}[2]{\frac{\partial #1}{\partial #2}}
+
+
+% Angestrichene Großbuchstaben
+\newcommand{\A}{\mathbb{A}}
+\newcommand{\B}{\mathbb{B}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\D}{\mathbb{D}}
+\newcommand{\E}{\mathbb{E}}
+\newcommand{\F}{\mathbb{F}}   
+\newcommand{\G}{\mathbb{G}}
+\renewcommand{\H}{\mathbb{H}}
+\newcommand{\I}{\mathbb{I}}
+\newcommand{\J}{\mathbb{J}}
+\newcommand{\K}{\mathbb{K}}
+\renewcommand{\L}{\mathbb{L}}
+\newcommand{\M}{\mathbb{M}}
+\newcommand{\N}{\mathbb{N}}
+% \O fehlt (wird benötigt als \Omega)
+%\newcommand{\O}{\mathbb{O}}
+\renewcommand{\P}{\mathbb{P}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\R}{\mathbb{R}}
+\renewcommand{\S}{\mathbb{S}}
+\newcommand{\T}{\mathbb{T}}
+\newcommand{\U}{\mathbb{U}}
+\newcommand{\V}{\mathbb{V}}
+\newcommand{\W}{\mathbb{W}}
+\newcommand{\X}{\mathbb{X}}
+\newcommand{\Y}{\mathbb{Y}}
+\newcommand{\Z}{\mathbb{Z}}
+
+% Kalligraphisches Alphabet
+\newcommand{\cA}{{\cal A}}
+\newcommand{\cB}{{\cal B}}
+\newcommand{\cC}{{\cal C}}
+\newcommand{\cD}{{\cal D}}
+\newcommand{\cE}{{\cal E}}
+\newcommand{\cF}{{\cal F}}
+\newcommand{\cG}{{\cal G}}
+\newcommand{\cH}{{\cal H}}
+\newcommand{\cI}{{\cal I}}
+\newcommand{\cJ}{{\cal J}}
+\newcommand{\cK}{{\cal K}}
+\newcommand{\cL}{{\cal L}}
+\newcommand{\cM}{{\cal M}}
+\newcommand{\cN}{{\cal N}}
+\newcommand{\cO}{{\cal O}}
+\newcommand{\cP}{{\cal P}}
+\newcommand{\cQ}{{\cal Q}}
+\newcommand{\cR}{{\cal R}}
+\newcommand{\cS}{{\cal S}}
+\newcommand{\cT}{{\cal T}}
+\newcommand{\cU}{{\cal U}}
+\newcommand{\cV}{{\cal V}}
+\newcommand{\cW}{{\cal W}}
+\newcommand{\cX}{{\cal X}}
+\newcommand{\cY}{{\cal Y}}
+\newcommand{\cZ}{{\cal Z}}
+
+% Operatoren
+
+\newcommand{\Span}{\operatorname{span}}
+\newcommand{\sign}{\operatorname{sign}}
+\newcommand{\Graph}{\operatorname{Graph}}
+\renewcommand{\div}{\operatorname{div}}
+\newcommand{\id}{\operatorname{id}}
+\newcommand{\diam}{\operatorname{diam}}
+\newcommand{\inner}{\operatorname{int}}
+
+% Abkürzungen
+
+\newcommand{\eps}{\varepsilon}
+\renewcommand{\phi}{\varphi}
+
+% Things for equations  
+\numberwithin{equation}{section}
+\setcounter{subsection}{0}
+
+%\renewcommand{\labelenumi}{(\alph{enumi})}
