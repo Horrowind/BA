@@ -1,19 +1,86 @@
 \section{Preliminaries}
 
-In this thesis we want to discuss a very general problem arising from the combinatorical properties of polyhedra.
-\begin{problem*} Given natural numbers $f_3$, $f_4$, \dots, $f_k$, does there exist a polyhedron with exactly $f_n$ $n$-gons for each $3 \leq n \leq k$.
-\end{problem*}
-A very powerful tool to answer this question is the Eulers relation.
-\begin{theorem*}\label{eulers_relation}
-\end{theorem*}
+% Todo: define $p$-vector, $f$-vector, $v$-vector
+% realization of a $p$-vector, notation of a $p$-vector, independence of length
+\begin{definition}[Sequence]
+  A sequence $a$ in this thesis is a map $\nats \setminus \{0, 1, 2\} \rightarrow \nats$ with finite support. These maps will be written as $(a(3), a(4), ..., a(k))$, where $k = \operatorname{max} \operatorname{supp} a$. If $a$ has a small but wide support these notation will be further abbreviated as $[a(k_1) \times k_1, a(k_2) \times k_2, ...]$, where $a(k) \times k$ will be simply written as $k$ if $a(k) = 1$.
+\end{definition}
+\begin{example}
+  $(2, 0, 0, 1)$, $[2 \times 3, 1 \times 6]$ and $[2 \times 3, 6]$ all denote the same sequence. 
+\end{example}
+\begin{definition}[$p$-vector and $v$-vector of an polyhedron]\label{def_relizable}
+  The $p$-vector of a polyhedron $P$ is the sequence $(p_3, \dots, p_m)$, where $p_k$ denotes the number of faces with exactly $k$ vertices. Similarily the $v$-vector of $P$ is the sequence $(v_1, \dots, v_n)$, where each $v_k$ measures the number of edges of $P$ with valence $k$. 
+\end{definition}
 
+\begin{definition}
+Sequences $a = (a_3, \dots, a_m)$, $b = (b_3, \dots, b_m)$ are said to be realizable, if there exists a polyhedron which has $a$ is its $p$-vector and $b$ as its $v$-vector.
+\end{definition}
 
-Let us consider the following problem:
+With this setup, we want to discuss in this thesis a broad problem arising from the combinatorical properties of polyhedra:
+\begin{problem} Are two arbitrarily given sequences realizable?
+\end{problem}
+The most basic result answering that question partially is Eulers relation.
+\begin{theorem}[Eulers relation]\label{thm_eulers_relation}
+  For each polyhedron with $v$ vertices, $e$ edges and $f$ faces
+  \begin{align*}
+    v - e + f = 2
+  \end{align*}
+  holds.
+\end{theorem}
+Given the notation as above one can immediatly draw some basic conclusions from this relation: For one the number of vertices $v$ is obviously the sum of the entries of $v$-vector, as is the same with $f$, which is the sum of the $p$-vector. Using a double counting argument (each edge is adjacent to two faces and each edge is adjacent to two vertices) the following for the number of edges holds:
+\begin{align*}
+  2e = \sum_{k=3}^{m} k \cdot p_k = \sum_{k=3}^{n} k \cdot f_k
+\end{align*}
+Putting these equations in Eulers relation \ref{thm_eulers_relation} gives for some $t \in (0, 1)$
+\begin{align*}
+  \sum_{k=3}^m v_k - \left(\frac{t}{2} \sum_{k=3}^m k v_k + \frac{1-t}{2} \sum_{k=3}^n k p_k \right) + \sum_{k=3}^n p_k = 2
+\end{align*}
+which can be transformed into:
+\begin{align*}
+  t \sum_{k=3}^m \left(\frac{2}{t} - k \right) v_k + (1-t) \sum_{k=3}^n \left( \frac{2}{1-t} - k \right) p_k = 4.
+\end{align*}
+This equation can be independant of the value of some $v_k$ or $p_{k'}$ when the value of $t$ is appropriately choesen. Of special interest in this thesis are the cases of one $v_r$ giving no information in the above equation (so $r \geq 3$ fixed and $t = \frac{2}{r}$) and having $v_{k} = 0$ for each $k \geq 3$, $k \neq r$. The resulting polyhedron has the property that each of his vertices has valence $r$. 
+% TODO Explain this.
+\begin{definition}[$r$-realizable]
+  A sequence $a = (a_3, \dots, a_m)$ is said to be $r$-realizable, if there exists a polyhedron such that $a$ is realizable with an $v$-vector consisting only of valence $r$ (in the sense of \ref{def_relizable}).
+\end{definition}
+Under these circumstances $r$ has to be in $\{3, 4, 5\}$.
 
-\begin{problem*}[General Eberhard's problem]
-\end{problem*}
+For $r \in \{3, 4, 5\}$ the following equations arise:
+\begin{align}
+  r &= 3: \sum_{k=3}^n \left(6 - k \right) p_k = 12 \label{eq_valence_3}\\
+  r &= 4: \sum_{k=3}^n \left(4 - k \right) p_k = 8  \label{eq_valence_4}\\
+  r &= 5: \sum_{k=3}^n \left( \frac{10}{3} - k \right) p_k = \frac{20}{3} \label{eq_valence_5}\\
+\end{align}
+\begin{notation}
+  If an $p$-vector $(p_3, \dots, p_k)$ is meant to be seen in this context, that each vertex of the considered polyhedron has valence $r$, this valence will be appended to the sequance, i.e. $(p_3, \dots, p_k)_r$.
+\end{notation}
+Even in with this rather specific constraints the problem stated above has no easy definite answer, as in, not every $p$-vector satisfying on of these equations can be realized as an polyhedron.
+\begin{example}
+  The $p$-vector $(0, 12, 1)_r$ has no realization but satisfies equation \ref{eq_valence_3}. To see this one can start with one hexagon. As only pentagons are left to build the rest of the polyhedron a ring of six pentagons has to be glued to the hexagon. Another ring of six pentagons is forced to be glued to the first leaving a hole of the shape of an hexagon in the end, but no polygons left to fill it.
+  % TODO: Add an image?!
+\end{example}
 
-Throughout the thesis we want to denote this problem as of $(f_1, f_2, ..., f_n)_p$-type.
+\begin{problem}[General Eberhard's problem]
+  Let $r \in \{3, 4, 5\}$ and $(q_3, \dots)$ be a sequence which satisfies 
+  \begin{align}
+    r &= 3: \sum_{k=3}^n \left( 6            - k \right) q_k = 0 \label{eq_zero_curv_3}\\
+    r &= 4: \sum_{k=3}^n \left( 4            - k \right) q_k = 0 \label{eq_zero_curv_4}\\
+    r &= 5: \sum_{k=3}^n \left( \frac{10}{3} - k \right) q_k = 0 \label{eq_zero_curv_5}
+  \end{align}
+  in the respective cases. Then show that for all sequences $(p_3, \dots)$  satisfying the respective equation \ref{eq_valence_3}, \ref{eq_valence_4} or \ref{eq_valence_5}, there exists an $c \in \nats$ for which $(p_3 + c \cdot q_3, p_4 + c \cdot q_4, \dots)$ is realizable as a polyhedron.
+\end{problem}
+\begin{notation}
+  Throughout the thesis we want to denote this problem as of $(q_3, \dots, p_n)_r$-type.
+\end{notation}
 
-\input{3_5_block_4}
+Equation \ref{eq_valence_3} and \ref{eq_valence_4} suggest that $(6)_3$ or $(4)_4$ might be good candidates for such statements. As it is, these questions are both proved and are known as the (non-general) Eberhards theorem:
 
+\begin{theorem}[Eberhards theorem] \label{thm_eberhard} The following holds:
+  \begin{enumerate}[(i)]
+  \item For each $p_3, p_4, p_5, p_7, \dots, p_m$ satisfiying \ref{eq_valence_3} there exists a number $p_6$ such that $(p_3, \dots, p_m)$ is realizable. \label{thm_eberhard_3}
+  \item For each $p_3, p_5, \dots, p_m$ satisfiying \ref{eq_valence_4} there exists a number $p_4$ such that $(p_3, \dots, p_m)$ is realizable. \label{thm_eberhard_4}
+  \end{enumerate}
+\end{theorem}
+
+%Todo Steinars theorem.
