@@ -12,6 +12,7 @@ set(sources
   case_3_5.tex
   case_3_4.tex
   case_5_7.tex
+  case_5_8.tex
 )
 
 
