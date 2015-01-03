@@ -1,8 +1,45 @@
 \section{The case $[5, 8]_3$}
 \begin{theorem}
-  Let $p = (p_3, p_4, p_5, \dots, p_n)$ be a given sequence satisfying equation \ref{eq_valence_3}, then there exists $r \in \nats$ for which $p + r [5, 7]_3$ is $3$-realizable.
+  Let $p = (p_3, p_4, p_5, \dots, p_n)$ be a given sequence satisfying equation \ref{eq_valence_3}, then there exists $r \in \nats$ for which $p + r [2 \times 5, 8]_3$ is $3$-realizable.
   \begin{proof}
-      The proof starts by using the construction given by Eberhards Theorem \ref{thm_eberhard}(\ref{thm_eberhard_3}). This results in a realization of $p$ which has many more hexagons then needed. The next step is to remove these hexagons and replace them by pentagons and heptagons. To further proceed, one adds a ring of hexagons around each polygon in the realization, these will be replaced immediately but serve the purpose of adding space around each polygon which can be used for replacement with pentagons and heptagons. The process is illustrated below:\\
+    The proof is unsuprisingly similiar to the last one given. Again one chooses a realization by the classical Eberhards Theorem \ref{thm_eberhard}(\ref{thm_eberhard_3}) and substitutes the surplus of hexagons by two pentagons and one octagon. Seperating the faces in a kind of different way then before, this gives enough space for this substitution. The separation consists of an ring of pentagons around each polygon of the realization followed by a ring of octagons and fitting in the emerging holes another round of pentagons (equal to the number of pentagons and octagons in the previous rings as to have a discrete curvature of zero). This process is depicted below:
+
+    \begin{figure}[htpp]
+      \centering
+      \begin{tikzpicture}
+        \matrix (m) [ column sep=1cm] {
+
+          \begin{scope} 
+            \filldraw[fill=gray!50!white] (-1, -1) -- (1, -1) -- (1, 1) -- (-1, 1) -- (-1, -1);
+          \end{scope}
+          &
+          \begin{scope}[scale=0.25] 
+            \draw (-6, 0) -- (-7, -3) -- (-6, -6) -- (-3, -7) -- (0, -6) -- (3, -7) -- (6, -6) -- (7, -3) -- (6, 0) -- (7, 3) -- (6, 6) -- (3, 7) -- (0, 6) -- (-3, 7) -- (-6, 6) -- (-7, 3) -- (-6, 0);
+            \draw (-5, 0) -- (-6, 0);
+            \draw (0, -5) -- (0, -6);
+            \draw (5, 0) -- (6, 0);
+            \draw (0, 5) -- (0, 6);
+
+            \draw (-5, 0) -- (-2, -2) -- (0, -5) -- (2, -2) -- (5, 0) -- (2, 2) -- (0, 5) -- (-2, 2) -- (-5, 0);
+            \draw (-2, -2) -- (-1, -1);
+            \draw (2, -2) -- (1, -1);
+            \draw (2, 2) -- (1, 1);
+            \draw (-2, 2) -- (-1, 1);
+            
+            \filldraw[fill=gray!50!white] (-1, -1) -- (1, -1) -- (1, 1) -- (-1, 1) -- (-1, -1);
+            \draw (-7, -3) -- (-9, -1) -- (-9, 1) -- (-7, 3);
+            \draw ( 7, -3) -- ( 9, -1) -- ( 9, 1) -- ( 7, 3);
+            \draw (-3, -7) -- (-1, -9) -- (1, -9) -- (3, -7);
+            \draw (3, 7) -- (1, 9) -- (-1, 9) -- (-3, 7);
+
+          \end{scope}
+          
+          \\
+        };
+      \end{tikzpicture}
+    \end{figure}
+
+
     \begin{figure}[htpp]
       \centering
       \begin{tikzpicture}
