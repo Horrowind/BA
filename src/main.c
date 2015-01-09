@@ -12,10 +12,9 @@ void print_raw(uint8_t* data, int length) {
 
 void main() {
     arc_t arc;
-    arc_from_string(&arc, "112301230102310201");
-    arc_from_string(&arc, "112301230102310201");
+    arc_from_string(&arc, "221123123123102122");
     arc_clean(&arc);
-    arc_normalize(&arc);
     arc_print(&arc);
-    
+    arc_add_3gon(&arc);
+    arc_print(&arc);    
 }

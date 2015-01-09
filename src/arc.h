@@ -24,12 +24,16 @@ typedef union {
         uint64_t d0 : B;
         uint64_t d1 : B;
         uint64_t d2 : B;
+        uint64_t d3 : B;
+        uint64_t d4 : B;
+        uint64_t d5 : B;
+	uint64_t d6 : B;
     };
 } arc_component_t;
 
 typedef struct {
     unsigned int length;
-    arc_component_t * data;
+    arc_component_t data[SIZE];
 } arc_t;
 
 void arc_print(arc_t* arc);
@@ -38,5 +42,5 @@ void arc_rotate(arc_t* arc);
 void arc_normalize(arc_t* arc);
 void arc_clean(arc_t* arc);
 
-void arc_add_ngon(arc_t* arc, int ngon);
+uint8_t arc_add_3gon(arc_t* arc);
 #endif //ARC_C

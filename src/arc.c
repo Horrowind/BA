@@ -59,7 +59,7 @@ void arc_print(arc_t* arc) {
 void arc_clean(arc_t* arc) {
     const int length = arc->length;
     for(int i = 0; i < length; i++) {
-        uint8_t d = arc->data[0].d1;
+        uint8_t d = arc->data[0].d0;
         if(d == 0) {
             arc->length--;
         }
@@ -67,9 +67,25 @@ void arc_clean(arc_t* arc) {
     }
 }
 
-void arc_add_ngon(arc_t* arc, int ngon) {
-    
-
+uint8_t arc_add_3gon(arc_t* arc) {
+    if(arc->data[0].d0 != 1) {
+	arc->data[0].d0--;
+	arc_rotate(arc);
+	arc->data[0].d0--;
+	printf("%i\n", arc->length % NB);
+	arc->data[arc->length / NB].d -= 1 << (B * (arc->length % NB));
+	arc->length++;
+	//((1 << (B * ) - 1) / ((1 << B) - 1);
+	return 1;
+    }
+    if(arc->data[0].d1 != 1) {
+	arc->data[0].d0--;
+	arc_rotate(arc);
+	arc->data[0].d0--;
+	arc->length--;
+	return 1;
+    }
+    return 0;
 }
 
 
