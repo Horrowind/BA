@@ -23,6 +23,3 @@ add_latex_document(ba_main.tex
   )
 
 
-add_subdirectory(pics)
-
-
