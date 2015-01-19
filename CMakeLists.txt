@@ -22,7 +22,3 @@ add_latex_document(ba_main.tex
   INPUTS ${sources}
   )
 
-
-add_subdirectory(pics)
-
-
