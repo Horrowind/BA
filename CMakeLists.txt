@@ -21,4 +21,3 @@ set(sources
 add_latex_document(ba_main.tex
   INPUTS ${sources}
   )
-
