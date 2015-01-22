@@ -2,100 +2,93 @@
 \begin{theorem}
   Let $p = (p_3, p_4, p_5, \dots, p_n)$ be a given sequence satisfying equation \ref{eq_valence_3}, then there exists $r \in \nats$ for which $p + r [2 \times 5, 8]_3$ is $3$-realizable.
   \begin{proof}
-    The proof is unsuprisingly similiar to the last one given. Again one chooses a realization by the classical Eberhards Theorem \ref{thm_eberhard}(\ref{thm_eberhard_3}) and substitutes the surplus of hexagons by two times as many pentagons and as octagon. Seperating the faces in a kind of different way then before gives enough space for this substitution. The separation consists of an ring of pentagons around each polygon of the realization followed by a ring of octagons and fitting in the emerging holes another round of pentagons (equal to the number of pentagons and octagons in the previous rings as to have a discrete curvature of zero). This process is depicted below:
+    The proof is unsuprisingly similiar to the last one given. Again one chooses a realization by the classical Eberhards  \ref{thm:eberhard:3} and substitutes the surplus of hexagons by two times as many pentagons and as octagon. Seperating the faces in a kind of different way then before gives enough space for this substitution. The separation consists of an ring of pentagons around each polygon of the realization followed by a ring of octagons and fitting in the emerging holes another round of pentagons (equal to the number of pentagons and octagons in the previous rings as to have a discrete curvature of zero). This process is depicted in \autoref{fig:case_5_8:img1}.
 
-    \begin{figure}[htpp]
-      \centering
-      \begin{tikzpicture}
-        \matrix (m) [ column sep=1cm] {
+    \begin{tikzfigure}{\label{fig:case_5_8:img1}}
+      \matrix (m) [ column sep=1cm] {
 
-          \begin{scope} 
-            \filldraw[fill=gray!50!white] (-1, -1) -- (1, -1) -- (1, 1) -- (-1, 1) -- (-1, -1);
-          \end{scope}
-          &
-          \begin{scope}[scale=0.25] 
-            \draw (-6, 0) -- (-7, -3) -- (-6, -6) -- (-3, -7) -- (0, -6) -- (3, -7) -- (6, -6) -- (7, -3) -- (6, 0) -- (7, 3) -- (6, 6) -- (3, 7) -- (0, 6) -- (-3, 7) -- (-6, 6) -- (-7, 3) -- (-6, 0);
-            \draw (-5, 0) -- (-6, 0);
-            \draw (0, -5) -- (0, -6);
-            \draw (5, 0) -- (6, 0);
-            \draw (0, 5) -- (0, 6);
+        \begin{scope} 
+          \filldraw[fill=gray!50!white] (-1, -1) -- (1, -1) -- (1, 1) -- (-1, 1) -- (-1, -1);
+        \end{scope}
+        &
+        \begin{scope}[scale=0.25] 
+          \draw (-6, 0) -- (-7, -3) -- (-6, -6) -- (-3, -7) -- (0, -6) -- (3, -7) -- (6, -6) -- (7, -3) -- (6, 0) -- (7, 3) -- (6, 6) -- (3, 7) -- (0, 6) -- (-3, 7) -- (-6, 6) -- (-7, 3) -- (-6, 0);
+          \draw (-5, 0) -- (-6, 0);
+          \draw (0, -5) -- (0, -6);
+          \draw (5, 0) -- (6, 0);
+          \draw (0, 5) -- (0, 6);
 
-            \draw (-5, 0) -- (-2, -2) -- (0, -5) -- (2, -2) -- (5, 0) -- (2, 2) -- (0, 5) -- (-2, 2) -- (-5, 0);
-            \draw (-2, -2) -- (-1, -1);
-            \draw (2, -2) -- (1, -1);
-            \draw (2, 2) -- (1, 1);
-            \draw (-2, 2) -- (-1, 1);
-            
-            \filldraw[fill=gray!50!white] (-1, -1) -- (1, -1) -- (1, 1) -- (-1, 1) -- (-1, -1);
-            \draw (-7, -3) -- (-9, -1) -- (-9, 1) -- (-7, 3);
-            \draw ( 7, -3) -- ( 9, -1) -- ( 9, 1) -- ( 7, 3);
-            \draw (-3, -7) -- (-1, -9) -- (1, -9) -- (3, -7);
-            \draw (3, 7) -- (1, 9) -- (-1, 9) -- (-3, 7);
-
-          \end{scope}
+          \draw (-5, 0) -- (-2, -2) -- (0, -5) -- (2, -2) -- (5, 0) -- (2, 2) -- (0, 5) -- (-2, 2) -- (-5, 0);
+          \draw (-2, -2) -- (-1, -1);
+          \draw (2, -2) -- (1, -1);
+          \draw (2, 2) -- (1, 1);
+          \draw (-2, 2) -- (-1, 1);
           
-          \\
-        };
-      \end{tikzpicture}
-    \end{figure}
+          \filldraw[fill=gray!50!white] (-1, -1) -- (1, -1) -- (1, 1) -- (-1, 1) -- (-1, -1);
+          \draw (-7, -3) -- (-9, -1) -- (-9, 1) -- (-7, 3);
+          \draw ( 7, -3) -- ( 9, -1) -- ( 9, 1) -- ( 7, 3);
+          \draw (-3, -7) -- (-1, -9) -- (1, -9) -- (3, -7);
+          \draw (3, 7) -- (1, 9) -- (-1, 9) -- (-3, 7);
 
-        \begin{figure}[htpp]
-      \centering
-      \begin{tikzpicture}
-        \matrix (m) [ column sep=1cm] {
+        \end{scope}
+        \\
+      };
+    \end{tikzfigure}
 
-          \begin{scope}[rotate=-30, yscale=0.866, scale=0.25] 
-            \draw (-1, 8) -- (1, 8) -- (1.5, 7) -- (3.5, 7) -- (4.5, 5) -- (5.5, 5) -- (6.5, 3) -- (6, 2) -- (7, 0) -- (6, -2) -- (6.5, -3) -- (5.5, -5) -- (4.5, -5) -- (3.5, -7) -- (1.5, -7) -- (1, -8) -- (-1, -8) -- (-1.5, -7) -- (-3.5, -7) -- (-4.5, -5) -- (-5.5, -5) -- (-6.5, -3) -- (-6, -2) -- (-7, 0) -- (-6, 2) -- (-6.5, 3) -- (-5.5, 5) -- (-4.5, 5) -- (-3.5, 7) -- (-1.5, 7) -- (-1, 8);
-            \draw (-1.5, 7) -- (0, 6) -- (1.5, 7);
-            \draw (4.5, 5) -- (4.5, 3) -- (6, 2);
-            \draw (4.5, -5) -- (4.5, -3) -- (6, -2);
-            \draw (-1.5, -7) -- (0, -6) -- (1.5, -7);
-            \draw (-4.5, 5) -- (-4.5, 3) -- (-6, 2);
-            \draw (-4.5, -5) -- (-4.5, -3) -- (-6, -2);
+    \begin{tikzfigure}{\label{fig:case_5_8:img2}}
+      \matrix (m) [ column sep=1cm] {
 
-            \draw (0, 6) -- (0, 4);
-            \draw (4.5, 3) -- (3, 2);
-            \draw (4.5, -3) -- (3, -2);
-            \draw (0, -6) -- (0, -4);
-            \draw (-4.5, 3) -- (-3, 2);
-            \draw (-4.5, -3) -- (-3, -2);
-            
-            \draw (0, 4) -- (1, 2) -- (3, 2) -- (2, 0) -- (3, -2) -- (1, -2) -- (0, -4) -- (-1, -2) -- (-3, -2) -- (-2, 0) -- (-3, 2) -- (-1, 2) -- (0, 4);
+        \begin{scope}[rotate=-30, yscale=0.866, scale=0.25] 
+          \draw (-1, 8) -- (1, 8) -- (1.5, 7) -- (3.5, 7) -- (4.5, 5) -- (5.5, 5) -- (6.5, 3) -- (6, 2) -- (7, 0) -- (6, -2) -- (6.5, -3) -- (5.5, -5) -- (4.5, -5) -- (3.5, -7) -- (1.5, -7) -- (1, -8) -- (-1, -8) -- (-1.5, -7) -- (-3.5, -7) -- (-4.5, -5) -- (-5.5, -5) -- (-6.5, -3) -- (-6, -2) -- (-7, 0) -- (-6, 2) -- (-6.5, 3) -- (-5.5, 5) -- (-4.5, 5) -- (-3.5, 7) -- (-1.5, 7) -- (-1, 8);
+          \draw (-1.5, 7) -- (0, 6) -- (1.5, 7);
+          \draw (4.5, 5) -- (4.5, 3) -- (6, 2);
+          \draw (4.5, -5) -- (4.5, -3) -- (6, -2);
+          \draw (-1.5, -7) -- (0, -6) -- (1.5, -7);
+          \draw (-4.5, 5) -- (-4.5, 3) -- (-6, 2);
+          \draw (-4.5, -5) -- (-4.5, -3) -- (-6, -2);
 
-            \draw (2, 0) -- (1, 0);
-            \draw (1, 2) -- (0.5, 1);
-            \draw (1, -2) -- (0.5, -1);
-            \draw (-2, 0) -- (-1, 0);
-            \draw (-1, 2) -- (-0.5, 1);
-            \draw (-1, -2) -- (-0.5, -1);
-
-            \filldraw[fill=gray!50!white] (1, 0) -- (0.5, 1) -- (-0.5, 1) -- (-1, 0) -- (-0.5, -1) -- (0.5, -1) -- (1, 0);
-
-          \end{scope}
-          &
-          \begin{scope}[rotate=-30, yscale=0.866, scale=0.25] 
-            \draw (-1, 8) -- (1, 8) -- (1.5, 7) -- (3.5, 7) -- (4.5, 5) -- (5.5, 5) -- (6.5, 3) -- (6, 2) -- (7, 0) -- (6, -2) -- (6.5, -3) -- (5.5, -5) -- (4.5, -5) -- (3.5, -7) -- (1.5, -7) -- (1, -8) -- (-1, -8) -- (-1.5, -7) -- (-3.5, -7) -- (-4.5, -5) -- (-5.5, -5) -- (-6.5, -3) -- (-6, -2) -- (-7, 0) -- (-6, 2) -- (-6.5, 3) -- (-5.5, 5) -- (-4.5, 5) -- (-3.5, 7) -- (-1.5, 7) -- (-1, 8);
-
-            \draw (-1.5, 7) -- (-1.5, 5) -- (1, 2) -- (2, 2) -- (2.5, 3) -- (1.5, 7);
-            \draw (-6, 2) -- (-3.5, -1) -- (-2.5, -1) -- (-2, 0) -- (-3, 4) -- (-4.5, 5);
-            \draw (4.5, -5) -- (4.5, -3) -- (2, -2) -- (1, -2) -- (0.5, -3) -- (0, -6) -- (1.5, -7);
-            \draw (-3, 4) -- (-1.5, 5);
-            \draw (-2, 0) -- (0, 0) -- (1, 2);
-            \draw (0, 0) -- (1, -2);
-            \draw (-2.5, -1) -- (0.5, -3);
-            \draw (2, -2) -- (2, 2);
-            \draw (-4.5, -5) -- (-4.5, -3) -- (-6, -2);
-            \draw (-4.5, -3) -- (-3.5, -1);
-            \draw (6, 2) -- (4.5, 3) -- (4.5, 5);
-            \draw (4.5, 3) -- (2.5, 3);
-            \draw (-1.5, -7) -- (0, -6);
-            \draw (6, -2) -- (4.5, -3);
-          \end{scope}
+          \draw (0, 6) -- (0, 4);
+          \draw (4.5, 3) -- (3, 2);
+          \draw (4.5, -3) -- (3, -2);
+          \draw (0, -6) -- (0, -4);
+          \draw (-4.5, 3) -- (-3, 2);
+          \draw (-4.5, -3) -- (-3, -2);
           
-          \\
-        };
-      \end{tikzpicture}
-    \end{figure}
+          \draw (0, 4) -- (1, 2) -- (3, 2) -- (2, 0) -- (3, -2) -- (1, -2) -- (0, -4) -- (-1, -2) -- (-3, -2) -- (-2, 0) -- (-3, 2) -- (-1, 2) -- (0, 4);
+
+          \draw (2, 0) -- (1, 0);
+          \draw (1, 2) -- (0.5, 1);
+          \draw (1, -2) -- (0.5, -1);
+          \draw (-2, 0) -- (-1, 0);
+          \draw (-1, 2) -- (-0.5, 1);
+          \draw (-1, -2) -- (-0.5, -1);
+
+          \filldraw[fill=gray!50!white] (1, 0) -- (0.5, 1) -- (-0.5, 1) -- (-1, 0) -- (-0.5, -1) -- (0.5, -1) -- (1, 0);
+
+        \end{scope}
+        &
+        \begin{scope}[rotate=-30, yscale=0.866, scale=0.25] 
+          \draw (-1, 8) -- (1, 8) -- (1.5, 7) -- (3.5, 7) -- (4.5, 5) -- (5.5, 5) -- (6.5, 3) -- (6, 2) -- (7, 0) -- (6, -2) -- (6.5, -3) -- (5.5, -5) -- (4.5, -5) -- (3.5, -7) -- (1.5, -7) -- (1, -8) -- (-1, -8) -- (-1.5, -7) -- (-3.5, -7) -- (-4.5, -5) -- (-5.5, -5) -- (-6.5, -3) -- (-6, -2) -- (-7, 0) -- (-6, 2) -- (-6.5, 3) -- (-5.5, 5) -- (-4.5, 5) -- (-3.5, 7) -- (-1.5, 7) -- (-1, 8);
+
+          \draw (-1.5, 7) -- (-1.5, 5) -- (1, 2) -- (2, 2) -- (2.5, 3) -- (1.5, 7);
+          \draw (-6, 2) -- (-3.5, -1) -- (-2.5, -1) -- (-2, 0) -- (-3, 4) -- (-4.5, 5);
+          \draw (4.5, -5) -- (4.5, -3) -- (2, -2) -- (1, -2) -- (0.5, -3) -- (0, -6) -- (1.5, -7);
+          \draw (-3, 4) -- (-1.5, 5);
+          \draw (-2, 0) -- (0, 0) -- (1, 2);
+          \draw (0, 0) -- (1, -2);
+          \draw (-2.5, -1) -- (0.5, -3);
+          \draw (2, -2) -- (2, 2);
+          \draw (-4.5, -5) -- (-4.5, -3) -- (-6, -2);
+          \draw (-4.5, -3) -- (-3.5, -1);
+          \draw (6, 2) -- (4.5, 3) -- (4.5, 5);
+          \draw (4.5, 3) -- (2.5, 3);
+          \draw (-1.5, -7) -- (0, -6);
+          \draw (6, -2) -- (4.5, -3);
+        \end{scope}
+        
+        \\
+      };
+    \end{tikzfigure}
 
     % \begin{figure}[htpp]
     %   \centering

@@ -31,7 +31,7 @@ Given the notation as above one can immediatly draw some basic conclusions from 
 \begin{align*}
   2e = \sum_{k=3}^{m} k \cdot p_k = \sum_{k=3}^{n} k \cdot f_k
 \end{align*}
-Putting these equations in Eulers relation \ref{thm_eulers_relation} gives for some $t \in (0, 1)$
+Putting these equations in Eulers relation \autoref{thm_eulers_relation} gives for some $t \in (0, 1)$
 \begin{align*}
   \sum_{k=3}^m v_k - \left(\frac{t}{2} \sum_{k=3}^m k v_k + \frac{1-t}{2} \sum_{k=3}^n k p_k \right) + \sum_{k=3}^n p_k = 2
 \end{align*}
@@ -42,7 +42,7 @@ which can be transformed into:
 This equation can be independant of the value of some $v_k$ or $p_{k'}$ when the value of $t$ is appropriately choesen. Of special interest in this thesis are the cases of one $v_r$ giving no information in the above equation (so $r \geq 3$ fixed and $t = \frac{2}{r}$) and having $v_{k} = 0$ for each $k \geq 3$, $k \neq r$. The resulting polyhedron has the property that each of his vertices has valence $r$. 
 % TODO Explain this.
 \begin{definition}[$r$-realizable]
-  A sequence $a = (a_3, \dots, a_m)$ is said to be $r$-realizable, if there exists a polyhedron such that $a$ is realizable with an $v$-vector consisting only of valence $r$ (in the sense of \ref{def_relizable}).
+  A sequence $a = (a_3, \dots, a_m)$ is said to be $r$-realizable, if there exists a polyhedron such that $a$ is realizable with an $v$-vector consisting only of valence $r$ (in the sense of \autoref{def_relizable}).
 \end{definition}
 Under these circumstances $r$ has to be in $\{3, 4, 5\}$.
 
@@ -57,7 +57,7 @@ For $r \in \{3, 4, 5\}$ the following equations arise:
 \end{notation}
 Even in with this rather specific constraints the problem stated above has no easy definite answer, as in, not every $p$-vector satisfying on of these equations can be realized as an polyhedron.
 \begin{example}
-  The $p$-vector $(0, 12, 1)_3$ has no realization but satisfies equation \ref{eq_valence_3}. To see this one can start with one hexagon. As only pentagons are left to build the rest of the polyhedron a ring of six pentagons has to be glued to the hexagon. Another ring of six pentagons is forced to be glued to the first leaving a hole of the shape of an hexagon in the end, but no polygons left to fill it.
+  The $p$-vector $(0, 12, 1)_3$ has no realization but satisfies \autoref{eq_valence_3}. To see this one can start with one hexagon. As only pentagons are left to build the rest of the polyhedron a ring of six pentagons has to be glued to the hexagon. Another ring of six pentagons is forced to be glued to the first leaving a hole of the shape of an hexagon in the end, but no polygons left to fill it.
   % TODO: Add an image?!
 \end{example}
 
@@ -68,22 +68,23 @@ Even in with this rather specific constraints the problem stated above has no ea
     r &= 4: \sum_{k=3}^n \left( 4            - k \right) q_k = 0 \label{eq_zero_curv_4}\\
     r &= 5: \sum_{k=3}^n \left( \frac{10}{3} - k \right) q_k = 0 \label{eq_zero_curv_5}
   \end{align}
-  in the respective cases. Then show that for all sequences $(p_3, \dots)$  satisfying the respective equation \ref{eq_valence_3}, \ref{eq_valence_4} or \ref{eq_valence_5}, there exists an $c \in \nats$ for which $(p_3 + c \cdot q_3, p_4 + c \cdot q_4, \dots)$ is realizable as a polyhedron.
+  in the respective cases. Then show that for all sequences $(p_3, \dots)$  satisfying the respective \autoref{eq_valence_3}, \autoref{eq_valence_4} or \autoref{eq_valence_5}, there exists an $c \in \nats$ for which $(p_3 + c \cdot q_3, p_4 + c \cdot q_4, \dots)$ is realizable as a polyhedron.
 \end{problem}
 \begin{notation}
   Throughout the thesis we want to denote this problem as of $(q_3, \dots, p_n)_r$-type.
 \end{notation}
 
-Equation \ref{eq_valence_3} and \ref{eq_valence_4} suggest that $(6)_3$ or $(4)_4$ might be good candidates for such statements. As it is, these questions are both proved and are known as the (non-general) Eberhards theorem:
-
+\autoref{eq_valence_3} and \autoref{eq_valence_4} suggest that $(6)_3$ or $(4)_4$ might be good candidates for such statements. As it is, these questions are both proved and are known as the (non-general) Eberhards theorem in \cite{ConvexPolytopes}:
+\renewcommand{\Itemautorefname}{Theorem \ref{thm_eberhard}}
 \begin{theorem}[Eberhards theorem] \label{thm_eberhard} The following holds:
-  \begin{enumerate}[(i)]
-  \item For each $p_3, p_4, p_5, p_7, \dots, p_m$ satisfiying \ref{eq_valence_3} there exists a number $p_6$ such that $(p_3, \dots, p_m)$ is realizable. \label{thm_eberhard_3}
-  \item For each $p_3, p_5, \dots, p_m$ satisfiying \ref{eq_valence_4} there exists a number $p_4$ such that $(p_3, \dots, p_m)$ is realizable. \label{thm_eberhard_4}
+  \begin{enumerate}[label=(\roman*)]
+    
+  \item \label{thm:eberhard:3} For each $p_3, p_4, p_5, p_7, \dots, p_m$ satisfiying \autoref{eq_valence_3} there exists a number $p_6$ such that $(p_3, \dots, p_m)$ is realizable. 
+  \item \label{thm:eberhard:4} For each $p_3, p_5, \dots, p_m$ satisfiying \autoref{eq_valence_4} there exists a number $p_4$ such that $(p_3, \dots, p_m)$ is realizable. 
   \end{enumerate}
 \end{theorem}
 
-Building upon these two, this thesis will present a bunch of new theorems of general Eberhards type. One of these proofs takes a similar approach as the proof given in -- Referenz -- for \ref{thm_eberhard}\ref{thm_eberhard_4}. The rest of the proofs directly use \ref{thm_eberhard}. This is done by taking a sequence not too different form the given one which suffices either equation \ref{eq_valence_3} or equation \ref{eq_valence_4}, constructing a polyhedron by the statements of \ref{thm_eberhard} and then by adding or deleting some polygons to create a polyhedron with a $p$-vector as stated. This is done by either substituting edges and vertices or every face by some larger structure. 
+Building upon these two, this thesis will present a bunch of new theorems of general Eberhards type. One of these proofs takes a similar approach as the proof given in \cite{ConvexPolytopes} for \autoref{thm:eberhard:4}. The rest of the proofs directly use \autoref{thm_eberhard}. This is done by taking a sequence not too different form the given one which suffices either \autoref{eq_valence_3} or \autoref{eq_valence_4}, constructing a polyhedron by the statements of \autoref{thm_eberhard} and then by adding or deleting some polygons to create a polyhedron with a $p$-vector as stated. This is done by either substituting edges and vertices or every face by some larger structure. 
 
 
 %Todo Steinars theorem.

@@ -1,7 +1,7 @@
 \usepackage[utf8]{inputenc}
-\usepackage[ngerman]{babel}
-
-\usepackage{ngerman}
+%\usepackage[ngerman]{babel}
+\usepackage[english]{babel}
+\usepackage{hyperref}
 \usepackage{amsmath}
 \usepackage{amsthm}
 \usepackage{amssymb}
@@ -9,7 +9,11 @@
 \usepackage{amstext}
 \usepackage{amsfonts}
 \usepackage{mathtools}
-\usepackage{enumerate}
+\usepackage{enumitem}
+\usepackage{chngcntr}
+\usepackage{caption}
+\counterwithin{figure}{section}
+
 %\usepackage{extarrows}
 
 \usepackage{tikz}
@@ -18,13 +22,23 @@
     matrix
 }
 \usepackage{shapepar}
+
 \setlength{\parindent}{0pt}
 \renewcommand{\baselinestretch}{1.0}
 \usepackage[inner=2cm,outer=2cm,top=1.5cm,bottom=1.5cm,includeheadfoot]{geometry}
 \theoremstyle{definition}
 
-% math environments
+% figure enviroments
+\captionsetup[FLOAT_TYPE]{labelformat=simple, labelsep=none}
+\newenvironment{tikzfigure}[1]
+    {\begin{figure}[htpp] \caption{} #1 \centering  \begin{tikzpicture}}
+    {\end{tikzpicture} \end{figure}}
 
+
+
+
+
+% math environments
 \newtheorem{theorem}{Theorem}[section]
 \newtheorem*{theorem*}{Theorem}
 \newtheorem{lemma}[theorem]{Lemma}
@@ -43,6 +57,10 @@
 \newtheorem*{definition*}{Definition}
 \newtheorem{corollary}[theorem]{Corollary}
 \newtheorem*{corollary*}{Corollary}
+
+\renewcommand*{\theenumi}{\thetheorem\,(\roman{enumi})}%
+\renewcommand*{\labelenumi}{\thetheorem\,(\roman{enumi})}%
+
 
 \newcommand{\markdef}[1]{\textbf{#1}}  
 \newcommand{\norm}[1]{\ensuremath{|#1|}}
