@@ -1,10 +1,10 @@
 \section{The case $[2 \times 3, 6]_4$}
 \begin{lemma}
-  Let $p = (p_3, p_4, p_5, \dots, p_n)$ be a given sequence satisfying equation \ref{eq_valence_4} as well as $p_4 \leq 3$, $p_5 \leq 3$ and $3 \mid 2 \sum_{k=3}^{n} p_k - 4$. Then there exists $r \in \nats$ for which $p + r [2 \times 3, 6]_3$ is $4$-realizable.
+  Let $p = (p_3, p_4, p_5, \dots, p_n)$ be a given sequence satisfying equation \ref{eq:valence:4} as well as $p_4 \leq 3$, $p_5 \leq 3$ and $3 \mid 2 \sum_{k=3}^{n} p_k - 4$. Then there exists $r \in \nats$ for which $p + r [2 \times 3, 6]_3$ is $4$-realizable.
 
-  All the requirements in the statement will help utilizing Eberhards Theorem \ref{thm_eberhard}(\ref{thm_eberhard_3}). The conditions $p_4 \leq 3$, $p_5 \leq 3$ deal with different sign of curvatures when having valence $3$ and $4$ (note that quadrangles and pentagons have positive curvature in the case of $3$-valence but zero or negative curvature in the other case), while the condition $p_4 \leq 3$, $p_5 \leq 3$ is necessary to keep the number of triangles natural. 
+  All the requirements in the statement will help utilizing Eberhards \ref{thm:eberhard:3}. The conditions $p_4 \leq 3$, $p_5 \leq 3$ deal with different sign of curvatures when having valence $3$ and $4$ (note that quadrangles and pentagons have positive curvature in the case of $3$-valence but zero or negative curvature in the other case), while the condition $p_4 \leq 3$, $p_5 \leq 3$ is necessary to keep the number of triangles natural. 
   \begin{proof}
-    One can restate \ref{eq_valence_4} to a form looking more like \ref{eq_valence_3}:
+    One can restate \ref{eq:valence:4} to a form looking more like \ref{eq:valence:3}:
     \begin{align*}
       & \sum_{k=3}^n \left( 4 - k \right) p_k = 8 \\
       \implies & \sum_{k=3}^n \left( 6 - k \right) p_k - \left(2 \sum_{k=3}^n  p_k - 4 \right) = 12
@@ -14,7 +14,7 @@
       3 r_3 &= 2 \sum_{k=3}^{n} p_k - 4 =  2 p_3 + 2 p_4 + 2 p_5 + \sum_{k=6}^{n} p_k - 4\\
       \implies r_3 &= 2 p_4 + 2 p_5 - 4 + \sum_{k=6}^{n} p_k \leq 8 + 2 \sum_{k=6}^{n} p_k \leq 8 + \sum_{k=4}^{n} (k - 4) p_k = p_3
     \end{align*}
-    follows, that $p_3' := p_3 - r_3 \geq 0$ and setting $p_k' := p_k$, $(k \geq 4)$ the resulting sequence $p'$ suffices \ref{eq_valence_3}. Using \ref{thm_eberhard}(\ref{thm_eberhard_3}) one get a $3$-realization $P'$ of $p'$. Inserting in $P'$ an hexagon for every edge and four triangles for every vertex as seen in the following figure one can construct a $4$-realization of some sequence $p''$.
+    follows, that $p_3' := p_3 - r_3 \geq 0$ and setting $p_k' := p_k$, $(k \geq 4)$ the resulting sequence $p'$ suffices \ref{eq:valence:3}. Using \ref{thm:eberhard:3} one get a $3$-realization $P'$ of $p'$. Inserting in $P'$ an hexagon for every edge and four triangles for every vertex as seen in the following figure one can construct a $4$-realization of some sequence $p''$.
     \begin{figure}[htpp]
       \centering
       \begin{tikzpicture}
@@ -48,7 +48,7 @@
         };
       \end{tikzpicture}
     \end{figure}
-    $p''$ coincides with $p$ for every entry but $3$ and $6$. They both comply with \ref{eq_valence_4}, therefore
+    $p''$ coincides with $p$ for every entry but $3$ and $6$. They both comply with \ref{eq:valence:4}, therefore
     \begin{align*}
       & \sum_{k=3}^n \left( 4 - k \right) p''_k  - \sum_{k=3}^n \left( 4 - k \right) p_k = 0 \\
       \implies & 2(p''_3 - p_3) = p''_6 - p_6
@@ -231,7 +231,7 @@
   \end{proof}
 \end{lemma}
 \begin{remark}
-  The proof given is simiar to !!!Todo!!!, where a proof for $3$-valent graphs is given. As is the case there, digons can be allowed during argument. As they do not simplify the proof here, they were omitted.
+  The proof given is simiar to \cite{ConvexPolytopes}, where a proof for $3$-valent graphs is given. As is the case there, digons can be allowed during argument. They do not simplify the proof here, so they were omitted.
 \end{remark}
 \begin{corollary}
   There is no 4-realization up to a scalar multiple of $[2 \times 3, 6]_4$ of the sequence $[1 \times k]_4$ for $3 \nmid k$.
