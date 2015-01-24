@@ -12,7 +12,7 @@
     Let $r_3 := (2 \sum_{k=3}^{n} p_k - 4)/3$. From
     \begin{align*}
       3 r_3 &= 2 \sum_{k=3}^{n} p_k - 4 =  2 p_3 + 2 p_4 + 2 p_5 + \sum_{k=6}^{n} p_k - 4\\
-      \implies r_3 &= 2 p_4 + 2 p_5 - 4 + \sum_{k=6}^{n} p_k \leq 8 + 2 \sum_{k=6}^{n} p_k \leq 8 + \sum_{k=4}^{n} (k - 4) p_k = p_3
+      \implies 3 r_3 - 2 p_3 &= 2 p_4 + 2 p_5 - 4 + \sum_{k=6}^{n} p_k \leq 8 + 2 \sum_{k=6}^{n} p_k \leq 8 + \sum_{k=4}^{n} (k - 4) p_k = p_3
     \end{align*}
     follows, that $p_3' := p_3 - r_3 \geq 0$ and setting $p_k' := p_k$, $(k \geq 4)$ the resulting sequence $p'$ suffices \ref{eq:valence:3}. Using \ref{thm:eberhard:3} one get a $3$-realization $P'$ of $p'$. Inserting in $P'$ an hexagon for every edge and four triangles for every vertex as seen in the following figure one can construct a $4$-realization of some sequence $p''$.
     \begin{figure}[htpp]
@@ -231,7 +231,7 @@
   \end{proof}
 \end{lemma}
 \begin{remark}
-  The proof given is simiar to \cite{ConvexPolytopes}, where a proof for $3$-valent graphs is given. As is the case there, digons can be allowed during argument. They do not simplify the proof here, so they were omitted.
+  The proof given is simiar to \cite{ConvexPolytopes}, where a proof for $3$-valent graphs is given. As is the case there, digons can be allowed during the argument. They do not simplify the proof here, so they were omitted.
 \end{remark}
 \begin{corollary}
   There is no 4-realization up to a scalar multiple of $[2 \times 3, 6]_4$ of the sequence $[1 \times k]_4$ for $3 \nmid k$.
