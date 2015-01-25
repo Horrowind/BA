@@ -59,8 +59,23 @@ Even in with this rather specific constraints the problem stated above has no ea
 \begin{example}
   The $p$-vector $(0, 12, 1)_3$ has no realization but satisfies \autoref{eq:valence:3}. To see this one can start with one hexagon. As only pentagons are left to build the rest of the polyhedron a ring of six pentagons has to be glued to the hexagon. Another ring of six pentagons is forced to be glued to the first leaving a hole of the shape of an hexagon in the end, but no polygons left to fill it.
 
-  \begin{tikzfigure}[\label{fig:preliminaries:example}]
-    
+  \begin{tikzfigure}{\label{fig:preliminaries:example}}
+\begin{scope}[xscale=1.0, yscale=0.866]
+          \draw (-1, 0) -- ++(0.5, -1) -- ++(1, 0) -- ++(0.5, 1) -- ++(-0.5, 1) -- ++(-1, 0) -- ++(-0.5, -1);
+          \draw (-1, 0) -- (-2, 0) -- (-2.25, -1.5) -- (-1, -2) -- (-0.5, -1);
+          \draw (1, 0) -- (2, 0) -- (2.25, -1.5) -- (1, -2) -- (0.5, -1);
+          \draw (-0.5, 1) -- (-1, 2) -- (0, 3) -- (1, 2) -- (0.5, 1);
+          \draw (-1, -2) -- (0, -3) -- (1, -2);
+          \draw (-2, 0) -- (-2.25, 1.5) -- (-1, 2);
+          \draw (2, 0) -- (2.25, 1.5) -- (1, 2);
+          \draw (-3, -2) -- (-3, 2) -- (0, 4) -- (3, 2) -- (3, -2) -- (0, -4) -- (-3, -2);
+          \draw (-3, -2) -- (-2.25, -1.5);
+          \draw (3, -2) -- (2.25, -1.5);
+          \draw (-3, 2) -- (-2.25, 1.5);
+          \draw (3, 2) -- (2.25, 1.5);
+          \draw (0, -4) -- (0, -3);
+          \draw (0, 4) -- (0, 3);
+        \end{scope}   
     
   \end{tikzfigure}
   
