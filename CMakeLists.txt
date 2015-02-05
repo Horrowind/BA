@@ -9,6 +9,7 @@ project(BA NONE)
 set(sources
   head.tex
   preliminaries.tex
+  arcs.tex
   case_3_5.tex
   case_3_6.tex
   case_3_4.tex
