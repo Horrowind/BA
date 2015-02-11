@@ -3,32 +3,44 @@
 Let $r \in \nats$. For the rest of this section one can think of $r$ as the given valence of a polyhedron. Many constructions in this thesis will utilize the concept of replacing each face of an polyhedron with a larger structure. It can be quite challenging to see whether the resulting structures fit together as the previous faces did. This chapter introduces the necessary formalizm for these kind of constructions.
 
 \begin{definition}[Arc]
-  An arc with weights $w_1, \dots, w_n$ is cycle (in the sense of graph theory) of length $n$ with vertices of weight $w_1, \dots, w_n \in \{0, \dots, r - 2\}$ where the vertices of each pair of weights $w_i, w_{i+1}$ are neighboring. A piece of an arc with weights $w_1, \dots, w_n$ is a path of length $n$, where each vertex is weighted with $w_1, \dots w_n$ and $w_i, w_{i+1}$ denote weights of neighboring vertices. These weights will also be called the free valences of the vertex. 
+  An arc with weights $w_1, \dots, w_n$ is cycle (in the sense of graph theory) of length $n$ with vertices of weight $w_1, \dots, w_n \in \{0, \dots, r - 2\}$ where the vertices of each pair of weights $w_i, w_{i+1}$ are neighboring. An $n$-gon with the weights $r-1$ on each vertex is called $n$-arc. A piece of an arc with weights $w_1, \dots, w_n$ is a path of length $n$, where each vertex is weighted with $w_1, \dots w_n$ and $w_i, w_{i+1}$ denote weights of neighboring vertices. These weights will also be called the face count of the vertex. 
 \end{definition}
 
-This definition has of cause a geometric interpretation. For a given graph, where each vertex has valence at most $r$ a fixed cycle in this graph can be interpreted as an arc where each vertex $v$ is given the weight $r - \deg(v)$, (TODO: introduce notation) thus, as the definition suggests, each weight counts the number of edges one has to add to each vertex for it to have valence $r$. To quickly describe pieces of an arc, his weight will be inscribed in connected circles, like  \piece{1}--\piece{2}--\piece{1}--\piece{2} for a piece of an arc of length $4$ with weights $1, 2, 1$ and $2$.
+This definition has of cause a geometric interpretation. For a given graph, where each vertex has valence at most $r$ a fixed cycle in this graph can be interpreted as an arc where each vertex $v$ is given the weight $\deg (v) - 1$, where $\deg (v)$ denotes the degree of the vertex $v$, thus, as the definition suggests, each weight counts the number of faces adjacent to $v$. To quickly describe pieces of an arc his weight will be inscribed in connected circles, like  \piece{1}--\piece{2}--\piece{1}--\piece{2} for a piece of an arc of length $4$ with weights $1, 2, 1$ and $2$.
 \begin{definition}
-  A planar graph is called a $r$-component if every of its vertices except the ones on the outer face is $r$-valent (the exterior vertices can, but are not required to, differ from the valence $r$). The outer face can be interpreted as an arc, where each vertex $v$ the weight $r - \deg$ is given. This arc will be called the outer arc.
+  A planar graph is called a $r$-component if every of its vertices except the ones on the outer face is $r$-valent (the exterior vertices can differ from the valence $r$, but are not required to). The outer face can be interpreted as an arc, where each vertex $v$ the weight $\deg(v) - 1$ is given. This arc will be called the outer arc.
 \end{definition}
 
 If one is interested in whether to parts of a construction fit together to assemble an larger part one has to compare the valences along some path on the boundary of each part. This is captured in the following definition:
 \begin{definition}
-  Two pieces of an arc with weights $w_1, \dots, w_{n}$ and $w'_1, \dots, w'_{n}$ are said to fit together if for all $i \in \{1, \dots, n \}$ holds $w_i + w'_{n-i} + 2 = r$. A piece of an arc is called self-fitting if it fits with itself.
+  Two pieces of an arc with weights $w_1, \dots, w_{n}$ and $w'_1, \dots, w'_{n}$ are said to fit together if for all $i \in \{1, \dots, n \}$ holds $w_i + w'_{n-i} = r$. A piece of an arc is called self-fitting if it fits with itself.
 \end{definition}
 
-\begin{lemma}
-  Let $G, G'$ be two $r$-components. Fix an orientation on both of them and let $v_0, \dots, v_{n+1}$ and $v'_0, \dots, v'_{n+1}$ be consecutive vertices (under this orientation) on $G, G'$ with weights $w_0, \dots, w_{n+1}$ and $w'_0, \dots, w'_{n+1}$. If $w_0 + w'_{n+1} + 1 \geq r$ and $w'_0 + w_{n+1} + 1 \geq r$ and the pieces $v_1, \dots, v_n$ and $v'_1, \dots, v'_n$ fit together, then there exists an $r$-component which has $G$ and $G'$ as subgraphs which identifies $v_0 = v'_{n+1}, \dots v_{n+1} = v'_0$, but not any other two vertices.
+\begin{lemma}\label{thm:fitting:arcs}
+  Let $G, G'$ be two $r$-components. Fix an orientation on both of them (clockwise or counter-clockwise) and let $v_0, \dots, v_{n+1}$ and $v'_0, \dots, v'_{n+1}$ be consecutive vertices (under this orientation) on $G, G'$ with weights $w_0, \dots, w_{n+1}$ and $w'_0, \dots, w'_{n+1}$. If $w_0 + w'_{n+1} + 1 \leq r$ and $w'_0 + w_{n+1} + 1 \leq r$ and the pieces $v_1, \dots, v_n$ and $v'_1, \dots, v'_n$ fit together, then there exists an $r$-component which has $G$ and $G'$ as subgraphs which identifies $v_0 = v'_{n+1}, \dots v_{n+1} = v'_0$, but not any other two vertices.
   \begin{proof}
-    By ``glueing'' $G$ and $G'$ along the paths $v_0 - \dots - v_{n+1}$ and $v'_0 - \dots - v'_{n+1}$, the resulting graph fullfills the requirements. It is planar since both $G$ and $G'$ are. When glueing $v_i$ with $v_{n+1-i}$ ($1 \leq i \leq n$), the edges $v_{i-1}$--$v_i$ and $v'_{n + 1 - i}$--$v'_{n + 2 - i}$ coincide, as well as the edges $v'_{n - i}$--$v'_{n + 1 - i}$ and $v_i$--$v_{i+1}$. Therefore, $\deg(v_i) = \deg(v'_{n+1-i}) = (r - w_i) + (r - w'_{n + 1 - i}) - 2 = 2r - w_i - w'_{n + 1 - i} - 2 = r$. The edges $v_0$--$v_1$ and $v'_n$--$v'_{n+1}$ are now glued together, thus $\deg(v_0) = \deg(v'_{n+1}) = (r - w_0) + (r - w'_{n+1}) - 1 = 2r - w_0 - w'_{n+1}) - 1 \leq r$. This proves that the new graph is an $r$-component.
+    By ``glueing'' $G$ and $G'$ along the paths $v_0 - \dots - v_{n+1}$ and $v'_0 - \dots - v'_{n+1}$, the resulting graph fullfills the requirements. It is planar since both $G$ and $G'$ are and both graphs where combined along the outer arc. Let $\tilde{v}_i$ be vertex in the new graph which represents $v_i$ and $v_{n+1-i}$ from the old graphs. When glueing $v_i$ with $v_{n+1-i}$ ($1 \leq i \leq n$), the edges $v_{i-1}$--$v_i$ and $v'_{n + 1 - i}$--$v'_{n + 2 - i}$ coincide, as well as the edges $v'_{n - i}$--$v'_{n + 1 - i}$ and $v_i$--$v_{i+1}$. Therefore the valence of $\tilde{v}_i$ is two less then the sum of valences of $v_i$ and $v'_{n+1-i}$, thus
+    \begin{equation*}
+      \deg(\tilde{v}_i) = \deg(v_i) + \deg(v'_{n+1-i}) - 2 = w_i + 1 + w'_{n + 1 - i} + 1 - 2 = w_i + w'_{n + 1 - i} = r.
+    \end{equation*}
+    The edges $v_0$--$v_1$ and $v'_n$--$v'_{n+1}$ are now glued together, it follows $\deg(\tilde{v}_0) = \deg(v_0) + \deg(v'_{n+1}) - 1 = (w_0 + 1) + (w'_{n+1} + 1) - 1 = w_0 - w'_{n+1}) + 1 \leq r$. This proves that the new graph is an $r$-component.
   \end{proof}
 \end{lemma}
+
+TODO: Insert picture for demonstration purposes.
 
 \begin{definition}
   Let $p$ be a piece of an arc with weights $w_1, \dots, w_{n}$. The $p$-expansion of an arc $a$ with weights $a_1, \dots a_k$ is the arc with weights $a_1, w_1, \dots w_n, a_2, w_1, \dots, w_n, a_3 \dots, a_k, w_1, \dots, w_n$.
 \end{definition}
 
-With this, one is able to describe a general construction theme:
+With this, one is able to describe a general construction scheme:
 
-\begin{construction}
-  
+\begin{construction}\label{thm:construction:arcs} Let $G$ be a planar graph of valence $r$. Let $p$ be a self-fitting piece of an arc. During the construction each $n$-gonal face is replaced with an $r$-component, whose outer arc is the $p$-expansion of an $n$-arc. This construction leads to an connected planar graph of valence $r$.
+  \begin{proof}
+    When viewing each face as an $r$-component, \autoref{thm:fitting:arcs} ensures that the valences of the new vertices inserted between the original vertices of one face sum up with the valences of the respective vertices added to a previously adjacent face to the required valence of $r$. TODO.
+  \end{proof}
 \end{construction}
+
+\begin{remark}
+  \autoref{thm:construction:arcs} still holds on an orientable closed $2$-manifold, as the arguments used where only ``local planarity'' and the existence of an orientation so \autoref{thm:fitting:arcs} can be used for all pairs of adjacent faces. If the piece of an arc of length $n$ is also symmetric, that is, $w_i = w_{n-i}$, $i = 1, \dots n$, even the requirement of an orientation can be dropped, the necessary equations of \autoref{thm:fitting:arcs} then hold regardless of the numbering of the vertices. If $w_i$ is a weight in an symmetric self-fitting piece of an arc of length $n$, then $w_i + w_{n-i} = 2 w_i = r$, thus for these kinds of arcs to exists $r$ has to be even; reviewing the considered cases only $r = 4$ remains.
+\end{remark}

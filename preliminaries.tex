@@ -37,7 +37,7 @@ which can be transformed into:
 \begin{align*}
   t \sum_{k=3}^m \left(\frac{2}{t} - k \right) v_k + (1-t) \sum_{k=3}^n \left( \frac{2}{1-t} - k \right) p_k = 4.
 \end{align*}
-This equation can be independant of the value of some $v_k$ or $p_{k'}$ when the value of $t$ is appropriately chosen. Of special interest in this thesis are the cases of one $v_r$ giving no information in the above equation (so $r \geq 3$ fixed and $t = \frac{2}{r}$) and having $v_{k} = 0$ for each $k \geq 3$, $k \neq r$. The resulting polyhedron has the property that each of his vertices has valence $r$. 
+This equation is independant of the value of some $v_k$ or $p_{k'}$ when the value of $t$ is appropriately chosen. Of special interest in this thesis are the cases of one $v_r$ giving no information in the above equation (so $r \geq 3$ fixed and $t = \frac{2}{r}$) and having $v_{k} = 0$ for each $k \geq 3$, $k \neq r$. The resulting polyhedron has the property that each of his vertices has valence $r$. 
 % TODO Explain this.
 \begin{definition}[$r$-realizable]
   A sequence $a = (a_3, \dots, a_m)$ is said to be $r$-realizable, if there exists a polyhedron such that $a$ is realizable with an $v$-vector consisting only of valence $r$ (in the sense of \autoref{def:relizable}).
@@ -55,7 +55,7 @@ For $r \in \{3, 4, 5\}$ the following equations arise:
 \end{notation}
 Even in with this rather specific constraints the problem stated above has no easy definite answer, as in, not every $p$-vector satisfying on of these equations can be realized as an polyhedron.
 \begin{example}
-  The $p$-vector $(0, 12, 1)_3$ has no realization but satisfies \autoref{eq:valence:3}. To see this one can start with one hexagon. As only pentagons are left to build the rest of the polyhedron a ring of six pentagons has to be glued to the hexagon. Another ring of six pentagons is forced to be glued to the first leaving a hole of the shape of an hexagon in the end, but no polygons left to fill it, see \autoref{fig:preliminaries:example}.
+  The $p$-vector $(0, 12, 1)_3$ has no realization but satisfies \autoref{eq:valence:3}. To see this one can start with one hexagon. As only pentagons are left to build the rest of the polyhedron a ring of six pentagons has to be glued to the sides of the hexagon. Another ring of six pentagons is forced to be glued to the first, leaving a hole of the shape of an hexagon in the end, but no polygons left to fill it, see \autoref{fig:preliminaries:example}.
 
   \begin{tikzfigure}{\label{fig:preliminaries:example}}
 \begin{scope}[xscale=1.0, yscale=0.866]
@@ -108,5 +108,9 @@ A stronger theorem, which generalizes the first case, is given in \cite{jendrol1
 
 Building upon these two, this thesis will present a bunch of new theorems of general Eberhards type. One of these proofs takes a similar approach as the proof given in \cite{ConvexPolytopes} for \autoref{thm:eberhard:4}. The rest of the proofs directly use \autoref{thm:eberhard}. This is done by taking a sequence not too different form the given one which suffices either \autoref{eq:valence:3} or \autoref{eq:valence:4}, constructing a polyhedron by the statements of \autoref{thm:eberhard} and then by adding or deleting some polygons create a polyhedron with a $p$-vector as stated. This is done by either substituting edges and vertices or every face by some larger structure. 
 
+These construction are transformation of graphs and therefore use heavily an result of Steinitz, stating that the necessary condition for an graph to be realizable as an polytope is to be planar and $3$-connected.
 
-%Todo Steinars theorem.
+\begin{theorem}[Steinitz's Theorem]\label{thm:steinitz}
+  A Graph $G$ is $3$-realizable if and only if $G$ is planar and $3$-connected.
+\end{theorem}
+A proof of this theorem can also be found in \cite{ConvexPolytopes}.

@@ -1,14 +1,13 @@
 \section{The case $[5, 8]_3$}
-\begin{theorem}
-  Let $p = (p_3, p_4, p_5, \dots, p_n)$ be a given sequence satisfying equation \ref{eq:valence:3}, then there exists $r \in \nats$ for which $p + r [2 \times 5, 8]_3$ is $3$-realizable.
+\begin{construction}\label{thm:construction:5:8}
+  Given a $3$-valent polyhedron $P$ with $p$-vector $(p_3, p_4, p_5, p_6, p_7, p_8, \dots, p_m)$ and $p'_6 \leq p_6$, there exists another $3$-valent polyhedron $P'$ with $p$-vector $(p_3, p_4, p'_5, p'_6, p_7, p'_8, \dots, p_m)$, where $2(p'_5 - p_5) = p'_8 - p_8$.
   \begin{proof}
-    The proof is unsuprisingly similiar to the last one given. Again one chooses a realization by the classical Eberhards  \ref{thm:eberhard:3} and substitutes the surplus of hexagons by two times as many pentagons and as octagon. Seperating the faces in a kind of different way then before gives enough space for this substitution. The separation consists of an ring of pentagons around each polygon of the realization followed by a ring of octagons and fitting in the emerging holes another round of pentagons (equal to the number of pentagons and octagons in the previous rings as to have a discrete curvature of zero). This process is depicted in \autoref{fig:case_5_8:img1}.
-
-    \begin{tikzfigure}{\label{fig:case_5_8:img1}}
+    As seen in \autoref{fig:case:5:8:img1}, one can create a (\piece{2}--\piece{1}--\piece{2}--\piece{1})-expansion of each polygon of the given realization $P$ (when counting the vertices clockwise). The construction forms around these $n$-gons a ring of pentagons, around which another ring of octagons is added. The resulting figure has $n$ vertices of valence $3$ on the outer arc, these will be the positions for final set of $n$ pentagons resulting in the shape given in \autoref{fig:case:5:8:img1}. It has the required outer arc since \piece{2}--\piece{1}--\piece{2}--\piece{1} is self-fitting, and therefore by \autoref{thm:construction:arcs} it gives rise to an polyhedron $\tilde{P}$.
+    \begin{tikzfigure}{\label{fig:case:5:8:img1}}
       \matrix (m) [ column sep=1cm] {
-
-        \begin{scope} 
-          \filldraw[fill=gray!50!white] (-1, -1) -- (1, -1) -- (1, 1) -- (-1, 1) -- (-1, -1);
+        \begin{scope}
+          \fill[fill=gray!50!white] (-1, -1) -- (1, -1) -- (1, 1) -- (-1, 1);
+          \draw (-1, -1) circle[radius=2pt] -- (1, -1) circle[radius=2pt] -- (1, 1) circle[radius=2pt] -- (-1, 1) circle[radius=2pt] -- (-1, -1);
         \end{scope}
         &
         \begin{scope}[scale=0.25] 
@@ -25,17 +24,19 @@
           \draw (-2, 2) -- (-1, 1);
           
           \filldraw[fill=gray!50!white] (-1, -1) -- (1, -1) -- (1, 1) -- (-1, 1) -- (-1, -1);
-          \draw (-7, -3) -- (-9, -1) -- (-9, 1) -- (-7, 3);
-          \draw ( 7, -3) -- ( 9, -1) -- ( 9, 1) -- ( 7, 3);
-          \draw (-3, -7) -- (-1, -9) -- (1, -9) -- (3, -7);
-          \draw (3, 7) -- (1, 9) -- (-1, 9) -- (-3, 7);
+          \draw (-7, -3)  -- (-9, -1) -- (-9, 1) circle[radius=8pt]-- (-7, 3);
+          \draw ( 7, -3) -- ( 9, -1) circle[radius=8pt]-- ( 9, 1) -- ( 7, 3) ;
+          \draw (-3, -7) -- (-1, -9) circle[radius=8pt]-- (1, -9) -- (3, -7) ;
+          \draw (3, 7) -- (1, 9) circle[radius=8pt]-- (-1, 9) -- (-3, 7);
 
         \end{scope}
         \\
       };
     \end{tikzfigure}
 
-    \begin{tikzfigure}{\label{fig:case_5_8:img2}}
+    In view of the hexagons one can now replace the figure held in the first construction step with the ones seen in \autoref{fig:case:5:8:img2}. Note that the left side of the figure is the result of the above construction in the case of an hexagon and the right side has the same outer arc, but consists only of pentagons and octagons. So one can substitute arbitrarly many hexagons by an amount of octagons and heptagons, creating hereby $P'$. $2(p'_5 - p_5) = p'_8 - p_8$ holds, since \autoref{eq:valence:3} holds for $P$ as well as for $P'$.
+    
+    \begin{tikzfigure}{\label{fig:case:5:8:img2}}
       \matrix (m) [ column sep=1cm] {
 
         \begin{scope}[rotate=-30, yscale=0.866, scale=0.25] 
@@ -206,9 +207,13 @@
     %     };
     %   \end{tikzpicture}
     % \end{figure}
-    Todo.
-    % This finishes the proof.
   \end{proof}
-\end{theorem}
+\end{construction}
 
+\begin{corollary}
+  Let $p = (p_3, p_4, p_5, \dots, p_n)$ be a given sequence satisfying \autoref{eq:valence:3}, then there exists $r \in \nats$ for which $p + r [2 \times 5, 8]_3$ is $3$-realizable.
+  \begin{proof}
+    The proof starts by using the construction given by Eberhards \autoref{thm:eberhard:3}. This results in a realization of $p$ which has many more hexagons then needed. The next step is to remove these hexagons and replace them by pentagons and heptagons. This is done by \autoref{thm:construction:5:8}. The resulting polyhedron has the required amount of polygons of each shape.
+  \end{proof}
+\end{corollary}
 

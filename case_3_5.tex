@@ -1,69 +1,268 @@
 \section{The case $[3, 5]_4$}
 In this section the main problem will be proved for the case of adding the same number of triangles and pentagons to realize a given sequence satisfying \autoref{eq:valence:4}. This proof will be given by an explicit construction, so some building blocks for this construction will be needed.
+
+\begin{definition}[Square arc]\label{def:square:arc}
+  When in the case of $4$-valent polyhedrons, a square arc denotes an arc consisting four times of the face count $1$, while every other vertex has has face count $2$.
+\end{definition}
+
+%% \begin{lemma}\label{thm:square:arc}
+%%   Let $G$ be $4$-component with an square outer arc, consisting of $p_3$ triangles, $p_4$ quadrangles and so forth. Then $p$ fullfills \autoref{eq:zero:curv:4}.
+%%   \begin{proof}
+%%     Let $v_4$ be the number of inner vertices, $v_3$ the number of vertices on the outer arc with face count $2$ and $v_2$ the number of vertices with face count $1$. Note that $v_i$ counts the number of vertices of valence $i$. Let $v = v_2 + v_3 + v_4$ be the number of vertices, $e$ be the number of edges and $f$ the number of faces of $G$. The outer face is circumscribed by the outer arc and is therefore a $v_2+v_3$-gon. Then by \autoref{def:square:arc} and a double counting argument follows:
+%%     \begin{align*}
+%%       v + f - e &= 2 \\
+%%       v_2 &= 4 \\
+%%       f &= \sum_{k \geq 3} p_k + 1 \\
+%%       e &= \frac{1}{2}(4 v_4 + 3 v_3  + 2 v_2) \\
+%%       e &= \frac{1}{2}\left(\sum_{k \geq 3} k p_k + v_2 + v_3\right).
+%%     \end{align*}
+%%     Plugging these into \autoref{thm:eulers:relation} $v + f - e = 2$ results in
+%%     \begin{align*}
+%%       4 = 2(v + f - e)&= 2(v_2 + v_3 + v_4) + 2\left(\sum_{k \geq 3} p_k + 1\right) - \frac{1}{2}\left(\sum_{k \geq 3} k p_k + v_2 + v_3\right) - \frac{1}{2}(4 v_4 + 3 v_3  + 2 v_2)\\
+%%       &= \left((2v_2 - \frac{1}{2}v_2 - v_2)\right) + \left((2v_3 - \frac{1}{2}v_3 - \frac{3}{2}v_3)\right) + (2v_4 - 2v_4) + \frac{1}{2} \left(\sum_{k \geq 3} (4 - k) p_k \right) + 2, \\
+%%       &= 4 + \frac{1}{2} \left(\sum_{k \geq 3} (4 - k) p_k \right)
+%%     \end{align*}
+%%     resulting in \autoref{eq:zero:curv:4} when multiplying with $2$.
+%%   \end{proof}
+%% \end{lemma}
+
 \begin{definition}[$2 \times 2$ building block]
   The following rectangle consisting of four triangles and four pentagons will be called a $2 \times 2$ building block.
-  \begin{figure}[htpp]
-    \centering
-    \begin{tikzpicture}
-      \begin{scope}
-        \draw (-1, -1) -- (1, -1) -- (1, 1) -- (-1, 1) -- (-1, -1);
-        \draw (-0.5, 0) -- (0, -0.5) -- (0.5, 0) -- (0, 0.5) -- (-0.5, 0);
-        \draw (0, -1) -- (0, 1);
-        \draw (-1, 0) -- (1, 0);
-      \end{scope}
-    \end{tikzpicture}
-  \end{figure}
+  \begin{tikzfigure}{\label{fig:case:3:5:2times2bb}}
+    \begin{scope}
+      \fill[fill=gray!50!white] (0, 0.5) -- (0, 1) -- (1, 1) -- (1, 0) -- (0.5, 0);
+      \draw (-1, -1) -- (1, -1) -- (1, 1) -- (-1, 1) -- (-1, -1);
+      \draw (-0.5, 0) -- (0, -0.5) -- (0.5, 0) -- (0, 0.5) -- (-0.5, 0);
+      \draw (0, -1) -- (0, 1);
+      \draw (-1, 0) -- (1, 0);
+    \end{scope}
+  \end{tikzfigure}
 \end{definition}
 
-Each $k$-gon of the sequence $(k > 4)$ can be grouped together with $k-2$ triangles to create a ``flat'' block (they fullfill \autoref{eq:zero:curv:4}). This can be brought to a square form by adding $2 \times 2$ building blocks, as well as some additional triangles and pentagons as seen in the following picture.
-\begin{definition}[Basic building block] The following will be called ``basic building block''.
-  \begin{figure}[htpp]
-    \centering
-    \begin{tikzpicture}[scale=0.1]
-      \begin{scope}
-        \draw (-10, -10) -- (10, -10) -- (10, 10) -- (-10, 10) -- (-10, -10);
-        \draw (6, 10) -- (10, 6);
-        \draw (6, -10) -- (-10, 6);
-        \draw (2, -10) -- (2, -6) -- (-10, -6);
-        \draw (-2, -10) -- (-2, -2) -- (-10, -2);
-        \draw (-6, -10) -- (-6, 2) -- (-10, 2);
-        \draw (2, -10) -- (2, -6) -- (-10, -6);
-        \draw (-2, -10) -- (-2, -2) -- (-10, -2);
-        \draw (-6, -10) -- (-6, 2) -- (-10, 2);
-        \draw (-10, 0) -- (-8, -2) -- (-8, -10);
-        \draw (-10, -4) -- (-6, -4) -- (-4, -6) -- (-4, -10);
-        \draw (-10, -8) -- (-2, -8) -- (0, -10);
-        \draw (-3, -8) -- (-4, -9) -- (-5, -8) -- (-4, -7) -- (-3, -8);
-        \draw (-8, -3) -- (-9, -4) -- (-8, -5) -- (-7, -4) -- (-8, -3);
-        \draw (-8, -7) -- (-9, -8) -- (-8, -9) -- (-7, -8) -- (-8, -7);
-      \end{scope}
-    \end{tikzpicture}
-  \end{figure}
-  Note that it has the form of a square, where the top and right as well as the bottom and left sides have the same amount of edges, which is even.
+Each $k$-gon of the sequence $(k > 5)$ can be grouped together with $k-4$ triangles to create a ``flat'' block (they fullfill \autoref{eq:zero:curv:4}). This can be brought to an square arc by adding $2 \times 2$ building blocks, as well as some additional triangles and pentagons as seen in the following picture.
+\begin{definition}[Basic building block] For a $k$-gon with $k > 5$, the $4$-component in \autoref{fig:case:3:5:basicbb} will be called its ``basic building block''.
+  \begin{tikzfigure}{\label{fig:case:3:5:basicbb}}
+    \begin{scope}[scale=0.1]
+      \fill[fill=gray!50!white] (-10, 10) -- (6, 10) -- (10, 6) -- (10, -10) -- (6, -10) -- (-10, 6) -- cycle;
+      \draw (-10, -10) -- (10, -10) -- (10, 10) -- (-10, 10) -- (-10, -10);
+      \draw (6, 10) -- (10, 6);
+      \draw (6, -10) -- (-10, 6);
+      \draw (2, -10) -- (2, -6) -- (-10, -6);
+      \draw (-2, -10) -- (-2, -2) -- (-10, -2);
+      \draw (-6, -10) -- (-6, 2) -- (-10, 2);
+      \draw (2, -10) -- (2, -6) -- (-10, -6);
+      \draw (-2, -10) -- (-2, -2) -- (-10, -2);
+      \draw (-6, -10) -- (-6, 2) -- (-10, 2);
+      \draw (-10, 0) -- (-8, -2) -- (-8, -10);
+      \draw (-10, -4) -- (-6, -4) -- (-4, -6) -- (-4, -10);
+      \draw (-10, -8) -- (-2, -8) -- (0, -10);
+      \draw (-3, -8) -- (-4, -9) -- (-5, -8) -- (-4, -7) -- cycle;
+      \draw (-8, -3) -- (-9, -4) -- (-8, -5) -- (-7, -4) -- cycle;
+      \draw (-8, -7) -- (-9, -8) -- (-8, -9) -- (-7, -8) -- cycle;
+    \end{scope}
+  \end{tikzfigure}
+  
+  For $k = 4$, a quadrangle, the structures in \autoref{fig:case:3:5:quadbb} will be considered as the respective basic building block. For a pentagon the basic building block is seen in \autoref{fig:case:3:5:2times2bb}
+
+  \begin{tikzfigure}{\label{fig:case:3:5:quadbb}}
+    \begin{scope}[scale=0.5]
+      \fill[fill=gray!50!white] (1, 1) -- (2, 1) -- (2, 2) -- (1, 2);
+      \draw (-2, -2) -- (-2, 2) -- (2, 2) -- (2, -2) -- cycle;
+      \draw (1, -2) -- (1, 2);
+      \draw (-2, 1) -- (2, 1);
+      \draw (-2, 0) -- (-1, -1) -- (0, 0) -- (1, -1) -- (2, 0);
+      \draw (-2, -1) -- (-1, 0) -- (0, -1) -- (1, 0) -- (2, -1);
+      \draw (-1, -2) -- (-1, 1) -- (0, 2);
+      \draw (0, -2) -- (0, 1) -- (-1, 2);
+    \end{scope}
+  \end{tikzfigure}
+
+  Note that every basic building block has the outer arc is a square arc, where the north and east as well as the south and west ``sides'' have the same amount of edges, which is even. Each building block consists of the assigned $k$-gon, $k-4+r$ triangles and $r$ pentagons for some value $r \in \nats$.
 \end{definition}
 
-\begin{definition}[Basic building block] The following will be called ``basic building block''.
-  \begin{figure}[htpp]
-    \centering
-    \begin{tikzpicture}[scale=0.1]
-      \begin{scope}
-        \draw (-10, -10) -- (10, -10) -- (10, 10) -- (-10, 10) -- (-10, -10);
-        \draw (6, 10) -- (10, 6);
-        \draw (6, -10) -- (-10, 6);
-        \draw (2, -10) -- (2, -6) -- (-10, -6);
-        \draw (-2, -10) -- (-2, -2) -- (-10, -2);
-        \draw (-6, -10) -- (-6, 2) -- (-10, 2);
-        \draw (2, -10) -- (2, -6) -- (-10, -6);
-        \draw (-2, -10) -- (-2, -2) -- (-10, -2);
-        \draw (-6, -10) -- (-6, 2) -- (-10, 2);
-        \draw (-10, 0) -- (-8, -2) -- (-8, -10);
-        \draw (-10, -4) -- (-6, -4) -- (-4, -6) -- (-4, -10);
-        \draw (-10, -8) -- (-2, -8) -- (0, -10);
-        \draw (-3, -8) -- (-4, -9) -- (-5, -8) -- (-4, -7) -- (-3, -8);
-        \draw (-8, -3) -- (-9, -4) -- (-8, -5) -- (-7, -4) -- (-8, -3);
-        \draw (-8, -7) -- (-9, -8) -- (-8, -9) -- (-7, -8) -- (-8, -7);
-      \end{scope}
-    \end{tikzpicture}
-  \end{figure}
-  Note that it has the form of a square, where the top and right as well as the bottom and left sides have the same amount of edges, which is even.
+\begin{definition}[Basis] One is able to assemble many basic building blocks by stacking them diagonaly as seen in \autoref{fig:case:3:5:basis} for the basic building blocks of an quadrangle, and pentagon and an nonagon. This shape can be completed to an quadrangle shape by inserting $(2 \times 2)$ building blocks. This is possible, since each side of an building block has an even number of edges.
+  \begin{tikzfigure}{\label{fig:case:3:5:basis}}
+    \begin{scope}[scale=0.1]
+      \fill[fill=gray!50!white] (-15, -15) -- (-10, -15) -- (-10, -10) -- (-15, -10);
+      \draw[very thick] (-30, -30) -- (-30, -10) -- (-10, -10) -- (-10, -30) -- cycle;
+      \draw (-15, -30) -- (-15, -10);
+      \draw (-30, -15) -- (-10, -15);
+      \draw (-30, -20) -- (-25, -25) -- (-20, -20) -- (-15, -25) -- (-10, -20);
+      \draw (-30, -25) -- (-25, -20) -- (-20, -25) -- (-15, -20) -- (-10, -25);
+      \draw (-25, -30) -- (-25, -15) -- (-20, -10);
+      \draw (-20, -30) -- (-20, -15) -- (-25, -10);
+      
+      \fill[fill=gray!50!white] (-10, 10) -- (6, 10) -- (10, 6) -- (10, -10) -- (6, -10) -- (-10, 6) -- cycle;
+      \draw[very thick] (-10, -10) -- (10, -10) -- (10, 10) -- (-10, 10) -- (-10, -10);
+      \draw (6, 10) -- (10, 6);
+      \draw (6, -10) -- (-10, 6);
+      \draw (2, -10) -- (2, -6) -- (-10, -6);
+      \draw (-2, -10) -- (-2, -2) -- (-10, -2);
+      \draw (-6, -10) -- (-6, 2) -- (-10, 2);
+      \draw (2, -10) -- (2, -6) -- (-10, -6);
+      \draw (-2, -10) -- (-2, -2) -- (-10, -2);
+      \draw (-6, -10) -- (-6, 2) -- (-10, 2);
+      \draw (-10, 0) -- (-8, -2) -- (-8, -10);
+      \draw (-10, -4) -- (-6, -4) -- (-4, -6) -- (-4, -10);
+      \draw (-10, -8) -- (-2, -8) -- (0, -10);
+      \draw (-3, -8) -- (-4, -9) -- (-5, -8) -- (-4, -7) -- cycle;
+      \draw (-8, -3) -- (-9, -4) -- (-8, -5) -- (-7, -4) -- cycle;
+      \draw (-8, -7) -- (-9, -8) -- (-8, -9) -- (-7, -8) -- cycle;
+
+      \fill[fill=gray!50!white] (20, 25) -- (20, 30) -- (30, 30) -- (30, 20) -- (25, 20);
+      \draw[very thick] (10, 10) -- (30, 10) -- (30, 30) -- (10, 30) -- cycle;
+      \draw (15, 20) -- (20, 15) -- (25, 20) -- (20, 25) -- (15, 20);
+      \draw (20, 10) -- (20, 30);
+      \draw (10, 20) -- (30, 20);
+
+
+      \draw ( 10,  6) -- ( 30,  6);
+      \draw ( 10,-10) -- ( 30,-10);
+      \draw (-10,-15) -- ( 30,-15);
+      \draw (-10,-20) -- ( 30,-20);
+      \draw (-10,-25) -- ( 30,-25);
+      \draw (-10,-30) -- ( 30,-30);
+
+      \draw ( -8,-30) -- ( -8,-10);
+      \draw ( -6,-30) -- ( -6,-10);
+      \draw ( -4,-30) -- ( -4,-10);
+      \draw ( -2,-30) -- ( -2,-10);
+      \draw (  0,-30) -- (  0,-10);
+      \draw (  2,-30) -- (  2,-10);
+      \draw (  6,-30) -- (  6,-10);
+      \draw ( 10,-30) -- ( 10,-10);
+      \draw ( 20,-30) -- ( 20, 10);
+      \draw ( 30,-30) -- ( 30, 10);
+      
+      \draw ( 18,  6) -- ( 20,  4) -- ( 22,  6) -- ( 20,  8) -- cycle;
+      \draw ( 18,-15) -- ( 20,-17) -- ( 22,-15) -- ( 20,-13) -- cycle;
+      \draw ( 18,-25) -- ( 20,-27) -- ( 22,-25) -- ( 20,-23) -- cycle;
+      \draw ( -9,-15) -- ( -8,-16) -- ( -7,-15) -- ( -8,-14) -- cycle;
+      \draw ( -5,-15) -- ( -4,-16) -- ( -3,-15) -- ( -4,-14) -- cycle;
+      \draw ( -1,-15) -- (  0,-16) -- (  1,-15) -- (  0,-14) -- cycle;
+      \draw (  4,-15) -- (  6,-17) -- (  8,-15) -- (  6,-13) -- cycle;
+      \draw ( -9,-25) -- ( -8,-26) -- ( -7,-25) -- ( -8,-24) -- cycle;
+      \draw ( -5,-25) -- ( -4,-26) -- ( -3,-25) -- ( -4,-24) -- cycle;
+      \draw ( -1,-25) -- (  0,-26) -- (  1,-25) -- (  0,-24) -- cycle;
+      \draw (  4,-25) -- (  6,-27) -- (  8,-25) -- (  6,-23) -- cycle;
+
+      \draw (  6, 10) -- (  6, 30);
+      \draw (-10, 10) -- (-10, 30);
+      \draw (-15,-10) -- (-15, 30);
+      \draw (-20,-10) -- (-20, 30);
+      \draw (-25,-10) -- (-25, 30);
+      \draw (-30,-10) -- (-30, 30);
+
+      \draw (-30, -8) -- (-10, -8);
+      \draw (-30, -6) -- (-10, -6);
+      \draw (-30, -4) -- (-10, -4);
+      \draw (-30, -2) -- (-10, -2);
+      \draw (-30,  0) -- (-10,  0);
+      \draw (-30,  2) -- (-10,  2);
+      \draw (-30,  6) -- (-10,  6);
+      \draw (-30, 10) -- (-10, 10);
+      \draw (-30, 20) -- ( 10, 20);
+      \draw (-30, 30) -- ( 10, 30);
+      
+      \draw (  6, 18) -- (  4, 20) -- (  6, 22) -- (  8, 20) -- cycle;
+      \draw (-15, 18) -- (-17, 20) -- (-15, 22) -- (-13, 20) -- cycle;
+      \draw (-25, 18) -- (-27, 20) -- (-25, 22) -- (-23, 20) -- cycle;
+      \draw (-15, -9) -- (-16, -8) -- (-15, -7) -- (-14, -8) -- cycle;
+      \draw (-15, -5) -- (-16, -4) -- (-15, -3) -- (-14, -4) -- cycle;
+      \draw (-15, -1) -- (-16,  0) -- (-15,  1) -- (-14,  0) -- cycle;
+      \draw (-15,  4) -- (-17,  6) -- (-15,  8) -- (-13,  6) -- cycle;
+      \draw (-25, -9) -- (-26, -8) -- (-25, -7) -- (-24, -8) -- cycle;
+      \draw (-25, -5) -- (-26, -4) -- (-25, -3) -- (-24, -4) -- cycle;
+      \draw (-25, -1) -- (-26,  0) -- (-25,  1) -- (-24,  0) -- cycle;
+      \draw (-25,  4) -- (-27,  6) -- (-25,  8) -- (-23,  6) -- cycle;
+
+    \end{scope}
+  \end{tikzfigure}
+
+  As is with the basic building blocks, the north and east and respective west and south sides share the same number of edges.
 \end{definition}
+
+\begin{theorem} Let $p = (p_3, p_4, p_5, \dots, p_n)$ be a given sequence satisfying \autoref{eq:valence:4}. Then there exists $r \in \nats$ for which $p + r [2 \times 3, 6]_3$ is $4$-realizable.
+  \begin{proof}
+    For each $k$-gon, $k > 3$ take the basic building block for this $k$-gon and form a basis out of these. Let $p'_k$ be the number of $k$-gons for each $3 \geq k$. The basis consists by construction only of the required $k$-gons, triangles and pentagons, so $p_k = p'_k$ for $k \neq 3, 5$. The basis can be closed as seen in \autoref{fig:case3:5:closedbasis} with $8+r$ additional triangles and $r$ pentagons, $r \in \nats$. This gives an polyhedron with $p$-vector $p''$ with
+    \begin{align*}
+      & \sum_{k=3}^n (4 - k) p_k'' - \sum_{k=3}^n (4 - k) p_k = 0 \\
+      \implies& \frac{1}{3} (p''_3 - p_3) = \frac{2}{3} (p''_4 - p_4), 
+    \end{align*}
+    from \autoref{eq:valence:4}.
+    \begin{tikzfigure}{\label{fig:case3:5:closedbasis}}
+      \begin{scope}
+        %% \filldraw[fill=gray!50!white]
+        %% (-1, 1) arc [start angle = 180, delta angle = -60, radius = 2]
+        %% node(n1){} arc [start angle = 60, delta angle = 150, radius = 2]
+        %% node(w1){} arc [start angle = 150, delta angle = -60, radius = 2];
+        
+        %% \filldraw[fill=gray!50!white]
+        %% (1, -1) arc [start angle = 0, delta angle = -60, radius = 2]
+        %% node(s1){} arc [start angle = 240, delta angle = 150, radius = 2]
+        %% node(e1){} arc [start angle = 330, delta angle = -60, radius = 2];
+
+        
+        
+        %% \fill[fill=gray!50!white] (1, 1) -- (1, 0.6) arc [start angle = 270, delta angle = 270, radius = 0.4]  -- cycle;
+        %% \fill[fill=gray!50!white] (-1, -1) -- (-1, -0.6) arc [start angle = 90, delta angle = 270, radius = 0.4] -- cycle;
+        \draw (-1, -1) -- (1, -1) -- (1, 1) -- (-1, 1) -- cycle;
+
+        \path [name path=nw1] (1, 1) arc [start angle = 0, delta angle = 270, radius = 2];
+        \path [name path=se1] (-1, -1) arc [start angle = 180, delta angle = 270, radius = 2];
+
+        \draw [name path=ne2] (1, -0.6) arc [start angle = 270, delta angle = 270, radius = 1.6];
+        \draw [name path=ne3] (1, 0.1) arc [start angle = 270, delta angle = 270, radius = 0.9];
+        \draw [name path=ne4] (1, 0.3) arc [start angle = 270, delta angle = 270, radius = 0.7];
+        \draw [name path=ne5] (1, 0.6) arc [start angle = 270, delta angle = 270, radius = 0.4];
+        
+        \draw [name path=sw2] (-1, 0.3) arc [start angle = 90, delta angle = 270, radius = 1.3];
+        \draw [name path=sw3] (-1, 0.1) arc [start angle = 90, delta angle = 270, radius = 1.1];
+        \draw [name path=sw4] (-1, -0.6) arc [start angle = 90, delta angle = 270, radius = 0.4];
+
+        \path [name intersections={of=nw1 and ne2, by=n2}];
+        \path [name intersections={of=nw1 and ne3, by=n3}];
+        \path [name intersections={of=nw1 and ne4, by=n4}];
+        \path [name intersections={of=nw1 and ne5, by=n5}];
+
+        \path [name intersections={of=se1 and ne2, by=e2}];
+        \path [name intersections={of=se1 and ne3, by=e3}];
+        \path [name intersections={of=se1 and ne4, by=e4}];
+        \path [name intersections={of=se1 and ne5, by=e5}];
+
+        \path [name intersections={of=nw1 and sw2, by=w2}];
+        \path [name intersections={of=nw1 and sw3, by=w3}];
+        \path [name intersections={of=nw1 and sw4, by=w4}];
+
+        \path [name intersections={of=se1 and sw2, by=s2}];
+        \path [name intersections={of=se1 and sw3, by=s3}];
+        \path [name intersections={of=se1 and sw4, by=s4}];
+
+        
+        %% \draw (n1) arc [start angle = 120, delta angle = -150, radius = 2];
+        %% \draw (w1) arc [start angle = 150, delta angle = 150, radius = 2];
+
+        \draw (1, 1) -- (n5) to [bend left=60] (e4) to [bend right=60] (n3) to [bend left=60] (e2):
+        \draw (1, 1) -- (e5) to [bend right=60] (n4) to [bend left=60] (e3) to [bend right=60] (n2);
+
+        \node (0,0) {Basis};
+
+        %% \draw (1, -1) -- (3, 1) -- (1, 3) -- (-1, 1);
+        %% \draw (1, -0.6) -- (2.6, 1) -- (1, 2.6) -- (-0.6, 1);
+        %% \draw (1, 0.1) -- (1.9, 1) -- (1, 1.9) -- (0.1, 1);
+        %% \draw (1, 0.3) -- (1.7, 1) -- (1, 1.7) -- (0.3, 1);
+        %% \draw (1, 0.6) -- (1.4, 1) -- (1, 1.4) -- (0.6, 1);
+        %% \draw (1, 1) -- (1.4, 1) -- (1, 1.7) -- (1.9, 1) -- (1, 2.6) -- (3, 1) -- (3, -3);
+        %% \draw (1, 1) -- (1, 1.4) -- (1.7, 1) -- (1, 1.9) -- (2.6, 1) -- (1, 3) -- (-3, 3);
+
+        %% \draw (-1, 1) -- (-3, -1) -- (-1, -3) -- (1, -1);
+        %% \draw (-1, 0.3) -- (-2.3, -1) -- (-1, -2.3) -- (0.3, -1);
+        %% \draw (-1, 0.1) -- (-2.1, -1) -- (-1, -2.1) -- (0.1, -1);
+        %% \draw (-1, -0.6) -- (-1.4, -1) -- (-1, -1.4) -- (-0.6, -1);
+        %% \draw (-1, -1) -- (-1.4, -1) -- (-1, -2.1) -- (-2.3, -1) -- (-1, -3) -- (3, -3);
+        %% \draw (-1, -1) -- (-1, -1.4) -- (-2.1, -1) -- (-1, -2.3) -- (-3, -1) -- (-3, 3);
+      \end{scope}
+    \end{tikzfigure}
+    TODO
+    \end{proof}
+  \end{theorem}
