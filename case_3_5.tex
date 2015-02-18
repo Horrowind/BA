@@ -39,7 +39,7 @@ In this section the main problem will be proved for the case of adding the same 
   \end{tikzfigure}
 \end{definition}
 
-Each $k$-gon of the sequence $(k > 5)$ can be grouped together with $k-4$ triangles to create a ``flat'' block (they fullfill \autoref{eq:zero:curv:4}). This can be brought to an square arc by adding $2 \times 2$ building blocks, as well as some additional triangles and pentagons as seen in the following picture.
+Each $k$-gon of the sequence $(k > 5)$ can be grouped together with $k-4$ triangles to create a ``flat'' block (they fulfill \autoref{eq:zero:curv:4}). This can be brought to an square arc by adding $2 \times 2$ building blocks, as well as some additional triangles and pentagons as seen in the following picture.
 \begin{definition}[Basic building block] For a $k$-gon with $k > 5$, the $4$-component in \autoref{fig:case:3:5:basicbb} will be called its ``basic building block''.
   \begin{tikzfigure}{\label{fig:case:3:5:basicbb}}
     \begin{scope}[scale=0.1]
@@ -80,7 +80,7 @@ Each $k$-gon of the sequence $(k > 5)$ can be grouped together with $k-4$ triang
   Note that every basic building block has the outer arc is a square arc, where the north and east as well as the south and west ``sides'' have the same amount of edges, which is even. Each building block consists of the assigned $k$-gon, $k-4+r$ triangles and $r$ pentagons for some value $r \in \nats$.
 \end{definition}
 
-\begin{definition}[Basis] One is able to assemble many basic building blocks by stacking them diagonaly as seen in \autoref{fig:case:3:5:basis} for the basic building blocks of an quadrangle, and pentagon and an nonagon. This shape can be completed to an quadrangle shape by inserting $(2 \times 2)$ building blocks. This is possible, since each side of an building block has an even number of edges.
+\begin{definition}[Basis] One is able to assemble many basic building blocks by stacking them diagonally as seen in \autoref{fig:case:3:5:basis} for the basic building blocks of an quadrangle, and pentagon and an nonagon. This shape can be completed to an quadrangle shape by inserting $(2 \times 2)$ building blocks. This is possible, since each side of an building block has an even number of edges.
   \begin{tikzfigure}{\label{fig:case:3:5:basis}}
     \begin{scope}[scale=0.1]
       \fill[fill=gray!50!white] (-15, -15) -- (-10, -15) -- (-10, -10) -- (-15, -10);
@@ -182,14 +182,14 @@ Each $k$-gon of the sequence $(k > 5)$ can be grouped together with $k-4$ triang
   As is with the basic building blocks, the north and east and respective west and south sides share the same number of edges.
 \end{definition}
 
-\begin{theorem} Let $p = (p_3, p_4, p_5, \dots, p_n)$ be a given sequence satisfying \autoref{eq:valence:4}. Then there exists $r \in \nats$ for which $p + r [2 \times 3, 6]_3$ is $4$-realizable.
+\begin{theorem} Let $p = (p_3, p_4, p_5, \dots, p_n)$ be a given sequence satisfying \autoref{eq:valence:4}. Then there exists $r \in \nats$ for which $p + r [2 \times 3, 5]_3$ is $4$-realizable.
   \begin{proof}
-    For each $k$-gon, $k > 3$ take the basic building block for this $k$-gon and form a basis out of these. Let $p'_k$ be the number of $k$-gons for each $3 \geq k$. The basis consists by construction only of the required $k$-gons, triangles and pentagons, so $p_k = p'_k$ for $k \neq 3, 5$. The basis can be closed as seen in \autoref{fig:case3:5:closedbasis} with $8+r$ additional triangles and $r$ pentagons, $r \in \nats$. This gives an polyhedron with $p$-vector $p''$ with
+    For each $k$-gon, $k > 3$ take the basic building block for this $k$-gon and form a basis out of these. Let $p'_k$ be the number of $k$-gons for each $3 \geq k$. The basis consists by construction only of the required $k$-gons, triangles and pentagons, so $p_k = p'_k$ for $k \neq 3, 5$. The basis can be closed as seen in \autoref{fig:case3:5:closedbasis} with $8+s$ additional triangles and $s$ pentagons, $s \in \nats$. This gives an polyhedron with $p$-vector $p''$ with
     \begin{align*}
-      & \sum_{k=3}^n (4 - k) p_k'' - \sum_{k=3}^n (4 - k) p_k = 0 \\
-      \implies& \frac{1}{3} (p''_3 - p_3) = \frac{2}{3} (p''_4 - p_4), 
+      0 = 8 - 8 =& \sum_{k=3}^n (4 - k) p_k'' - \sum_{k=3}^n (4 - k) p_k\\
+      \implies& \frac{1}{3} (p''_3 - p_3) = \frac{2}{3} (p''_5 - p_5), 
     \end{align*}
-    from \autoref{eq:valence:4}.
+    from \autoref{eq:valence:4} and since $p_k = p''_k$ for $k\neq 3, 5$. Thus $p'' = p + r [2 \times 3, 5]$ for some $r \in \nats$.
     \begin{tikzfigure}{\label{fig:case3:5:closedbasis}}
       \begin{scope}
         %% \filldraw[fill=gray!50!white]
@@ -242,7 +242,7 @@ Each $k$-gon of the sequence $(k > 5)$ can be grouped together with $k-4$ triang
         %% \draw (n1) arc [start angle = 120, delta angle = -150, radius = 2];
         %% \draw (w1) arc [start angle = 150, delta angle = 150, radius = 2];
 
-        \draw (1, 1) -- (n5) to [bend left=60] (e4) to [bend right=60] (n3) to [bend left=60] (e2):
+        \draw (1, 1) -- (n5) to [bend left=60] (e4) to [bend right=60] (n3) to [bend left=60] (e2);
         \draw (1, 1) -- (e5) to [bend right=60] (n4) to [bend left=60] (e3) to [bend right=60] (n2);
 
         \node (0,0) {Basis};
@@ -263,6 +263,6 @@ Each $k$-gon of the sequence $(k > 5)$ can be grouped together with $k-4$ triang
         %% \draw (-1, -1) -- (-1, -1.4) -- (-2.1, -1) -- (-1, -2.3) -- (-3, -1) -- (-3, 3);
       \end{scope}
     \end{tikzfigure}
-    TODO
+    TO-DO
     \end{proof}
   \end{theorem}

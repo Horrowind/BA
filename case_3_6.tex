@@ -1,20 +1,20 @@
 \section{The case $[2 \times 3, 6]_4$}
 \begin{lemma}
-  Let $p = (p_3, p_4, p_5, \dots, p_n)$ be a given sequence satisfying \autoref{eq:valence:4} as well as $p_4 \leq 3$, $p_5 \leq 3$ and $3 \mid 2 \sum_{k=3}^{n} p_k - 4$. Then there exists $r \in \nats$ for which $p + r [2 \times 3, 6]_3$ is $4$-realizable.
+  Let $p = (p_3, p_4, p_5, \dots, p_n)$ be a given sequence satisfying \autoref{eq:valence:4} as well as $p_4 \leq 3$, $p_5 \leq 3$ and $3 \mid \sum_{k=3}^{n} p_k - 2$. Then there exists $r \in \nats$ for which $p + r [2 \times 3, 6]_3$ is $4$-realizable.
 
-  All the requirements in the statement will help utilizing Eberhards \autoref{thm:eberhard:3}. The conditions $p_4 \leq 3$, $p_5 \leq 3$ deal with different sign of curvatures when having valence $3$ and $4$ (note that quadrangles and pentagons have positive curvature in the case of $3$-valence but zero or negative curvature in the other case), while the condition $p_4 \leq 3$, $p_5 \leq 3$ is necessary to keep the number of triangles natural. 
+  All the requirements in the statement will help utilizing Eberhards \autoref{thm:eberhard:3}. The conditions $p_4 \leq 3$, $p_5 \leq 3$ deal with different sign of curvatures when having valence $3$ and $4$ (note that quadrangles and pentagons have positive curvature in the case of $3$-valence but zero or negative curvature in the other case), while the condition $3 \mid \sum_{k=3}^{n} p_k - 2$ is necessary to keep the number of triangles natural. 
   \begin{proof}
     One can restate \autoref{eq:valence:4} to a form looking more like \autoref{eq:valence:3}:
     \begin{align*}
       & \sum_{k=3}^n \left( 4 - k \right) p_k = 8 \\
       \implies & \sum_{k=3}^n \left( 6 - k \right) p_k - \left(2 \sum_{k=3}^n  p_k - 4 \right) = 12
     \end{align*}
-    Let $r_3 := (2 \sum_{k=3}^{n} p_k - 4)/3$. From
+    Let $r_3 := (2 \sum_{k=3}^{n} p_k - 4)/3$ ($\in \wholes$ by the second condition) . From
     \begin{align*}
       3 r_3 &= 2 \sum_{k=3}^{n} p_k - 4 =  2 p_3 + 2 p_4 + 2 p_5 + 2 \sum_{k=6}^{n} p_k - 4\\
       \implies 3 r_3 - 2 p_3 &= 2 p_4 + 2 p_5 - 4 + 2 \sum_{k=6}^{n} p_k \leq 8 + 2 \sum_{k=6}^{n} p_k \leq 8 + \sum_{k=4}^{n} (k - 4) p_k = p_3
     \end{align*}
-    follows, that $p_3' := p_3 - r_3 \geq 0$ and setting $p_k' := p_k$, $(k \geq 4)$ the resulting sequence $p'$ suffices \autoref{eq:valence:3}. Using \autoref{thm:eberhard:3} one get a $3$-realization $P'$ of $p'$. Inserting in $P'$ an hexagon for every edge and four triangles for every vertex as seen in the following figure one can construct a $4$-realization of some sequence $p''$.
+    follows, that $p_3' := p_3 - r_3 \geq 0$ (so $p'_3 \in \nats$) and setting $p_k' := p_k$ for $k \geq 4$ the resulting sequence $p'$ suffices \autoref{eq:valence:3}. Using \autoref{thm:eberhard:3} one get a $3$-realization $P'$ of $p'$. Inserting in $P'$ an hexagon for every edge and four triangles for every vertex as seen in \autoref{fig:case3:6:img1} one can construct a $4$-realization of some sequence $p''$.
     
     \begin{tikzfigure}{\label{fig:case3:6:img1}}
       \matrix (m) [ column sep=1cm] {
@@ -48,7 +48,7 @@
     \end{tikzfigure}
     $p''$ coincides with $p$ for every entry but $3$ and $6$. They both comply with \autoref{eq:valence:4}, therefore
     \begin{align*}
-      & \sum_{k=3}^n \left( 4 - k \right) p''_k  - \sum_{k=3}^n \left( 4 - k \right) p_k = 0 \\
+      0 = 8 - 8 = & \sum_{k=3}^n \left( 4 - k \right) p''_k  - \sum_{k=3}^n \left( 4 - k \right) p_k \\
       \implies & 2(p''_3 - p_3) = p''_6 - p_6
     \end{align*}
     and $p'' = p + (p''_6 - p_6)[2 \times 3, 6]_4$ is $4$-realizable, which finishes the proof.
@@ -101,7 +101,15 @@
 
 \begin{lemma}\label{thm:case3:6:nonexistence}
   There exists no 4-valent connected planar graph without monogons or digons where each but one face is a $k$-gon for some $k \in \nats$, $3 | k$. The single face with a number of edges not divisible by $3$ is called the exceptional face.
-  \begin{proof} The proof is made by contradiction. Let $G$ be a graph with the mentioned properties. The proof shows that $G$ by reducing the number of edges $G$ can be reduced to another graph which does not meet the requirements. The first thing to notice is that one can assume the number of edges of the exceptional face to be four or five. In fact, by changing two edges it is possible to ``cut out'' a square or a pentagon from larger exceptional faces.
+\end{lemma}
+\begin{remark}
+  When counting planar graphs some oddities can occur. A graph could for example have a face which visits a single vertex multiple times or two sides which in the end denote the same edge. One of these graphs can be seen in \autoref{fig:case3:6:example}.
+  \begin{tikzfigure}{\label{fig:case3:6:example}}
+    \draw (-1, 0) -- (-1, -1) -- (-1, 1) -- (1, 1) -- (1, -1) -- (-1, -1) -- (-1, 0) -- (0, 0) -- (0.5, -0.5) -- (0.5, 0.5) -- (0, 0);
+  \end{tikzfigure}
+  
+\end{remark}
+\begin{proof} The proof is made by contradiction. Let $G$ be a graph with the mentioned properties. The proof shows that $G$ by reducing the number of edges $G$ can be reduced to another graph which does not meet the requirements. The first thing to notice is that one can assume the number of edges of the exceptional face to be four or five. In fact, by changing two edges it is possible to ``cut out'' a square or a pentagon from larger exceptional faces.
     In the figures below let $B$ be the exceptional face with $b$ edges. Under the transformation $B$ is reduced to a square or a pentagon, depending on whether $b \equiv 1 (\operatorname{mod} 3)$ or $b \equiv 2 (\operatorname{mod} 3)$. In the first case $E$ has $b - 4$ edges, in the second $b-5$. Therefore, in either case $E$ is not an exceptional face, its number of edges is divisible by $3$. If $A$ and $C$ are different faces the resulting graph is connected. As $A$ and $C$ have a number of edges which is divisible by $3$, so has the new face $D$. It remains the case that $A$ is the same face as $C$. Then the free space labeled with $D$ is separated by two cycles of length $d$ (denoting the length of ``left'' cycle) and $d'$ (denoting the length of ``right'' cycle). If $d$ is divisible by $3$ then the left component has exactly one exceptional face and has fewer edges then the original one. If $d$ is not divisible by $3$, then neither is $d'$, as their sum matches the sum of the number of edges of $A$ and $C$, thus the right component has exactly one exceptional face (the cycle labeled with $d'$) and fewer faces then $G$.
     \begin{tikzfigure}{\label{fig:case3:6:img4}}
       \matrix (m) [ column sep=1cm] {
@@ -204,9 +212,9 @@
         \\
       };
     \end{tikzfigure}
-    The argument is mostly the same as in the previos case. $E$ has three less edges the $B$, the number of whose are divisible by $3$. There is also a differentiation to be made whether $A$ and $C$ denote the same face. If not, then the resulting graph is connected and has a triangle. If they are the same the graph separates and one of both sides has exactly one exceptional face and has fewer edges then $G$.
+    The argument is mostly the same as in the previous case. $E$ has three less edges the $B$, the number of whose are divisible by $3$. There is also a differentiation to be made whether $A$ and $C$ denote the same face. If not, then the resulting graph is connected and has a triangle. If they are the same the graph separates and one of both sides has exactly one exceptional face and has fewer edges then $G$.
 
-    This step will be used for the up to eight or ten faces which share at least one vertex with the exceptional face (eight if it is a square, ten if it is a pentagon). One can therefore assume that the exceptional face is surrounded by triangles, else one could try the above step to ``cut out'' a triangle, resulting in fewer edges or in a triangle at the desired position. But the resulting graph is isomorph to the skeleton of an antiprism, which has one additional exceptional face. The steps taken did not introduce new exceptional faces, a contradiction.
+    This step will be used for the up to eight or ten faces which share at least one vertex with the exceptional face (eight if it is a square, ten if it is a pentagon). One can therefore assume that the exceptional face is surrounded by triangles, else one could try the above step to ``cut out'' a triangle, resulting in fewer edges or in a triangle at the desired position. But the resulting graph is isomorphic to the skeleton of an antiprism (see \autoref{fig:case3:6:img6} for the two antiprisms with a quadrangle base and a pentagonal base), which has one additional exceptional face. The steps taken did not introduce new exceptional faces, a contradiction.
     \begin{tikzfigure}{\label{fig:case3:6:img6}}
       \matrix (m) [ column sep=1cm] {
         \begin{scope}[scale=0.75]
@@ -220,9 +228,9 @@
       };
     \end{tikzfigure}
   \end{proof}
-\end{lemma}
+
 \begin{remark}
-  The proof given is simiar to \cite{ConvexPolytopes}, where a proof for $3$-valent graphs is given. As is the case there, digons can be allowed during the argument. They do not simplify the proof here, so they were omitted.
+  The proof given is similar to \cite{ConvexPolytopes}, where a proof for $3$-valent graphs is given. As is the case there, digons can be allowed during the argument. They do not simplify the proof here, so they were omitted.
 \end{remark}
 \begin{corollary}
   There is no $4$-realization up to a scalar multiple of $[2 \times 3, 6]_4$ of the sequence $[1 \times k]_4$ for $3 \nmid k$.

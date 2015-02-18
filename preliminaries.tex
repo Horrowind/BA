@@ -7,7 +7,7 @@
   $(2, 0, 0, 1)$, $[2 \times 3, 1 \times 6]$ and $[2 \times 3, 6]$ all denote the same sequence. 
 \end{example}
 \begin{definition}[$p$-vector and $v$-vector of an polyhedron]\label{def:relizable}
-  The $p$-vector of a polyhedron $P$ is the sequence $(p_3, \dots, p_m)$, where $p_k$ denotes the number of faces with exactly $k$ vertices. Similarily the $v$-vector of $P$ is the sequence $(v_1, \dots, v_n)$, where each $v_k$ measures the number of edges of $P$ with valence $k$. 
+  The $p$-vector of a polyhedron $P$ is the sequence $(p_3, \dots, p_m)$, where $p_k$ denotes the number of faces with exactly $k$ vertices. Similarly the $v$-vector of $P$ is the sequence $(v_1, \dots, v_n)$, where each $v_k$ measures the number of edges of $P$ with valence $k$. 
 \end{definition}
 
 \begin{definition}
@@ -25,7 +25,7 @@ The most basic result answering that question partially is Eulers relation.
   \end{align*}
   holds.
 \end{theorem}
-Given the notation as above one can immediatly draw some basic conclusions from this relation: For one the number of vertices $v$ is obviously the sum of the entries of $v$-vector, as is the same with $f$, which is the sum of the $p$-vector. Using a double counting argument (each edge is adjacent to two faces and each edge is adjacent to two vertices) the following for the number of edges holds:
+Given the notation as above one can immediately draw some basic conclusions from this relation: For one the number of vertices $v$ is obviously the sum of the entries of $v$-vector, as is the same with $f$, which is the sum of the $p$-vector. Using a double counting argument (each edge is adjacent to two faces and each edge is adjacent to two vertices) the following for the number of edges holds:
 \begin{align*}
   2e = \sum_{k=3}^{m} k \cdot p_k = \sum_{k=3}^{n} k \cdot f_k
 \end{align*}
@@ -37,10 +37,10 @@ which can be transformed into:
 \begin{align*}
   t \sum_{k=3}^m \left(\frac{2}{t} - k \right) v_k + (1-t) \sum_{k=3}^n \left( \frac{2}{1-t} - k \right) p_k = 4.
 \end{align*}
-This equation is independant of the value of some $v_k$ or $p_{k'}$ when the value of $t$ is appropriately chosen. Of special interest in this thesis are the cases of one $v_r$ giving no information in the above equation (so $r \geq 3$ fixed and $t = \frac{2}{r}$) and having $v_{k} = 0$ for each $k \geq 3$, $k \neq r$. The resulting polyhedron has the property that each of his vertices has valence $r$. 
+This equation is independent of the value of some $v_k$ or $p_{k'}$ when the value of $t$ is appropriately chosen. Of special interest in this thesis are the cases of one $v_r$ giving no information in the above equation (so $r \geq 3$ fixed and $t = \frac{2}{r}$) and having $v_{k} = 0$ for each $k \geq 3$, $k \neq r$. The resulting polyhedron has the property that each of his vertices has valence $r$. 
 % TODO Explain this.
 \begin{definition}[$r$-realizable]
-  A sequence $a = (a_3, \dots, a_m)$ is said to be $r$-realizable, if there exists a polyhedron such that $a$ is realizable with an $v$-vector consisting only of valence $r$ (in the sense of \autoref{def:relizable}).
+  A sequence $a = (a_3, \dots, a_m)$ is said to be $r$-realizable, if there exists a polyhedron such that $a$ is realizable with an $v$-vector consisting only of valence $r$ (in the sense of \autoref{def:realizable}).
 \end{definition}
 Under these circumstances $r$ has to be in $\{3, 4, 5\}$.
 
@@ -51,7 +51,7 @@ For $r \in \{3, 4, 5\}$ the following equations arise:
   r &= 5: \sum_{k=3}^n \left( \frac{10}{3} - k \right) p_k = \frac{20}{3} \label{eq:valence:5}
 \end{align}
 \begin{notation}
-  If an $p$-vector $(p_3, \dots, p_k)$ is meant to be seen in this context, that each vertex of the considered polyhedron has valence $r$, this valence will be appended to the sequance, i.e. $(p_3, \dots, p_k)_r$.
+  If an $p$-vector $(p_3, \dots, p_k)$ is meant to be seen in this context, that each vertex of the considered polyhedron has valence $r$, this valence will be appended to the sequence, i.e. $(p_3, \dots, p_k)_r$.
 \end{notation}
 Even in with this rather specific constraints the problem stated above has no easy definite answer, as in, not every $p$-vector satisfying on of these equations can be realized as an polyhedron.
 \begin{example}
@@ -92,15 +92,15 @@ Even in with this rather specific constraints the problem stated above has no ea
   Throughout the thesis we want to denote this problem as of $(p_3, \dots, p_n)_r$-type.
 \end{notation}
 \begin{definition}[$r$-realizable]
-  A sequence $a = (p_3, \dots, p_m)$ is said to be $(q_3, \dots, q_n)_r$-realizable, if there exists a polyhedron such that $a$ is realizable with an $v$-vector consisting only of valence $r$ (in the sense of \autoref{def:relizable}).
+  A sequence $a = (p_3, \dots, p_m)$ is said to be $(q_3, \dots, q_n)_r$-realizable, if there exists a polyhedron such that $a$ is realizable with an $v$-vector consisting only of valence $r$ (in the sense of \autoref{def:realizable}).
 \end{definition}
 
 \autoref{eq:valence:3} and \autoref{eq:valence:4} suggest that $(6)_3$ or $(4)_4$ might be good candidates for such statements. As it is, these questions are well established and known as the (non-general) Eberhards theorem in \cite{ConvexPolytopes}:
 \renewcommand{\Itemautorefname}{Theorem \ref{thm:eberhard}}
 \begin{theorem}[Eberhards theorem] \label{thm:eberhard} The following holds:
   \begin{enumerate}[label=(\roman*)]
-  \item \label{thm:eberhard:3} For each $p_3, p_4, p_5, p_7, \dots, p_m$ satisfiying \autoref{eq:valence:3} there exists a number $p_6$ such that $(p_3, \dots, p_m)$ is $3$-realizable. 
-  \item \label{thm:eberhard:4} For each $p_3, p_5, \dots, p_m$ satisfiying \autoref{eq:valence:4} there exists a number $p_4$ such that $(p_3, \dots, p_m)$ is $4$-realizable. 
+  \item \label{thm:eberhard:3} For each $p_3, p_4, p_5, p_7, \dots, p_m$ satisfying \autoref{eq:valence:3} there exists a number $p_6$ such that $(p_3, \dots, p_m)$ is $3$-realizable. 
+  \item \label{thm:eberhard:4} For each $p_3, p_5, \dots, p_m$ satisfying \autoref{eq:valence:4} there exists a number $p_4$ such that $(p_3, \dots, p_m)$ is $4$-realizable. 
   \end{enumerate}
 \end{theorem}
 

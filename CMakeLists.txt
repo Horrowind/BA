@@ -19,7 +19,7 @@ set(sources
 )
 
 
-
+set(LATEX_USE_SYNCTEX ON)
 add_latex_document(ba_main.tex
   INPUTS ${sources}
   BIBFILES bibliography.bib

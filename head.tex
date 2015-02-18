@@ -32,7 +32,7 @@
 % figure enviroments
 \captionsetup[FLOAT_TYPE]{labelformat=simple, labelsep=none}
 \newenvironment{tikzfigure}[1]
-    {\begin{figure}[htpp] \caption{} #1 \centering  \begin{tikzpicture}}
+    {\begin{figure}[h!] \caption{} #1 \centering  \begin{tikzpicture}}
     {\end{tikzpicture} \end{figure}}
 
 
@@ -64,69 +64,13 @@
 \renewcommand*{\theenumi}{\thetheorem\,(\roman{enumi})}%
 \renewcommand*{\labelenumi}{\thetheorem\,(\roman{enumi})}%
 
-% Angestrichene Großbuchstaben
-\newcommand{\A}{\mathbb{A}}
-\newcommand{\B}{\mathbb{B}}
-\newcommand{\C}{\mathbb{C}}
-\newcommand{\D}{\mathbb{D}}
-\newcommand{\E}{\mathbb{E}}
-\newcommand{\F}{\mathbb{F}}   
-\newcommand{\G}{\mathbb{G}}
-\renewcommand{\H}{\mathbb{H}}
-\newcommand{\I}{\mathbb{I}}
-\newcommand{\J}{\mathbb{J}}
-\newcommand{\K}{\mathbb{K}}
-\renewcommand{\L}{\mathbb{L}}
-\newcommand{\M}{\mathbb{M}}
-\newcommand{\N}{\mathbb{N}}
-% \O fehlt (wird benötigt als \Omega)
-%\newcommand{\O}{\mathbb{O}}
-\renewcommand{\P}{\mathbb{P}}
-\newcommand{\Q}{\mathbb{Q}}
-\newcommand{\R}{\mathbb{R}}
-\renewcommand{\S}{\mathbb{S}}
-\newcommand{\T}{\mathbb{T}}
-\newcommand{\U}{\mathbb{U}}
-\newcommand{\V}{\mathbb{V}}
-\newcommand{\W}{\mathbb{W}}
-\newcommand{\X}{\mathbb{X}}
-\newcommand{\Y}{\mathbb{Y}}
-\newcommand{\Z}{\mathbb{Z}}
-
-% Kalligraphisches Alphabet
-\newcommand{\cA}{{\cal A}}
-\newcommand{\cB}{{\cal B}}
-\newcommand{\cC}{{\cal C}}
-\newcommand{\cD}{{\cal D}}
-\newcommand{\cE}{{\cal E}}
-\newcommand{\cF}{{\cal F}}
-\newcommand{\cG}{{\cal G}}
-\newcommand{\cH}{{\cal H}}
-\newcommand{\cI}{{\cal I}}
-\newcommand{\cJ}{{\cal J}}
-\newcommand{\cK}{{\cal K}}
-\newcommand{\cL}{{\cal L}}
-\newcommand{\cM}{{\cal M}}
-\newcommand{\cN}{{\cal N}}
-\newcommand{\cO}{{\cal O}}
-\newcommand{\cP}{{\cal P}}
-\newcommand{\cQ}{{\cal Q}}
-\newcommand{\cR}{{\cal R}}
-\newcommand{\cS}{{\cal S}}
-\newcommand{\cT}{{\cal T}}
-\newcommand{\cU}{{\cal U}}
-\newcommand{\cV}{{\cal V}}
-\newcommand{\cW}{{\cal W}}
-\newcommand{\cX}{{\cal X}}
-\newcommand{\cY}{{\cal Y}}
-\newcommand{\cZ}{{\cal Z}}
-
 % Operatoren
 
 \newcommand{\piece}[1]{\textcircled{\tiny{#1}}}
 %\newcommand{\deg}{\operatorname{deg}}
 % Abkürzungen
 \newcommand{\nats}{\mathbb{N}}
+\newcommand{\wholes}{\mathbb{Z}}
 
 \newcommand{\eps}{\varepsilon}
 \renewcommand{\phi}{\varphi}
