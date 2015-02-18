@@ -1,3 +1,4 @@
+
 # File: UseLATEX.cmake
 # CMAKE commands to actually use the LaTeX compiler
 # Version: 1.10.5
