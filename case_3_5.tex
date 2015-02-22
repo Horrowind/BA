@@ -182,87 +182,165 @@ Each $k$-gon of the sequence $(k > 5)$ can be grouped together with $k-4$ triang
   As is with the basic building blocks, the north and east and respective west and south sides share the same number of edges.
 \end{definition}
 
-\begin{theorem} Let $p = (p_3, p_4, p_5, \dots, p_n)$ be a given sequence satisfying \autoref{eq:valence:4}. Then there exists $r \in \nats$ for which $p + r [2 \times 3, 5]_3$ is $4$-realizable.
+\begin{theorem} Let $p = (p_3, p_4, p_5, \dots, p_n)$ be a given sequence satisfying \autoref{eq:valence:4}. Then $p$ is $[3, 5]_4$-realizable.
   \begin{proof}
-    For each $k$-gon, $k > 3$ take the basic building block for this $k$-gon and form a basis out of these. Let $p'_k$ be the number of $k$-gons for each $3 \geq k$. The basis consists by construction only of the required $k$-gons, triangles and pentagons, so $p_k = p'_k$ for $k \neq 3, 5$. The basis can be closed as seen in \autoref{fig:case3:5:closedbasis} with $8+s$ additional triangles and $s$ pentagons, $s \in \nats$. This gives an polyhedron with $p$-vector $p''$ with
+    For each $k$-gon, $k > 3$ take the basic building block for this $k$-gon and form a basis out of these. Let $p'_k$ be the number of $k$-gons for each $3 \geq k$. The basis consists by construction only of the required $k$-gons, triangles and pentagons, so $p_k = p'_k$ for $k \neq 3, 5$. The basis can be closed in two steps. First add a ring of $2 \times 2$ basic blocks around the base and the pieces of \label{fig:case3:5:closedbasis1} in each corner (here four of the additional triangles are used, one in each corner). The construction is possible, since every side of the base has length divisible by two. The resulting figure has an outer face with twelve additional edges compared to the basis, albeit the number of edges is divisible by four. Also note that each vertex on the outer face is adjacent to two faces.
+    \begin{tikzfigure}{\label{fig:case3:5:closedbasis1}}
+      \matrix (m) [ column sep=1cm] {
+        \begin{scope}[scale=0.8]
+          \draw (2, 1) -- (-1, 1) -- (-1, 3) -- (1, 3) -- (2, 2) -- (2, 0) -- (0, 0) -- (0, 3);
+          \draw (0, 1.5) -- (-0.5, 2) -- (0, 2.5) -- (0.5, 2) -- (0.5, 1) -- (1, 0.5) -- (1.5, 1) -- (1, 1.5) -- cycle;
+          \draw (1, 0) -- (1, 3);
+          \draw (-1, 2) -- (2, 2);
+          \draw (0.25, 1.5) -- (0.5, 1.75) -- (0.75, 1.5) -- (0.5, 1.25) -- cycle;
+        \end{scope}
+        &
+        \begin{scope}[scale=0.4]
+          \draw (-5, -5) -- (5, -5) -- (5, 5) -- (-5, 5) -- cycle;
+
+          \draw (7, 5) -- (4, 5) -- (4, 7) -- (6, 7) -- (7, 6) -- (7, 4) -- (5, 4) -- (5, 7);
+          \draw (5, 5.5) -- (4.5, 6) -- (5, 6.5) -- (5.5, 6) -- (5.5, 5) -- (6, 4.5) -- (6.5, 5) -- (6, 5.5) -- cycle;
+          \draw (6, 4) -- (6, 7);
+          \draw (4, 6) -- (7, 6);
+          \draw (5.25, 5.5) -- (5.5, 5.75) -- (5.75, 5.5) -- (5.5, 5.25) -- cycle;
+
+          \draw (-7, 5) -- (-4, 5) -- (-4, 7) -- (-6, 7) -- (-7, 6) -- (-7, 4) -- (-5, 4) -- (-5, 7);
+          \draw (-5, 5.5) -- (-4.5, 6) -- (-5, 6.5) -- (-5.5, 6) -- (-5.5, 5) -- (-6, 4.5) -- (-6.5, 5) -- (-6, 5.5) -- cycle;
+          \draw (-6, 4) -- (-6, 7);
+          \draw (-4, 6) -- (-7, 6);
+          \draw (-5.25, 5.5) -- (-5.5, 5.75) -- (-5.75, 5.5) -- (-5.5, 5.25) -- cycle;
+
+          \draw (-7, -5) -- (-4, -5) -- (-4, -7) -- (-6, -7) -- (-7, -6) -- (-7, -4) -- (-5, -4) -- (-5, -7);
+          \draw (-5, -5.5) -- (-4.5, -6) -- (-5, -6.5) -- (-5.5, -6) -- (-5.5, -5) -- (-6, -4.5) -- (-6.5, -5) -- (-6, -5.5) -- cycle;
+          \draw (-6, -4) -- (-6, -7);
+          \draw (-4, -6) -- (-7, -6);
+          \draw (-5.25, -5.5) -- (-5.5, -5.75) -- (-5.75, -5.5) -- (-5.5, -5.25) -- cycle;
+
+          \draw (7, -5) -- (4, -5) -- (4, -7) -- (6, -7) -- (7, -6) -- (7, -4) -- (5, -4) -- (5, -7);
+          \draw (5, -5.5) -- (4.5, -6) -- (5, -6.5) -- (5.5, -6) -- (5.5, -5) -- (6, -4.5) -- (6.5, -5) -- (6, -5.5) -- cycle;
+          \draw (6, -4) -- (6, -7);
+          \draw (4, -6) -- (7, -6);
+          \draw (5.25, -5.5) -- (5.5, -5.75) -- (5.75, -5.5) -- (5.5, -5.25) -- cycle;
+
+          \draw (6, 3) +(-1, -1) -- +(1, -1) -- +(1, 1) -- +(-1, 1) -- +(-1, -1) +(-1, 0) -- +(1, 0) +(0, -1) -- +(0, 1) +(0, -0.5) -- +(0.5, 0) -- +(0, 0.5) -- +(-0.5, 0) -- +(0, -0.5);
+          \draw (3, 6) +(-1, -1) -- +(1, -1) -- +(1, 1) -- +(-1, 1) -- +(-1, -1) +(-1, 0) -- +(1, 0) +(0, -1) -- +(0, 1) +(0, -0.5) -- +(0.5, 0) -- +(0, 0.5) -- +(-0.5, 0) -- +(0, -0.5);
+
+          \draw (-6, 3) +(-1, -1) -- +(1, -1) -- +(1, 1) -- +(-1, 1) -- +(-1, -1) +(-1, 0) -- +(1, 0) +(0, -1) -- +(0, 1) +(0, -0.5) -- +(0.5, 0) -- +(0, 0.5) -- +(-0.5, 0) -- +(0, -0.5);
+          \draw (-3, 6) +(-1, -1) -- +(1, -1) -- +(1, 1) -- +(-1, 1) -- +(-1, -1) +(-1, 0) -- +(1, 0) +(0, -1) -- +(0, 1) +(0, -0.5) -- +(0.5, 0) -- +(0, 0.5) -- +(-0.5, 0) -- +(0, -0.5);
+
+          \draw (6, -3) +(-1, -1) -- +(1, -1) -- +(1, 1) -- +(-1, 1) -- +(-1, -1) +(-1, 0) -- +(1, 0) +(0, -1) -- +(0, 1) +(0, -0.5) -- +(0.5, 0) -- +(0, 0.5) -- +(-0.5, 0) -- +(0, -0.5);
+          \draw (3, -6) +(-1, -1) -- +(1, -1) -- +(1, 1) -- +(-1, 1) -- +(-1, -1) +(-1, 0) -- +(1, 0) +(0, -1) -- +(0, 1) +(0, -0.5) -- +(0.5, 0) -- +(0, 0.5) -- +(-0.5, 0) -- +(0, -0.5);
+
+          \draw (-6, -3) +(-1, -1) -- +(1, -1) -- +(1, 1) -- +(-1, 1) -- +(-1, -1) +(-1, 0) -- +(1, 0) +(0, -1) -- +(0, 1) +(0, -0.5) -- +(0.5, 0) -- +(0, 0.5) -- +(-0.5, 0) -- +(0, -0.5);
+          \draw (-3, -6) +(-1, -1) -- +(1, -1) -- +(1, 1) -- +(-1, 1) -- +(-1, -1) +(-1, 0) -- +(1, 0) +(0, -1) -- +(0, 1) +(0, -0.5) -- +(0.5, 0) -- +(0, 0.5) -- +(-0.5, 0) -- +(0, -0.5);
+
+          \draw[loosely dotted] (6, 2) -- (6, -2);
+          \draw[loosely dotted] (-6, 2) -- (-6, -2);
+          \draw[loosely dotted] (-2, 6) -- (2, 6);
+          \draw[loosely dotted] (-2, -6) -- (2, -6);
+          
+          
+          \node at (0, 0) {Basis};
+        \end{scope}
+        \\
+      };
+    \end{tikzfigure}
+
+    The second step uses the remaining four triangles and several $2 \times 2$-building blocks and creates a fitting stripe, see \autoref{fig:case3:5:closedbasis2}. By adding in $2 \times 2$-building blocks, one can create stripes whose number of edges on the outer face is equal to any multiple of four, in this case equal to the number of edges of the previous construction. As it was previously, each vertex on the outer face is adjacent to two faces, therefore, after glueing the results of both steps together, the polyhedron held is $4$-valent.
+    \begin{tikzfigure}{\label{fig:case3:5:closedbasis2}}
+      \begin{scope}[scale=0.8]
+        \draw (-4, -1) -- (-5, 0) -- (-4, 1);
+        \draw (4, -1) -- (5, 0) -- (4, 1);
+        \draw (-4, 0) -- (-5, 0);
+        \draw (4, 0) -- (5, 0);
+        \draw (-3, 0) +(-1, -1) -- +(1, -1) -- +(1, 1) -- +(-1, 1) -- +(-1, -1) +(-1, 0) -- +(1, 0) +(0, -1) -- +(0, 1) +(0, -0.5) -- +(0.5, 0) -- +(0, 0.5) -- +(-0.5, 0) -- +(0, -0.5);
+        \draw (3, 0) +(-1, -1) -- +(1, -1) -- +(1, 1) -- +(-1, 1) -- +(-1, -1) +(-1, 0) -- +(1, 0) +(0, -1) -- +(0, 1) +(0, -0.5) -- +(0.5, 0) -- +(0, 0.5) -- +(-0.5, 0) -- +(0, -0.5);
+        \draw[loosely dotted] (-2, 1) -- (2, 1);
+        \draw[loosely dotted] (-2, 0) -- (2, 0);
+        \draw[loosely dotted] (-2, -1) -- (2, -1);
+      \end{scope}
+    \end{tikzfigure}
+    
+    This polyhedron with $p$-vector $p''$ fulfills 
     \begin{align*}
       0 = 8 - 8 =& \sum_{k=3}^n (4 - k) p_k'' - \sum_{k=3}^n (4 - k) p_k\\
       \implies& \frac{1}{3} (p''_3 - p_3) = \frac{2}{3} (p''_5 - p_5), 
     \end{align*}
     from \autoref{eq:valence:4} and since $p_k = p''_k$ for $k\neq 3, 5$. Thus $p'' = p + r [2 \times 3, 5]$ for some $r \in \nats$.
-    \begin{tikzfigure}{\label{fig:case3:5:closedbasis}}
-      \begin{scope}
-        %% \filldraw[fill=gray!50!white]
-        %% (-1, 1) arc [start angle = 180, delta angle = -60, radius = 2]
-        %% node(n1){} arc [start angle = 60, delta angle = 150, radius = 2]
-        %% node(w1){} arc [start angle = 150, delta angle = -60, radius = 2];
-        
-        %% \filldraw[fill=gray!50!white]
-        %% (1, -1) arc [start angle = 0, delta angle = -60, radius = 2]
-        %% node(s1){} arc [start angle = 240, delta angle = 150, radius = 2]
-        %% node(e1){} arc [start angle = 330, delta angle = -60, radius = 2];
-
-        
-        
-        %% \fill[fill=gray!50!white] (1, 1) -- (1, 0.6) arc [start angle = 270, delta angle = 270, radius = 0.4]  -- cycle;
-        %% \fill[fill=gray!50!white] (-1, -1) -- (-1, -0.6) arc [start angle = 90, delta angle = 270, radius = 0.4] -- cycle;
-        \draw (-1, -1) -- (1, -1) -- (1, 1) -- (-1, 1) -- cycle;
-
-        \path [name path=nw1] (1, 1) arc [start angle = 0, delta angle = 270, radius = 2];
-        \path [name path=se1] (-1, -1) arc [start angle = 180, delta angle = 270, radius = 2];
-
-        \draw [name path=ne2] (1, -0.6) arc [start angle = 270, delta angle = 270, radius = 1.6];
-        \draw [name path=ne3] (1, 0.1) arc [start angle = 270, delta angle = 270, radius = 0.9];
-        \draw [name path=ne4] (1, 0.3) arc [start angle = 270, delta angle = 270, radius = 0.7];
-        \draw [name path=ne5] (1, 0.6) arc [start angle = 270, delta angle = 270, radius = 0.4];
-        
-        \draw [name path=sw2] (-1, 0.3) arc [start angle = 90, delta angle = 270, radius = 1.3];
-        \draw [name path=sw3] (-1, 0.1) arc [start angle = 90, delta angle = 270, radius = 1.1];
-        \draw [name path=sw4] (-1, -0.6) arc [start angle = 90, delta angle = 270, radius = 0.4];
-
-        \path [name intersections={of=nw1 and ne2, by=n2}];
-        \path [name intersections={of=nw1 and ne3, by=n3}];
-        \path [name intersections={of=nw1 and ne4, by=n4}];
-        \path [name intersections={of=nw1 and ne5, by=n5}];
-
-        \path [name intersections={of=se1 and ne2, by=e2}];
-        \path [name intersections={of=se1 and ne3, by=e3}];
-        \path [name intersections={of=se1 and ne4, by=e4}];
-        \path [name intersections={of=se1 and ne5, by=e5}];
-
-        \path [name intersections={of=nw1 and sw2, by=w2}];
-        \path [name intersections={of=nw1 and sw3, by=w3}];
-        \path [name intersections={of=nw1 and sw4, by=w4}];
-
-        \path [name intersections={of=se1 and sw2, by=s2}];
-        \path [name intersections={of=se1 and sw3, by=s3}];
-        \path [name intersections={of=se1 and sw4, by=s4}];
-
-        
-        %% \draw (n1) arc [start angle = 120, delta angle = -150, radius = 2];
-        %% \draw (w1) arc [start angle = 150, delta angle = 150, radius = 2];
-
-        \draw (1, 1) -- (n5) to [bend left=60] (e4) to [bend right=60] (n3) to [bend left=60] (e2);
-        \draw (1, 1) -- (e5) to [bend right=60] (n4) to [bend left=60] (e3) to [bend right=60] (n2);
-
-        \node (0,0) {Basis};
-
-        %% \draw (1, -1) -- (3, 1) -- (1, 3) -- (-1, 1);
-        %% \draw (1, -0.6) -- (2.6, 1) -- (1, 2.6) -- (-0.6, 1);
-        %% \draw (1, 0.1) -- (1.9, 1) -- (1, 1.9) -- (0.1, 1);
-        %% \draw (1, 0.3) -- (1.7, 1) -- (1, 1.7) -- (0.3, 1);
-        %% \draw (1, 0.6) -- (1.4, 1) -- (1, 1.4) -- (0.6, 1);
-        %% \draw (1, 1) -- (1.4, 1) -- (1, 1.7) -- (1.9, 1) -- (1, 2.6) -- (3, 1) -- (3, -3);
-        %% \draw (1, 1) -- (1, 1.4) -- (1.7, 1) -- (1, 1.9) -- (2.6, 1) -- (1, 3) -- (-3, 3);
-
-        %% \draw (-1, 1) -- (-3, -1) -- (-1, -3) -- (1, -1);
-        %% \draw (-1, 0.3) -- (-2.3, -1) -- (-1, -2.3) -- (0.3, -1);
-        %% \draw (-1, 0.1) -- (-2.1, -1) -- (-1, -2.1) -- (0.1, -1);
-        %% \draw (-1, -0.6) -- (-1.4, -1) -- (-1, -1.4) -- (-0.6, -1);
-        %% \draw (-1, -1) -- (-1.4, -1) -- (-1, -2.1) -- (-2.3, -1) -- (-1, -3) -- (3, -3);
-        %% \draw (-1, -1) -- (-1, -1.4) -- (-2.1, -1) -- (-1, -2.3) -- (-3, -1) -- (-3, 3);
-      \end{scope}
-    \end{tikzfigure}
-    TO-DO
-    \end{proof}
+  \end{proof}
   \end{theorem}
+
+
+%% \begin{tikzfigure}{\label{fig:case3:5:closedbasis1}}
+%%       \begin{scope}
+%%         %% \filldraw[fill=gray!50!white]
+%%         %% (-1, 1) arc [start angle = 180, delta angle = -60, radius = 2]
+%%         %% node(n1){} arc [start angle = 60, delta angle = 150, radius = 2]
+%%         %% node(w1){} arc [start angle = 150, delta angle = -60, radius = 2];
+        
+%%         %% \filldraw[fill=gray!50!white]
+%%         %% (1, -1) arc [start angle = 0, delta angle = -60, radius = 2]
+%%         %% node(s1){} arc [start angle = 240, delta angle = 150, radius = 2]
+%%         %% node(e1){} arc [start angle = 330, delta angle = -60, radius = 2];
+
+        
+        
+%%         %% \fill[fill=gray!50!white] (1, 1) -- (1, 0.6) arc [start angle = 270, delta angle = 270, radius = 0.4]  -- cycle;
+%%         %% \fill[fill=gray!50!white] (-1, -1) -- (-1, -0.6) arc [start angle = 90, delta angle = 270, radius = 0.4] -- cycle;
+%%         \draw (-1, -1) -- (1, -1) -- (1, 1) -- (-1, 1) -- cycle;
+%%         \node (0,0) {Basis};
+%%         %% \path [name path=nw1] (1, 1) arc [start angle = 0, delta angle = 270, radius = 2];
+%%         %% \path [name path=se1] (-1, -1) arc [start angle = 180, delta angle = 270, radius = 2];
+
+%%         %% \draw [name path=ne2] (1, -0.6) arc [start angle = 270, delta angle = 270, radius = 1.6];
+%%         %% \draw [name path=ne3] (1, 0.1) arc [start angle = 270, delta angle = 270, radius = 0.9];
+%%         %% \draw [name path=ne4] (1, 0.3) arc [start angle = 270, delta angle = 270, radius = 0.7];
+%%         %% \draw [name path=ne5] (1, 0.6) arc [start angle = 270, delta angle = 270, radius = 0.4];
+        
+%%         %% \draw [name path=sw2] (-1, 0.3) arc [start angle = 90, delta angle = 270, radius = 1.3];
+%%         %% \draw [name path=sw3] (-1, 0.1) arc [start angle = 90, delta angle = 270, radius = 1.1];
+%%         %% \draw [name path=sw4] (-1, -0.6) arc [start angle = 90, delta angle = 270, radius = 0.4];
+
+%%         %% \path [name intersections={of=nw1 and ne2, by=n2}];
+%%         %% \path [name intersections={of=nw1 and ne3, by=n3}];
+%%         %% \path [name intersections={of=nw1 and ne4, by=n4}];
+%%         %% \path [name intersections={of=nw1 and ne5, by=n5}];
+
+%%         %% \path [name intersections={of=se1 and ne2, by=e2}];
+%%         %% \path [name intersections={of=se1 and ne3, by=e3}];
+%%         %% \path [name intersections={of=se1 and ne4, by=e4}];
+%%         %% \path [name intersections={of=se1 and ne5, by=e5}];
+
+%%         %% \path [name intersections={of=nw1 and sw2, by=w2}];
+%%         %% \path [name intersections={of=nw1 and sw3, by=w3}];
+%%         %% \path [name intersections={of=nw1 and sw4, by=w4}];
+
+%%         %% \path [name intersections={of=se1 and sw2, by=s2}];
+%%         %% \path [name intersections={of=se1 and sw3, by=s3}];
+%%         %% \path [name intersections={of=se1 and sw4, by=s4}];
+
+        
+%%         %% %% \draw (n1) arc [start angle = 120, delta angle = -150, radius = 2];
+%%         %% %% \draw (w1) arc [start angle = 150, delta angle = 150, radius = 2];
+
+%%         %% \draw (1, 1) -- (n5) to [bend left=60] (e4) to [bend right=60] (n3) to [bend left=60] (e2);
+%%         %% \draw (1, 1) -- (e5) to [bend right=60] (n4) to [bend left=60] (e3) to [bend right=60] (n2);
+
+%%         \node (0,0) {Basis};
+
+%%         %% \draw (1, -1) -- (3, 1) -- (1, 3) -- (-1, 1);
+%%         %% \draw (1, -0.6) -- (2.6, 1) -- (1, 2.6) -- (-0.6, 1);
+%%         %% \draw (1, 0.1) -- (1.9, 1) -- (1, 1.9) -- (0.1, 1);
+%%         %% \draw (1, 0.3) -- (1.7, 1) -- (1, 1.7) -- (0.3, 1);
+%%         %% \draw (1, 0.6) -- (1.4, 1) -- (1, 1.4) -- (0.6, 1);
+%%         %% \draw (1, 1) -- (1.4, 1) -- (1, 1.7) -- (1.9, 1) -- (1, 2.6) -- (3, 1) -- (3, -3);
+%%         %% \draw (1, 1) -- (1, 1.4) -- (1.7, 1) -- (1, 1.9) -- (2.6, 1) -- (1, 3) -- (-3, 3);
+
+%%         %% \draw (-1, 1) -- (-3, -1) -- (-1, -3) -- (1, -1);
+%%         %% \draw (-1, 0.3) -- (-2.3, -1) -- (-1, -2.3) -- (0.3, -1);
+%%         %% \draw (-1, 0.1) -- (-2.1, -1) -- (-1, -2.1) -- (0.1, -1);
+%%         %% \draw (-1, -0.6) -- (-1.4, -1) -- (-1, -1.4) -- (-0.6, -1);
+%%         %% \draw (-1, -1) -- (-1.4, -1) -- (-1, -2.1) -- (-2.3, -1) -- (-1, -3) -- (3, -3);
+%%         %% \draw (-1, -1) -- (-1, -1.4) -- (-2.1, -1) -- (-1, -2.3) -- (-3, -1) -- (-3, 3);
+%%       \end{scope}
+%%     \end{tikzfigure}

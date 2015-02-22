@@ -8,6 +8,7 @@ project(BA NONE)
 
 set(sources
   head.tex
+  title.tex
   preliminaries.tex
   arcs.tex
   case_3_5.tex
@@ -17,12 +18,14 @@ set(sources
   case_5_8.tex
   general_remarks.tex
   appendix.tex
+  declaration.tex
 )
 
 
 set(LATEX_USE_SYNCTEX ON)
 add_latex_document(ba_main.tex
   INPUTS ${sources}
+  IMAGES TU.png
   BIBFILES bibliography.bib
   DEFAULT_PDF
   )

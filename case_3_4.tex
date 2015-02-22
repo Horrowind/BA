@@ -1,7 +1,7 @@
 \section{The case $[2 \times 3, 4]_5$}
-For some stronger result in the field of $5$-valent polyhedra see \cite{trenkler1975face}. Here established are only some low-hanging fruits based on the mechanism as seen before. The proof utilizes the already established Eberhards \autoref{thm:eberhard:4} for construction of the new solid.
+For some stronger result in the field of $5$-valent polyhedra see \cite{trenkler1975face}. Here established are only some low-hanging fruits based on the mechanism as seen before. The proof utilizes Eberhards \autoref{thm:eberhard:4} for construction of the new solid.
 \begin{theorem}
-  Let $p = (p_3, p_4, p_5, \dots, p_n)$ be a given sequence satisfying \autoref{eq:valence:5}, then there exists $r \in \nats$ for which $p + r [2 \times 3, 4]_5$ is $5$-realizable.
+  Let $p = (p_3, p_4, p_5, \dots, p_n)$ be a given sequence satisfying \autoref{eq:valence:5}, then $p$ is $[2\times3, 4]_5$-realizable.
   \begin{proof}
     Beginning with equation \autoref{eq:valence:5} one retrieves the following:
     \begin{align*}
@@ -14,30 +14,73 @@ For some stronger result in the field of $5$-valent polyhedra see \cite{trenkler
       \sum_{k=3}^n (4 - k) p'_k =&~ p_3 + \frac{4}{3} - \frac{2}{3} \sum_{k=3}^n p_k + \sum_{k=4}^n (4 - k) p_k \\
       = \frac{4}{3} + \frac{1}{3} p_3 + \sum_{k=4}^n \left(k - \frac{10}{3} \right) p_k =&~ \frac{4}{3} + \sum_{k=3}^n \left(k - \frac{10}{3} \right) p_k = \frac{4}{3} + \frac{20}{3} = 8.
     \end{align*}
-    Hence the sequence $p'$ is $4$-realizable by Eberhards Theorem \autoref{thm:eberhard:4}. Let $P'$ be this realization with $e'$ edges and $v'$ vertices. One can now use $P'$ to create a realization with valence $5$ by inserting further triangles and quadrangles. This is done by replacing each edge of the realization by two triangles and each vertex by one square as shown in \autoref{fig:case34:img1}.
+    Hence the sequence $p'$ is $4$-realizable by Eberhards Theorem \autoref{thm:eberhard:4}. Let $P'$ be this realization with $e'$ edges and $v'$ vertices. One can now use $P'$ to create a realization with valence $5$ by inserting further triangles and quadrangles. This is done by replacing each edge of the realization by two triangles and each vertex by one square as shown in \autoref{fig:case34:img1}. For this, fix an orientation on $P'$ and replace each edge by two triangles so that around each vertex the same mill-shaped figure (shaded in dark gray in \autoref{fig:case34:img1}) assembles. By fixing the orientation it is prevented that mirrored images of the mill-shape appear, thus the construction is defined.
 
-    %TODO.
     \begin{tikzfigure}{\label{fig:case34:img1}}
       \matrix (m) [ column sep=1cm] {
-        \begin{scope}
-          \filldraw[fill=gray!50!white] (0, 1) -- (0, 0.7) -- (0.2, 0.4) -- (0.4, 0.2) -- (0.7, 0) -- (1, 0) -- (1, 1);
-          \draw (0, 1) -- (1, 1) -- (1, 0) -- (2, 0) -- (2, 1) -- (3, 1) -- (3, 2) -- (2, 2) -- (2, 3) -- (1, 3) -- (1, 2) -- (0, 2) -- (0, 1);     
-          \draw (1, 1) -- (0, 2);
-          \draw (2, 1) -- (1, 0);
-          \draw (1, 2) -- (2, 3);
-          \draw (2, 2) -- (3, 1);
-          \draw (1, 1) -- (2, 1) -- (2, 2) -- (1, 2) -- (1, 1);
+        \begin{scope}[scale=0.5]
+
+          \filldraw[fill=gray!50!white] (-3.5, -0.5) -- (-3, 0) -- (-1, 0) -- (-1, -2) -- (-1.5, -2.5);
+          \filldraw[fill=gray!50!white] (3.5, -0.5) -- (3, 0) -- (1, 0) -- (1, -2) -- (1.5, -2.5);
+          \filldraw[fill=gray!50!white] (3.5, 0.5) -- (3, 0) -- (1, 0) -- (1, 2) -- (1.5, 2.5);
+          \filldraw[fill=gray!50!white] (-3.5, 0.5) -- (-3, 0) -- (-1, 0) -- (-1, 2) -- (-1.5, 2.5);
+          \filldraw[fill=gray!50!white] (-0.5, -2.5) -- (-1, -2) -- (-1, 0) -- (1, 0) -- (1, -2) -- (0.5, -2.5);
+          \filldraw[fill=gray!50!white] (-0.5, 2.5) -- (-1, 2) -- (-1, 0) -- (1, 0) -- (1, 2) -- (0.5, 2.5);
           
+          \draw (-3.5, 0) -- (-3, 0);
+          \draw (3.5, 0) -- (3, 0);
+          \draw (-1, 2.5) -- (-1, 2);
+          \draw (-1, -2.5) -- (-1, -2);
+          \draw (1, 2.5) -- (1, 2);
+          \draw (1, -2.5) -- (1, -2);
+
+          \draw[very thick] (-3, 0) -- (3, 0);
+          \draw[very thick] (-1, -2) -- (-1, 2);
+          \draw[very thick] (1, -2) -- (1, 2);
+                   
         \end{scope}
         &
-        \begin{scope}
-          \filldraw[fill=gray!50!white] (0, 1) -- (0, 0.7) -- (0.2, 0.4) -- (0.4, 0.2) -- (0.7, 0) -- (1, 0) -- (1, 1);
-          \draw (0, 1) -- (1, 1) -- (1, 0) -- (2, 0) -- (2, 1) -- (3, 1) -- (3, 2) -- (2, 2) -- (2, 3) -- (1, 3) -- (1, 2) -- (0, 2) -- (0, 1);     
-          \draw (1, 1) -- (0, 2);
-          \draw (2, 1) -- (1, 0);
-          \draw (1, 2) -- (2, 3);
-          \draw (2, 2) -- (3, 1);
-          \draw (1, 1) -- (2, 1) -- (2, 2) -- (1, 2) -- (1, 1);
+        \begin{scope}[scale=0.5]
+          \filldraw[fill=gray!50!white] (-5.5, -1.5) -- (-5, -1) -- (-3, -1) -- (-3, -3) -- (-3.5, -3.5);
+          \filldraw[fill=gray!50!white] (5.5, -1.5) -- (5, -1) -- (3, -1) -- (3, -3) -- (3.5, -3.5);
+          \filldraw[fill=gray!50!white] (5.5, 1.5) -- (5, 1) -- (3, 1) -- (3, 3) -- (3.5, 3.5);
+          \filldraw[fill=gray!50!white] (-5.5, 1.5) -- (-5, 1) -- (-3, 1) -- (-3, 3) -- (-3.5, 3.5);
+          \filldraw[fill=gray!50!white] (-0.5, -3.5) -- (-1, -3) -- (-1, -1) -- (1, -1) -- (1, -3) -- (0.5, -3.5);
+          \filldraw[fill=gray!50!white] (-0.5, 3.5) -- (-1, 3) -- (-1, 1) -- (1, 1) -- (1, 3) -- (0.5, 3.5);
+
+          \filldraw[fill=gray!75!white] (-5, -1) -- (-3, 1) -- (-3, 3) -- (-1, 1) -- (1, 1) -- (-1, -1) -- (-1, -3) -- (-3, -1) -- cycle;
+          
+          \draw[very thick] (-5, -1) -- (5, -1);
+          \draw[very thick] (-5, 1) -- (5, 1);
+          \draw[very thick] (-3, -3) -- (-3, 3);
+          \draw[very thick] (-1, -3) -- (-1, 3);
+          \draw[very thick] (1, -3) -- (1, 3);
+          \draw[very thick] (3, -3) -- (3, 3);
+          \draw[very thick] (-5, -1) -- (-3, 1);
+          \draw[very thick] (-1, -1) -- (1, 1);
+          \draw[very thick] (3, -1) -- (5, 1);
+          \draw[very thick] (-3, -1) -- (-1, -3);
+          \draw[very thick] (-3, 3) -- (-1, 1);
+          \draw[very thick] (1, -1) -- (3, -3);
+          \draw[very thick] (1, 3) -- (3, 1);
+
+          \draw[very thick] (-5, -1) -- (-5, 1); \draw[very thick] (5, -1) -- (5, 1);
+          \draw[very thick] (-3, -3) -- (-1, -3); \draw[very thick] (1, -3) -- (3, -3);
+          \draw[very thick] (-3, 3) -- (-1, 3); \draw[very thick] (1, 3) -- (3, 3);
+
+          \draw (-3, -3.5) -- (-3, -3) -- (-2.5, -3.5);
+          \draw (-1, -3.5) -- (-1, -3);
+          \draw (1, -3.5) -- (1, -3) -- (1.5, -3.5);
+          \draw (3, -3.5) -- (3, -3);
+          \draw (-3, 3.5) -- (-3, 3);
+          \draw (-1, 3.5) -- (-1, 3) -- (-1.5, 3.5);
+          \draw (1, 3.5) -- (1, 3);
+          \draw (3, 3.5) -- (3, 3) -- (2.5, 3.5);
+
+          \draw (-5.5, -1) -- (-5, -1);
+          \draw (-5.5, 1) -- (-5, 1) -- (-5.5, 0.5);
+          \draw (5.5, -1) -- (5, -1) -- (5.5, -0.5);
+          \draw (5.5, 1) -- (5, 1);
           
         \end{scope}
         \\
