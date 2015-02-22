@@ -10,7 +10,7 @@
   The $p$-vector of a polyhedron $P$ is the sequence $(p_3, \dots, p_m)$, where $p_k$ denotes the number of faces with exactly $k$ vertices. Similarly the $v$-vector of $P$ is the sequence $(v_1, \dots, v_n)$, where each $v_k$ measures the number of edges of $P$ with valence $k$. 
 \end{definition}
 
-\begin{definition}
+\begin{definition}\label{def:realizable}
 Sequences $a = (a_3, \dots, a_m)$, $b = (b_3, \dots, b_m)$ are said to be realizable, if there exists a polyhedron which has $a$ is its $p$-vector and $b$ as its $v$-vector.
 \end{definition}
 
@@ -34,13 +34,13 @@ Putting these equations in Eulers relation \autoref{thm:eulers:relation} gives f
   \sum_{k=3}^m v_k - \left(\frac{t}{2} \sum_{k=3}^m k v_k + \frac{1-t}{2} \sum_{k=3}^n k p_k \right) + \sum_{k=3}^n p_k = 2
 \end{align*}
 which can be transformed into:
-\begin{align*}
-  t \sum_{k=3}^m \left(\frac{2}{t} - k \right) v_k + (1-t) \sum_{k=3}^n \left( \frac{2}{1-t} - k \right) p_k = 4.
-\end{align*}
+\begin{align}
+  t \sum_{k=3}^m \left(\frac{2}{t} - k \right) v_k + (1-t) \sum_{k=3}^n \left( \frac{2}{1-t} - k \right) p_k = 4. \label{eq:general:vp:relation}
+\end{align}
 This equation is independent of the value of some $v_k$ or $p_{k'}$ when the value of $t$ is appropriately chosen. Of special interest in this thesis are the cases of one $v_r$ giving no information in the above equation (so $r \geq 3$ fixed and $t = \frac{2}{r}$) and having $v_{k} = 0$ for each $k \geq 3$, $k \neq r$. The resulting polyhedron has the property that each of his vertices has valence $r$. 
 % TODO Explain this.
-\begin{definition}[$r$-realizable]
-  A sequence $a = (a_3, \dots, a_m)$ is said to be $r$-realizable, if there exists a polyhedron such that $a$ is realizable with an $v$-vector consisting only of valence $r$ (in the sense of \autoref{def:realizable}).
+\begin{definition}[$r$-realizable]\label{def:r:realizable}
+  A sequence $p = (p_3, \dots, p_m)$ is said to be $r$-realizable, if there exists a polyhedron such that $p$ is realizable with an $v$-vector consisting only of valence $r$ (in the sense of \autoref{def:realizable}).
 \end{definition}
 Under these circumstances $r$ has to be in $\{3, 4, 5\}$.
 
@@ -79,6 +79,9 @@ Even in with this rather specific constraints the problem stated above has no ea
   
 \end{example}
 
+\begin{definition}[$(q_3, \dots, q_n)_r$-realizable]\label{def:eberhard:realizable}
+  A sequence $p = (p_3, \dots, p_m)$ is said to be $(q_3, \dots, q_n)_r$-realizable, if there exists $c \in \nats$, such that $p + c a$ is $r$-realizable.
+\end{definition}
 \begin{problem}[General Eberhard's problem]
   Let $r \in \{3, 4, 5\}$ and $(q_3, \dots)$ be a sequence which satisfies 
   \begin{align}
@@ -86,14 +89,11 @@ Even in with this rather specific constraints the problem stated above has no ea
     r &= 4: \sum_{k=3}^n \left( 4            - k \right) q_k = 0 \label{eq:zero:curv:4}\\
     r &= 5: \sum_{k=3}^n \left( \frac{10}{3} - k \right) q_k = 0 \label{eq:zero:curv:5}
   \end{align}
-  in the respective cases. Then show that for all sequences $(p_3, \dots)$  satisfying the respective \autoref{eq:valence:3}, \autoref{eq:valence:4} or \autoref{eq:valence:5}, there exists an $c \in \nats$ for which $(p_3 + c \cdot q_3, p_4 + c \cdot q_4, \dots)$ is realizable as a polyhedron.
+  in the respective cases. Then show that all sequences $(p_3, \dots)$ satisfying the respective equations \ref{eq:valence:3}, \ref{eq:valence:4} or \ref{eq:valence:5} are $(q_3, \dots, q_n)_r$-realizable.
 \end{problem}
 \begin{notation}
   Throughout the thesis we want to denote this problem as of $(p_3, \dots, p_n)_r$-type.
 \end{notation}
-\begin{definition}[$r$-realizable]
-  A sequence $a = (p_3, \dots, p_m)$ is said to be $(q_3, \dots, q_n)_r$-realizable, if there exists a polyhedron such that $a$ is realizable with an $v$-vector consisting only of valence $r$ (in the sense of \autoref{def:realizable}).
-\end{definition}
 
 \autoref{eq:valence:3} and \autoref{eq:valence:4} suggest that $(6)_3$ or $(4)_4$ might be good candidates for such statements. As it is, these questions are well established and known as the (non-general) Eberhards theorem in \cite{ConvexPolytopes}:
 \renewcommand{\Itemautorefname}{Theorem \ref{thm:eberhard}}
@@ -106,6 +106,15 @@ Even in with this rather specific constraints the problem stated above has no ea
 
 A stronger theorem, which generalizes the first case, is given in \cite{jendrol1977generalization}.
 
+\begin{theorem}[Jendrol', Jucovi{\v{c}} 1977] \label{thm:eberhard:extended}
+ Each sequence $p$ together with $v$ is realizable on the closed orientable $2$-manifold of genus $g$ for some $p_6 \in \nats$, $v_3 \in \nats$ if and only if
+  \begin{align*}
+    \sum_{k=3}^m (6-k)p_k + 2 \sum_{k=4}^n (3-k)v_k &= 12(1-g) \\
+    \sum_{k=1}^{\floor{\frac{m-1}{2}}} p_{2k+1} \neq 0 \text{\quad or \quad} \sum_{k=3, \,3 \nmid k}^m p_k \neq 0 \text{\quad if \quad} g &= 0 \\
+    p \neq [5, 7]_3 \text{\quad or \quad} v \neq [r\times3]_3 \text{\quad if \quad} g &= 1
+  \end{align*}
+\end{theorem}
+
 Building upon these two, this thesis will present a bunch of new theorems of general Eberhards type. One of these proofs takes a similar approach as the proof given in \cite{ConvexPolytopes} for \autoref{thm:eberhard:4}. The rest of the proofs directly use \autoref{thm:eberhard}. This is done by taking a sequence not too different form the given one which suffices either \autoref{eq:valence:3} or \autoref{eq:valence:4}, constructing a polyhedron by the statements of \autoref{thm:eberhard} and then by adding or deleting some polygons create a polyhedron with a $p$-vector as stated. This is done by either substituting edges and vertices or every face by some larger structure. 
 
 These construction are transformation of graphs and therefore use heavily an result of Steinitz, stating that the necessary condition for an graph to be realizable as an polytope is to be planar and $3$-connected.
@@ -114,3 +123,4 @@ These construction are transformation of graphs and therefore use heavily an res
   A Graph $G$ is $3$-realizable if and only if $G$ is planar and $3$-connected.
 \end{theorem}
 A proof of this theorem can also be found in \cite{ConvexPolytopes}.
+

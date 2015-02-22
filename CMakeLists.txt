@@ -15,6 +15,7 @@ set(sources
   case_3_4.tex
   case_5_7.tex
   case_5_8.tex
+  general_remarks.tex
   appendix.tex
 )
 

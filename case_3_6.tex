@@ -63,8 +63,8 @@
     \begin{tikzfigure}{\label{fig:case3:6:img2}}
       \begin{scope}[scale=0.5]
         \draw (-1, 1) -- ++(0, 2) -- ++(8, 0) -- ++(0, -2) -- ++(-8, 0) ++(2,0) -- ++(2, 0.5) ++(0, 1) -- ++(-2, 0.5) ++(4, 0) -- ++(-2, -0.5) ++(0, -1) -- ++(2, -0.5) ++(-2, 0) -- ++(0, 2);
-          \draw (-1, 3) -- ++(0, 2) -- ++(8, 0) -- ++(0, -2) -- ++(-8, 0) ++(2,0) -- ++(2, 0.5) ++(0, 1) -- ++(-2, 0.5) ++(4, 0) -- ++(-2, -0.5) ++(0, -1) -- ++(2, -0.5) ++(-2, 0) -- ++(0, 2);
-          \draw (-1, 5) -- ++(0, 2) -- ++(8, 0) -- ++(0, -2) -- ++(-8, 0) ++(2,0) -- ++(2, 0.5) ++(0, 1) -- ++(-2, 0.5) ++(4, 0) -- ++(-2, -0.5) ++(0, -1) -- ++(2, -0.5) ++(-2, 0) -- ++(0, 2);
+        \draw (-1, 3) -- ++(0, 2) -- ++(8, 0) -- ++(0, -2) -- ++(-8, 0) ++(2,0) -- ++(2, 0.5) ++(0, 1) -- ++(-2, 0.5) ++(4, 0) -- ++(-2, -0.5) ++(0, -1) -- ++(2, -0.5) ++(-2, 0) -- ++(0, 2);
+        \draw (-1, 5) -- ++(0, 2) -- ++(8, 0) -- ++(0, -2) -- ++(-8, 0) ++(2,0) -- ++(2, 0.5) ++(0, 1) -- ++(-2, 0.5) ++(4, 0) -- ++(-2, -0.5) ++(0, -1) -- ++(2, -0.5) ++(-2, 0) -- ++(0, 2);
       \end{scope}
     \end{tikzfigure}
     The same can be done with $Q$ resulting in $Q'$. Both $P'$ and $Q'$ have at least one of the diamond shaped construct consisting of four triangles which is marked by thick lines in \autoref{fig:case3:6:img3}. By removing these four triangles on both of them one can ``glue'' the resulting quadrangles together, the established polyhedron has the desired number of faces.
@@ -96,7 +96,7 @@
         \\
       };
     \end{tikzfigure}
-      \end{proof}
+  \end{proof}
 \end{lemma}
 
 \begin{lemma}\label{thm:case3:6:nonexistence}
@@ -107,127 +107,128 @@
   \begin{tikzfigure}{\label{fig:case3:6:example}}
     \draw (-1, 0) -- (-1, -1) -- (-1, 1) -- (1, 1) -- (1, -1) -- (-1, -1) -- (-1, 0) -- (0, 0) -- (0.5, -0.5) -- (0.5, 0.5) -- (0, 0);
   \end{tikzfigure}
+  For the following considerations, one will count each of these occurrences separately, thus the example consists of a triangle, a decagon and a pentagon (as the outer face).
   
 \end{remark}
-\begin{proof} The proof is made by contradiction. Let $G$ be a graph with the mentioned properties. The proof shows that $G$ by reducing the number of edges $G$ can be reduced to another graph which does not meet the requirements. The first thing to notice is that one can assume the number of edges of the exceptional face to be four or five. In fact, by changing two edges it is possible to ``cut out'' a square or a pentagon from larger exceptional faces.
-    In the figures below let $B$ be the exceptional face with $b$ edges. Under the transformation $B$ is reduced to a square or a pentagon, depending on whether $b \equiv 1 (\operatorname{mod} 3)$ or $b \equiv 2 (\operatorname{mod} 3)$. In the first case $E$ has $b - 4$ edges, in the second $b-5$. Therefore, in either case $E$ is not an exceptional face, its number of edges is divisible by $3$. If $A$ and $C$ are different faces the resulting graph is connected. As $A$ and $C$ have a number of edges which is divisible by $3$, so has the new face $D$. It remains the case that $A$ is the same face as $C$. Then the free space labeled with $D$ is separated by two cycles of length $d$ (denoting the length of ``left'' cycle) and $d'$ (denoting the length of ``right'' cycle). If $d$ is divisible by $3$ then the left component has exactly one exceptional face and has fewer edges then the original one. If $d$ is not divisible by $3$, then neither is $d'$, as their sum matches the sum of the number of edges of $A$ and $C$, thus the right component has exactly one exceptional face (the cycle labeled with $d'$) and fewer faces then $G$.
-    \begin{tikzfigure}{\label{fig:case3:6:img4}}
-      \matrix (m) [ column sep=1cm] {
-        \begin{scope}
-          \draw[loosely dotted] (4, 1) -- (3, 0.25);
-          \draw (3, 0.25) -- (2, 0) -- (1, 0) -- (0, 1) -- (0, 2) -- (1, 3) -- (2, 3) -- (3, 2.75);
-          \draw[loosely dotted] (3, 2.75) -- (4, 2);
-          \draw (2, 0) -- ++(-0.2, -0.2)  ++(0.2, 0.2) -- ++(0.2, -0.2);
-          \draw (1, 0) -- ++(-0.2, -0.2)  ++(0.2, 0.2) -- ++(0.2, -0.2);
-          \draw (0, 2) -- ++(-0.2, -0.2)  ++(0.2, 0.2) -- ++(-0.2, 0.2);
-          \draw (0, 1) -- ++(-0.2, -0.2)  ++(0.2, 0.2) -- ++(-0.2, 0.2);
-          \draw (1, 3) -- ++(0.2, 0.2)  ++(-0.2, -0.2) -- ++(-0.2, 0.2);
-          \draw (2, 3) -- ++(0.2, 0.2)  ++(-0.2, -0.2) -- ++(-0.2, 0.2);
-          \node [above] at (1.5, 3) {A};
-          \node at (1.5, 1.5) {B};
-          \node [below] at (1.5, 0) {C};
-        \end{scope}
-        &
-        \begin{scope}
-          \draw[loosely dotted] (4, 1) -- (3, 0.25);
-          \draw (3, 0.25) -- (2, 0) -- (2, 3) node [midway, above=10pt, left=-3pt] {d} -- (3, 2.75);
-          \draw (1, 0) -- (0, 1) -- (0, 2) -- (1, 3) -- (1, 0) node [midway, above=10pt, right=-3pt] {d'};
-          \draw[loosely dotted] (3, 2.75) -- (4, 2);
-          \draw (2, 0) -- ++(-0.2, -0.2)  ++(0.2, 0.2) -- ++(0.2, -0.2);
-          \draw (1, 0) -- ++(-0.2, -0.2)  ++(0.2, 0.2) -- ++(0.2, -0.2);
-          \draw (0, 2) -- ++(-0.2, -0.2)  ++(0.2, 0.2) -- ++(-0.2, 0.2);
-          \draw (0, 1) -- ++(-0.2, -0.2)  ++(0.2, 0.2) -- ++(-0.2, 0.2);
-          \draw (1, 3) -- ++(0.2, 0.2)  ++(-0.2, -0.2) -- ++(-0.2, 0.2);
-          \draw (2, 3) -- ++(0.2, 0.2)  ++(-0.2, -0.2) -- ++(-0.2, 0.2);
-          \node at (1.5, 1.5) {D};
-          \node at (3, 1.5) {E};
-        \end{scope}
-        \\
-        \begin{scope}
-          \draw[loosely dotted] (4, 1) -- (3, 0.25);
-          \draw (3, 0.25) -- (2, 0) -- (1, 0) -- (0, 0.75) -- (-0.25, 1.5) -- (0, 2.25) -- (1, 3) -- (2, 3) -- (3, 2.75);
-          \draw[loosely dotted] (3, 2.75) -- (4, 2);
-          \draw (2, 0) -- ++(-0.2, -0.2)  ++(0.2, 0.2) -- ++(0.2, -0.2);
-          \draw (1, 0) -- ++(-0.2, -0.2)  ++(0.2, 0.2) -- ++(0.2, -0.2);
-          \draw (0, 2.25) -- ++(-0.2, -0.2)  ++(0.2, 0.2) -- ++(-0.2, 0.2);
-          \draw (-0.25, 1.5) -- ++(-0.2, -0.2)  ++(0.2, 0.2) -- ++(-0.2, 0.2);
-          \draw (0, 0.75) -- ++(-0.2, -0.2)  ++(0.2, 0.2) -- ++(-0.2, 0.2);
-          \draw (1, 3) -- ++(0.2, 0.2)  ++(-0.2, -0.2) -- ++(-0.2, 0.2);
-          \draw (2, 3) -- ++(0.2, 0.2)  ++(-0.2, -0.2) -- ++(-0.2, 0.2);
-          \node [above] at (1.5, 3) {A};
-          \node at (1.5, 1.5) {B};
-          \node [below] at (1.5, 0) {C};
-        \end{scope}
-        &
-        \begin{scope}
-          \draw[loosely dotted] (4, 1) -- (3, 0.25);
-          \draw (3, 0.25) -- (2, 0) -- (2, 3) node [midway, above=10pt, left=-3pt] {d} -- (3, 2.75);
-          \draw (1, 0) -- (0, 0.75) -- (-0.25, 1.5) -- (0, 2.25) -- (1, 3) -- (1, 0) node [midway, above=10pt, right=-3pt] {d'};
-          \draw[loosely dotted] (3, 2.75) -- (4, 2);
-          \draw (2, 0) -- ++(-0.2, -0.2)  ++(0.2, 0.2) -- ++(0.2, -0.2);
-          -- (-3, -3) -- (-3.125, -2.25)            \draw (1, 0) -- ++(-0.2, -0.2)  ++(0.2, 0.2) -- ++(0.2, -0.2);
-          \draw (0, 2.25) -- ++(-0.2, -0.2)  ++(0.2, 0.2) -- ++(-0.2, 0.2);
-          \draw (-0.25, 1.5) -- ++(-0.2, -0.2)  ++(0.2, 0.2) -- ++(-0.2, 0.2);
-          \draw (0, 0.75) -- ++(-0.2, -0.2)  ++(0.2, 0.2) -- ++(-0.2, 0.2);
-          \draw (1, 3) -- ++(0.2, 0.2)  ++(-0.2, -0.2) -- ++(-0.2, 0.2);
-          \draw (2, 3) -- ++(0.2, 0.2)  ++(-0.2, -0.2) -- ++(-0.2, 0.2);
-          \node at (1.5, 1.5) {D};
-          \node at (3, 1.5) {E};
-        \end{scope}
-        \\
-      };
-    \end{tikzfigure}
+\begin{proof} The proof is made by contradiction. Let $G$ be a graph with the mentioned properties. The proof shows that if $G$ has the mentioned properties, then, after some transformations which let these properties invariant, a graph which does not meet the requirements can be held. The first thing to notice is that one can assume the number of edges of the exceptional face to be four or five. In fact, by changing two edges it is possible to ``cut out'' a square or a pentagon from larger exceptional faces.
+  In \autoref{fig:case3:6:img4} let $B$ be the exceptional face with $b$ edges. Under the transformation $B$ is reduced to a square or a pentagon, depending on whether $b \equiv 1 (\operatorname{mod} 3)$ or $b \equiv 2 (\operatorname{mod} 3)$. In the first case $E$ has $b - 4$ edges, in the second $b-5$. In either case $E$ is not an exceptional face, its number of edges is divisible by $3$. If $A$ and $C$ are different faces the resulting graph is connected. As $A$ and $C$ have a number of edges which is divisible by $3$, so has the new face $D$. It remains the case that $A$ is the same face as $C$. Then the free space labeled with $D$ is separated by two cycles of length $d$ (denoting the length of ``left'' cycle) and $d'$ (denoting the length of ``right'' cycle). If $d$ is divisible by $3$ then the left component has exactly one exceptional face and has fewer edges then the original one. If $d$ is not divisible by $3$, then neither is $d'$, as their sum matches the sum of the number of edges of $A$ and $C$, thus the right component has exactly one exceptional face (the cycle labeled with $d'$) and fewer faces then $G$.
+  \begin{tikzfigure}{\label{fig:case3:6:img4}}
+    \matrix (m) [ column sep=1cm] {
+      \begin{scope}
+        \draw[loosely dotted] (4, 1) -- (3, 0.25);
+        \draw (3, 0.25) -- (2, 0) -- (1, 0) -- (0, 1) -- (0, 2) -- (1, 3) -- (2, 3) -- (3, 2.75);
+        \draw[loosely dotted] (3, 2.75) -- (4, 2);
+        \draw (2, 0) -- ++(-0.2, -0.2)  ++(0.2, 0.2) -- ++(0.2, -0.2);
+        \draw (1, 0) -- ++(-0.2, -0.2)  ++(0.2, 0.2) -- ++(0.2, -0.2);
+        \draw (0, 2) -- ++(-0.2, -0.2)  ++(0.2, 0.2) -- ++(-0.2, 0.2);
+        \draw (0, 1) -- ++(-0.2, -0.2)  ++(0.2, 0.2) -- ++(-0.2, 0.2);
+        \draw (1, 3) -- ++(0.2, 0.2)  ++(-0.2, -0.2) -- ++(-0.2, 0.2);
+        \draw (2, 3) -- ++(0.2, 0.2)  ++(-0.2, -0.2) -- ++(-0.2, 0.2);
+        \node [above] at (1.5, 3) {A};
+        \node at (1.5, 1.5) {B};
+        \node [below] at (1.5, 0) {C};
+      \end{scope}
+      &
+      \begin{scope}
+        \draw[loosely dotted] (4, 1) -- (3, 0.25);
+        \draw (3, 0.25) -- (2, 0) -- (2, 3) node [midway, above=10pt, left=-3pt] {d} -- (3, 2.75);
+        \draw (1, 0) -- (0, 1) -- (0, 2) -- (1, 3) -- (1, 0) node [midway, above=10pt, right=-3pt] {d'};
+        \draw[loosely dotted] (3, 2.75) -- (4, 2);
+        \draw (2, 0) -- ++(-0.2, -0.2)  ++(0.2, 0.2) -- ++(0.2, -0.2);
+        \draw (1, 0) -- ++(-0.2, -0.2)  ++(0.2, 0.2) -- ++(0.2, -0.2);
+        \draw (0, 2) -- ++(-0.2, -0.2)  ++(0.2, 0.2) -- ++(-0.2, 0.2);
+        \draw (0, 1) -- ++(-0.2, -0.2)  ++(0.2, 0.2) -- ++(-0.2, 0.2);
+        \draw (1, 3) -- ++(0.2, 0.2)  ++(-0.2, -0.2) -- ++(-0.2, 0.2);
+        \draw (2, 3) -- ++(0.2, 0.2)  ++(-0.2, -0.2) -- ++(-0.2, 0.2);
+        \node at (1.5, 1.5) {D};
+        \node at (3, 1.5) {E};
+      \end{scope}
+      \\
+      \begin{scope}
+        \draw[loosely dotted] (4, 1) -- (3, 0.25);
+        \draw (3, 0.25) -- (2, 0) -- (1, 0) -- (0, 0.75) -- (-0.25, 1.5) -- (0, 2.25) -- (1, 3) -- (2, 3) -- (3, 2.75);
+        \draw[loosely dotted] (3, 2.75) -- (4, 2);
+        \draw (2, 0) -- ++(-0.2, -0.2)  ++(0.2, 0.2) -- ++(0.2, -0.2);
+        \draw (1, 0) -- ++(-0.2, -0.2)  ++(0.2, 0.2) -- ++(0.2, -0.2);
+        \draw (0, 2.25) -- ++(-0.2, -0.2)  ++(0.2, 0.2) -- ++(-0.2, 0.2);
+        \draw (-0.25, 1.5) -- ++(-0.2, -0.2)  ++(0.2, 0.2) -- ++(-0.2, 0.2);
+        \draw (0, 0.75) -- ++(-0.2, -0.2)  ++(0.2, 0.2) -- ++(-0.2, 0.2);
+        \draw (1, 3) -- ++(0.2, 0.2)  ++(-0.2, -0.2) -- ++(-0.2, 0.2);
+        \draw (2, 3) -- ++(0.2, 0.2)  ++(-0.2, -0.2) -- ++(-0.2, 0.2);
+        \node [above] at (1.5, 3) {A};
+        \node at (1.5, 1.5) {B};
+        \node [below] at (1.5, 0) {C};
+      \end{scope}
+      &
+      \begin{scope}
+        \draw[loosely dotted] (4, 1) -- (3, 0.25);
+        \draw (3, 0.25) -- (2, 0) -- (2, 3) node [midway, above=10pt, left=-3pt] {d} -- (3, 2.75);
+        \draw (1, 0) -- (0, 0.75) -- (-0.25, 1.5) -- (0, 2.25) -- (1, 3) -- (1, 0) node [midway, above=10pt, right=-3pt] {d'};
+        \draw[loosely dotted] (3, 2.75) -- (4, 2);
+        \draw (2, 0) -- ++(-0.2, -0.2)  ++(0.2, 0.2) -- ++(0.2, -0.2);
+        -- (-3, -3) -- (-3.125, -2.25)            \draw (1, 0) -- ++(-0.2, -0.2)  ++(0.2, 0.2) -- ++(0.2, -0.2);
+        \draw (0, 2.25) -- ++(-0.2, -0.2)  ++(0.2, 0.2) -- ++(-0.2, 0.2);
+        \draw (-0.25, 1.5) -- ++(-0.2, -0.2)  ++(0.2, 0.2) -- ++(-0.2, 0.2);
+        \draw (0, 0.75) -- ++(-0.2, -0.2)  ++(0.2, 0.2) -- ++(-0.2, 0.2);
+        \draw (1, 3) -- ++(0.2, 0.2)  ++(-0.2, -0.2) -- ++(-0.2, 0.2);
+        \draw (2, 3) -- ++(0.2, 0.2)  ++(-0.2, -0.2) -- ++(-0.2, 0.2);
+        \node at (1.5, 1.5) {D};
+        \node at (3, 1.5) {E};
+      \end{scope}
+      \\
+    };
+  \end{tikzfigure}
 
-    A similar construction can be used to ``cut'' out a triangle from a larger non exceptional face ($B$). 
-    
-    \begin{tikzfigure}{\label{fig:case3:6:img5}}
-      \matrix (m) [ column sep=1cm] {
-        \begin{scope}
-          \draw[loosely dotted] (4, 1) -- (3, 0.25);
-          \draw (3, 0.25) -- (2, 0) -- (1, 0) -- (0, 1.5) -- (1, 3) -- (2, 3) -- (3, 2.75);
-          \draw[loosely dotted] (3, 2.75) -- (4, 2);
-          \draw (2, 0) -- ++(-0.2, -0.2)  ++(0.2, 0.2) -- ++(0.2, -0.2);
-          \draw (1, 0) -- ++(-0.2, -0.2)  ++(0.2, 0.2) -- ++(0.2, -0.2);
-          \draw (0, 1.5) -- ++(-0.2, -0.2)  ++(0.2, 0.2) -- ++(-0.2, 0.2);
-          \draw (1, 3) -- ++(0.2, 0.2)  ++(-0.2, -0.2) -- ++(-0.2, 0.2);
-          \draw (2, 3) -- ++(0.2, 0.2)  ++(-0.2, -0.2) -- ++(-0.2, 0.2);
-          \node [above] at (1.5, 3) {A};
-          \node at (1.5, 1.5) {B};
-          \node [below] at (1.5, 0) {C};
-        \end{scope}
-        &
-        \begin{scope}
-          \draw[loosely dotted] (4, 1) -- (3, 0.25);
-          \draw (3, 0.25) -- (2, 0) -- (2, 3) node [midway, above=10pt, left=-3pt] {d} -- (3, 2.75);
-          \draw (1, 0) -- (0, 1.5) -- (1, 3) -- (1, 0) node [midway, above=10pt, right=-3pt] {d'};
-          \draw[loosely dotted] (3, 2.75) -- (4, 2);
-          \draw (2, 0) -- ++(-0.2, -0.2)  ++(0.2, 0.2) -- ++(0.2, -0.2);
-          \draw (1, 0) -- ++(-0.2, -0.2)  ++(0.2, 0.2) -- ++(0.2, -0.2);
-          \draw (0, 1.5) -- ++(-0.2, -0.2)  ++(0.2, 0.2) -- ++(-0.2, 0.2);
-          \draw (1, 3) -- ++(0.2, 0.2)  ++(-0.2, -0.2) -- ++(-0.2, 0.2);
-          \draw (2, 3) -- ++(0.2, 0.2)  ++(-0.2, -0.2) -- ++(-0.2, 0.2);
-          \node at (1.5, 1.5) {D};
-          \node at (3, 1.5) {E};
-        \end{scope}
-        \\
-      };
-    \end{tikzfigure}
-    The argument is mostly the same as in the previous case. $E$ has three less edges the $B$, the number of whose are divisible by $3$. There is also a differentiation to be made whether $A$ and $C$ denote the same face. If not, then the resulting graph is connected and has a triangle. If they are the same the graph separates and one of both sides has exactly one exceptional face and has fewer edges then $G$.
+  A similar construction (see \autoref{fig:case3:6:img5}) can be used to ``cut'' out a triangle from a larger non exceptional face ($B$). 
+  
+  \begin{tikzfigure}{\label{fig:case3:6:img5}}
+    \matrix (m) [ column sep=1cm] {
+      \begin{scope}
+        \draw[loosely dotted] (4, 1) -- (3, 0.25);
+        \draw (3, 0.25) -- (2, 0) -- (1, 0) -- (0, 1.5) -- (1, 3) -- (2, 3) -- (3, 2.75);
+        \draw[loosely dotted] (3, 2.75) -- (4, 2);
+        \draw (2, 0) -- ++(-0.2, -0.2)  ++(0.2, 0.2) -- ++(0.2, -0.2);
+        \draw (1, 0) -- ++(-0.2, -0.2)  ++(0.2, 0.2) -- ++(0.2, -0.2);
+        \draw (0, 1.5) -- ++(-0.2, -0.2)  ++(0.2, 0.2) -- ++(-0.2, 0.2);
+        \draw (1, 3) -- ++(0.2, 0.2)  ++(-0.2, -0.2) -- ++(-0.2, 0.2);
+        \draw (2, 3) -- ++(0.2, 0.2)  ++(-0.2, -0.2) -- ++(-0.2, 0.2);
+        \node [above] at (1.5, 3) {A};
+        \node at (1.5, 1.5) {B};
+        \node [below] at (1.5, 0) {C};
+      \end{scope}
+      &
+      \begin{scope}
+        \draw[loosely dotted] (4, 1) -- (3, 0.25);
+        \draw (3, 0.25) -- (2, 0) -- (2, 3) node [midway, above=10pt, left=-3pt] {d} -- (3, 2.75);
+        \draw (1, 0) -- (0, 1.5) -- (1, 3) -- (1, 0) node [midway, above=10pt, right=-3pt] {d'};
+        \draw[loosely dotted] (3, 2.75) -- (4, 2);
+        \draw (2, 0) -- ++(-0.2, -0.2)  ++(0.2, 0.2) -- ++(0.2, -0.2);
+        \draw (1, 0) -- ++(-0.2, -0.2)  ++(0.2, 0.2) -- ++(0.2, -0.2);
+        \draw (0, 1.5) -- ++(-0.2, -0.2)  ++(0.2, 0.2) -- ++(-0.2, 0.2);
+        \draw (1, 3) -- ++(0.2, 0.2)  ++(-0.2, -0.2) -- ++(-0.2, 0.2);
+        \draw (2, 3) -- ++(0.2, 0.2)  ++(-0.2, -0.2) -- ++(-0.2, 0.2);
+        \node at (1.5, 1.5) {D};
+        \node at (3, 1.5) {E};
+      \end{scope}
+      \\
+    };
+  \end{tikzfigure}
+  The argument is mostly the same as in the previous case. $E$ has three less edges the $B$, the number of whose are divisible by $3$. There is also a differentiation to be made whether $A$ and $C$ denote the same face. If not, then the resulting graph is connected and has a triangle. If they are the same the graph separates and one of both sides has exactly one exceptional face and has fewer edges then $G$.
 
-    This step will be used for the up to eight or ten faces which share at least one vertex with the exceptional face (eight if it is a square, ten if it is a pentagon). One can therefore assume that the exceptional face is surrounded by triangles, else one could try the above step to ``cut out'' a triangle, resulting in fewer edges or in a triangle at the desired position. But the resulting graph is isomorphic to the skeleton of an antiprism (see \autoref{fig:case3:6:img6} for the two antiprisms with a quadrangle base and a pentagonal base), which has one additional exceptional face. The steps taken did not introduce new exceptional faces, a contradiction.
-    \begin{tikzfigure}{\label{fig:case3:6:img6}}
-      \matrix (m) [ column sep=1cm] {
-        \begin{scope}[scale=0.75]
-          \draw (-1, -1) -- (-1, 1) -- (1, 1) -- (1, -1) -- (-1, -1) -- (0, -3) -- (1, -1) -- (3, 0) -- (1, 1) -- (0, 3) -- (-1, 1) -- (-3 , 0) -- (-1, -1) (0, -3) -- (3, 0) -- (0, 3) -- (-3, 0) -- (0, -3);
-        \end{scope}
-        &
-        \begin{scope}[scale=0.75]
-          \draw (0 : 2) -- (72 : 2) -- (144 : 2) -- (216 : 2) -- (288 : 2) -- (0 : 2) -- (36 : 3) -- (72 : 2) -- (108 : 3) -- (144 : 2) -- (180 : 3) -- (216 : 2) -- (252 : 3) -- (288 : 2) -- (324 : 3) -- (0 : 2) -- (36 : 3) -- (108 : 3) -- (180 : 3) -- (252 : 3) -- (324 : 3) -- (36 : 3);
-        \end{scope}
-        \\
-      };
-    \end{tikzfigure}
-  \end{proof}
+  This step will be used for the up to eight or ten faces which share at least one vertex with the exceptional face (eight if it is a square, ten if it is a pentagon). One can therefore assume the exceptional face to be surrounded by triangles, else one could try the above step to ``cut out'' a triangle, resulting in fewer edges or in a triangle at the desired position. But the resulting graph is the same as the skeleton of an antiprism (see \autoref{fig:case3:6:img6} for the two antiprisms with a quadrangle base and a pentagonal base), which has one additional exceptional face. The steps taken did not introduce new exceptional faces, a contradiction.
+  \begin{tikzfigure}{\label{fig:case3:6:img6}}
+    \matrix (m) [ column sep=1cm] {
+      \begin{scope}[scale=0.75]
+        \draw (-1, -1) -- (-1, 1) -- (1, 1) -- (1, -1) -- (-1, -1) -- (0, -3) -- (1, -1) -- (3, 0) -- (1, 1) -- (0, 3) -- (-1, 1) -- (-3 , 0) -- (-1, -1) (0, -3) -- (3, 0) -- (0, 3) -- (-3, 0) -- (0, -3);
+      \end{scope}
+      &
+      \begin{scope}[scale=0.75]
+        \draw (0 : 2) -- (72 : 2) -- (144 : 2) -- (216 : 2) -- (288 : 2) -- (0 : 2) -- (36 : 3) -- (72 : 2) -- (108 : 3) -- (144 : 2) -- (180 : 3) -- (216 : 2) -- (252 : 3) -- (288 : 2) -- (324 : 3) -- (0 : 2) -- (36 : 3) -- (108 : 3) -- (180 : 3) -- (252 : 3) -- (324 : 3) -- (36 : 3);
+      \end{scope}
+      \\
+    };
+  \end{tikzfigure}
+\end{proof}
 
 \begin{remark}
   The proof given is similar to \cite{ConvexPolytopes}, where a proof for $3$-valent graphs is given. As is the case there, digons can be allowed during the argument. They do not simplify the proof here, so they were omitted.

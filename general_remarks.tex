@@ -1,3 +1,163 @@
-\section{Genaral Remarks}
+\section{General Remarks}
 
-As seen in 
+As seen in \autoref{thm:case3:6:nonexistence}, there seems to exist an inherent problem when $(q_3, \dots, q_n)_4$-realizing a single face if $3 | k$ for all $q_k \neq 0$. Similarities exists when dealing with valences $3$ and $4$, as the following theorem proves:
+
+\begin{theorem}
+  There exists no general Eberhard theorem of type $(q_3, \dots, q_n)_r$ if $\gcd (k : q_k \neq 0) > 1$ and $|\set{k : q_k \neq 0}|>1$.
+  \begin{proof}
+    From the \autoref{eq:valence:3} follows, that if $r=3$ and $|\set{k : q_k \neq 0}|>1$ faces of positive and negative curvature must occur, thus $q_3 \neq 0$, $q_4 \neq 0$ or $q_5 \neq 0$ and $\gcd (k : q_k \neq 0) \in \set{2, 3, 4, 5}$. Similarly for $r=4$ or $r=5$ and from \autoref{eq:valence:4} or \autoref{eq:valence:5} one has $q_3 \neq 0$ and $\gcd (k : q_k \neq 0) = 3$. The nonexistence of the respective theorem then follows by the nonexistence of an $r$-valent graph where each but one face is of the size of a multiple of the respective $\gcd$. For $r = 3$ these proofs are established in \cite{ConvexPolytopes} (Theorem 13.4.2) and for $r=4$ this is simply \autoref{thm:case3:6:nonexistence}. The remaining case is $r=5$ and $\gcd (k : q_k \neq 0) = 3$, which will be proven in the following \autoref{thm:valence5:nonexistence}. As none of these graphs exists, there is no realization of a sequence consisting of a single face of size coprime to the $\gcd$, contradicting the potential general Eberhard theorem.
+  \end{proof}
+\end{theorem}
+
+\begin{lemma}\label{thm:valence5:nonexistence}
+  There exists no 5-valent connected planar graph without monogons or digons where each but one face is a $k$-gon for some $k \in \nats$, $3 | k$. As in \autoref{thm:case3:6:nonexistence}, the single face with a number of edges not divisible by $3$ is called the exceptional face.
+  \begin{proof} The proof is made by contradiction. Let $G$ be a graph with the mentioned properties and from these one with minimal amount of edges. The proof shows that if $G$ has the mentioned properties, then, after some transformations which let these properties invariant, a graph which does not meet the requirements can be held. One can use the same two constructions from \autoref{thm:case3:6:nonexistence} with small differences (the resulting pictures now have vertices of valence $5$ and not $4$) as seen in \autoref{fig:valence5:img4} and \autoref{fig:valence5:img5}. The same arguments as before apply. Thus, assume that the exceptional face has four or five sides.
+    \begin{tikzfigure}{\label{fig:valence5:img4}}
+      \matrix (m) [ column sep=1cm] {
+        \begin{scope}
+          \draw[loosely dotted] (4, 1) -- (3, 0.25);
+          \draw (3, 0.25) -- (2, 0) -- (1, 0) -- (0, 1) -- (0, 2) -- (1, 3) -- (2, 3) -- (3, 2.75);
+          \draw[loosely dotted] (3, 2.75) -- (4, 2);
+          \draw (2, 0) -- ++(-0.2, -0.2)  ++(0.2, 0.2) -- ++(0.2, -0.2) ++(-0.2, 0.2) -- ++(0, -0.2);
+          \draw (1, 0) -- ++(-0.2, -0.2)  ++(0.2, 0.2) -- ++(0.2, -0.2) ++(-0.2, 0.2) -- ++(0, -0.2);
+          \draw (0, 2) -- ++(-0.2, -0.2)  ++(0.2, 0.2) -- ++(-0.2, 0.2) ++(0.2, -0.2) -- ++(-0.2, 0);
+          \draw (0, 1) -- ++(-0.2, -0.2)  ++(0.2, 0.2) -- ++(-0.2, 0.2) ++(0.2, -0.2) -- ++(-0.2, 0);
+          \draw (1, 3) -- ++(0.2, 0.2)  ++(-0.2, -0.2) -- ++(-0.2, 0.2) ++(0.2, -0.2) -- ++(0, 0.2);
+          \draw (2, 3) -- ++(0.2, 0.2)  ++(-0.2, -0.2) -- ++(-0.2, 0.2) ++(0.2, -0.2) -- ++(0, 0.2);
+          \node [above] at (1.5, 3) {A};
+          \node at (1.5, 1.5) {B};
+          \node [below] at (1.5, 0) {C};
+        \end{scope}
+        &
+        \begin{scope}
+          \draw[loosely dotted] (4, 1) -- (3, 0.25);
+          \draw (3, 0.25) -- (2, 0) -- (2, 3) node [midway, above=10pt, left=-3pt] {d} -- (3, 2.75);
+          \draw (1, 0) -- (0, 1) -- (0, 2) -- (1, 3) -- (1, 0) node [midway, above=10pt, right=-3pt] {d'};
+          \draw[loosely dotted] (3, 2.75) -- (4, 2);
+          \draw (2, 0) -- ++(-0.2, -0.2)  ++(0.2, 0.2) -- ++(0.2, -0.2) ++(-0.2, 0.2) -- ++(0, -0.2);
+          \draw (1, 0) -- ++(-0.2, -0.2)  ++(0.2, 0.2) -- ++(0.2, -0.2) ++(-0.2, 0.2) -- ++(0, -0.2);
+          \draw (0, 2) -- ++(-0.2, -0.2)  ++(0.2, 0.2) -- ++(-0.2, 0.2) ++(0.2, -0.2) -- ++(-0.2, 0);
+          \draw (0, 1) -- ++(-0.2, -0.2)  ++(0.2, 0.2) -- ++(-0.2, 0.2) ++(0.2, -0.2) -- ++(-0.2, 0);
+          \draw (1, 3) -- ++(0.2, 0.2)  ++(-0.2, -0.2) -- ++(-0.2, 0.2) ++(0.2, -0.2) -- ++(0, 0.2);
+          \draw (2, 3) -- ++(0.2, 0.2)  ++(-0.2, -0.2) -- ++(-0.2, 0.2) ++(0.2, -0.2) -- ++(0, 0.2);
+          \node at (1.5, 1.5) {D};
+          \node at (3, 1.5) {E};
+        \end{scope}
+        \\
+        \begin{scope}
+          \draw[loosely dotted] (4, 1) -- (3, 0.25);
+          \draw (3, 0.25) -- (2, 0) -- (1, 0) -- (0, 0.75) -- (-0.25, 1.5) -- (0, 2.25) -- (1, 3) -- (2, 3) -- (3, 2.75);
+          \draw[loosely dotted] (3, 2.75) -- (4, 2);
+          \draw (2, 0) -- ++(-0.2, -0.2)  ++(0.2, 0.2) -- ++(0.2, -0.2) ++(-0.2, 0.2) -- ++(0, -0.2);
+          \draw (1, 0) -- ++(-0.2, -0.2)  ++(0.2, 0.2) -- ++(0.2, -0.2) ++(-0.2, 0.2) -- ++(0, -0.2);
+          \draw (0, 2.25) -- ++(-0.2, -0.2)  ++(0.2, 0.2) -- ++(-0.2, 0.2) ++(0.2, -0.2) -- ++(-0.2, 0);
+          \draw (-0.25, 1.5) -- ++(-0.2, -0.2)  ++(0.2, 0.2) -- ++(-0.2, 0.2) ++(0.2, -0.2) -- ++(-0.2, 0);
+          \draw (0, 0.75) -- ++(-0.2, -0.2)  ++(0.2, 0.2) -- ++(-0.2, 0.2) ++(0.2, -0.2) -- ++(-0.2, 0);
+          \draw (1, 3) -- ++(0.2, 0.2)  ++(-0.2, -0.2) -- ++(-0.2, 0.2) ++(0.2, -0.2) -- ++(0, 0.2);
+          \draw (2, 3) -- ++(0.2, 0.2)  ++(-0.2, -0.2) -- ++(-0.2, 0.2) ++(0.2, -0.2) -- ++(0, 0.2);
+          \node [above] at (1.5, 3) {A};
+          \node at (1.5, 1.5) {B};
+          \node [below] at (1.5, 0) {C};
+        \end{scope}
+        &
+        \begin{scope}
+          \draw[loosely dotted] (4, 1) -- (3, 0.25);
+          \draw (3, 0.25) -- (2, 0) -- (2, 3) node [midway, above=10pt, left=-3pt] {d} -- (3, 2.75);
+          \draw (1, 0) -- (0, 0.75) -- (-0.25, 1.5) -- (0, 2.25) -- (1, 3) -- (1, 0) node [midway, above=10pt, right=-3pt] {d'};
+          \draw[loosely dotted] (3, 2.75) -- (4, 2);
+          \draw (2, 0) -- ++(-0.2, -0.2)  ++(0.2, 0.2) -- ++(0.2, -0.2) ++(-0.2, 0.2) -- ++(0, -0.2);
+          \draw (1, 0) -- ++(-0.2, -0.2)  ++(0.2, 0.2) -- ++(0.2, -0.2) ++(-0.2, 0.2) -- ++(0, -0.2);
+          \draw (0, 2.25) -- ++(-0.2, -0.2)  ++(0.2, 0.2) -- ++(-0.2, 0.2) ++(0.2, -0.2) -- ++(-0.2, 0);
+          \draw (-0.25, 1.5) -- ++(-0.2, -0.2)  ++(0.2, 0.2) -- ++(-0.2, 0.2) ++(0.2, -0.2) -- ++(-0.2, 0);
+          \draw (0, 0.75) -- ++(-0.2, -0.2)  ++(0.2, 0.2) -- ++(-0.2, 0.2) ++(0.2, -0.2) -- ++(-0.2, 0);
+          \draw (1, 3) -- ++(0.2, 0.2)  ++(-0.2, -0.2) -- ++(-0.2, 0.2) ++(0.2, -0.2) -- ++(0, 0.2);
+          \draw (2, 3) -- ++(0.2, 0.2)  ++(-0.2, -0.2) -- ++(-0.2, 0.2) ++(0.2, -0.2) -- ++(0, 0.2);
+          \node at (1.5, 1.5) {D};
+          \node at (3, 1.5) {E};
+        \end{scope}
+        \\
+      };
+    \end{tikzfigure}
+  
+    \begin{tikzfigure}{\label{fig:valence5:img5}}
+      \matrix (m) [ column sep=1cm] {
+        \begin{scope}
+          \draw[loosely dotted] (4, 1) -- (3, 0.25);
+          \draw (3, 0.25) -- (2, 0) -- (1, 0) -- (0, 1.5) -- (1, 3) -- (2, 3) -- (3, 2.75);
+          \draw[loosely dotted] (3, 2.75) -- (4, 2);
+          \draw (2, 0) -- ++(-0.2, -0.2)  ++(0.2, 0.2) -- ++(0.2, -0.2) ++(-0.2, 0.2) -- ++(0, -0.2);
+          \draw (1, 0) -- ++(-0.2, -0.2)  ++(0.2, 0.2) -- ++(0.2, -0.2) ++(-0.2, 0.2) -- ++(0, -0.2);
+          \draw (0, 1.5) -- ++(-0.2, -0.2)  ++(0.2, 0.2) -- ++(-0.2, 0.2) ++(0.2, -0.2) -- ++(-0.2, 0);
+          \draw (1, 3) -- ++(0.2, 0.2)  ++(-0.2, -0.2) -- ++(-0.2, 0.2) ++(0.2, -0.2) -- ++(0, 0.2);
+          \draw (2, 3) -- ++(0.2, 0.2)  ++(-0.2, -0.2) -- ++(-0.2, 0.2) ++(0.2, -0.2) -- ++(0, 0.2);
+          \node [above] at (1.5, 3) {A};
+          \node at (1.5, 1.5) {B};
+          \node [below] at (1.5, 0) {C};
+        \end{scope}
+        &
+        \begin{scope}
+          \draw[loosely dotted] (4, 1) -- (3, 0.25);
+          \draw (3, 0.25) -- (2, 0) -- (2, 3) node [midway, above=10pt, left=-3pt] {d} -- (3, 2.75);
+          \draw (1, 0) -- (0, 1.5) -- (1, 3) -- (1, 0) node [midway, above=10pt, right=-3pt] {d'};
+          \draw[loosely dotted] (3, 2.75) -- (4, 2);
+          \draw (2, 0) -- ++(-0.2, -0.2)  ++(0.2, 0.2) -- ++(0.2, -0.2) ++(-0.2, 0.2) -- ++(0, -0.2);
+          \draw (1, 0) -- ++(-0.2, -0.2)  ++(0.2, 0.2) -- ++(0.2, -0.2) ++(-0.2, 0.2) -- ++(0, -0.2);
+          \draw (0, 1.5) -- ++(-0.2, -0.2)  ++(0.2, 0.2) -- ++(-0.2, 0.2) ++(0.2, -0.2) -- ++(-0.2, 0);
+          \draw (1, 3) -- ++(0.2, 0.2)  ++(-0.2, -0.2) -- ++(-0.2, 0.2) ++(0.2, -0.2) -- ++(0, 0.2);
+          \draw (2, 3) -- ++(0.2, 0.2)  ++(-0.2, -0.2) -- ++(-0.2, 0.2) ++(0.2, -0.2) -- ++(0, 0.2);
+          \node at (1.5, 1.5) {D};
+          \node at (3, 1.5) {E};
+        \end{scope}
+        \\
+      };
+    \end{tikzfigure}
+    The step of ``cutting out'' triangles will be used for the up to twelve or fifteens faces which share at least one vertex with the exceptional face (twelve if it is a square, fifteen if it is a pentagon). After these assume the exceptional face to be surrounded by triangles, else one could try the above step to ``cut out'' a triangle, resulting in fewer edges or in a triangle at the desired position. By iterating this step on the faces adjacent to these twelve or fifteen faces one has a graph which is the same as the skeleton of an ``generalized icosahedron'' (these are built by an similar constructions as the regular one, but with a $k$-gon as top and base face, see \autoref{fig:valence5:img6} for the resulting graphs with a quadrangle base and a pentagonal base), which has one additional exceptional face. The steps taken did not introduce new exceptional faces, a contradiction.
+    \begin{tikzfigure}{\label{fig:valence5:img6}}
+      \matrix (m) [ column sep=1cm] {
+        \begin{scope}[scale=0.5]
+          \draw (-4, -4) -- (4, -4) -- (4, 4) -- (-4, 4) -- cycle;
+          \draw (-4, -4) -- (-3, 0) -- (-4, 4) -- (0, 3) -- (4, 4) -- (3, 0) -- (4, -4) -- (0, -3) -- cycle;
+          \draw (-2, -2) -- (-3, 0) -- (-2, 2) -- (0, 3) -- (2, 2) -- (3, 0) -- (2, -2) -- (0, -3) -- cycle;
+          \draw (-4, -4) -- (-2, -2) -- (0, -1) -- (2, -2) -- (4, -4);
+          \draw (-4,  4) -- (-2,  2) -- (0,  1) -- (2,  2) -- (4,  4);
+          \draw (-3, 0) -- (-1, 0) -- (0, -1) -- (0, -3);
+          \draw ( 3, 0) -- ( 1, 0) -- (0,  1) -- (0,  3);
+          \draw (-2, -2) -- (-1, 0) -- (-2, 2);
+          \draw ( 2,  2) -- ( 1, 0) -- ( 2,-2);
+          \draw (-1, 0) -- (0, 1) (0, -1) --(1, 0);
+        \end{scope}
+        &
+        \begin{scope}[scale=0.75]
+          \draw (0 : 3) -- (72 : 3) -- (144 : 3) -- (216 : 3) -- (288 : 3) -- cycle;
+          \draw (0 : 3) -- (36 : 2) -- (72 : 3) -- (108: 2) -- (144 : 3) -- (180 : 2) -- (216 : 3) -- (252 : 2) -- (288 : 3) -- (324 : 2) -- cycle;
+          \draw (0 : 2) -- (36 : 2) -- (72 : 2) -- (108: 2) -- (144 : 2) -- (180 : 2) -- (216 : 2) -- (252 : 2) -- (288 : 2) -- (324 : 2) -- cycle;
+          \draw (0 : 3) -- (0 : 2) (72 : 3) -- (72 : 2) (144 : 3) -- (144 : 2) (216 : 3) -- (216 : 2) (288 : 3) -- (288 : 2);
+          \draw (0 : 2) -- (36 : 1) -- (72 : 2) -- (108: 1) -- (144 : 2) -- (180 : 1) -- (216 : 2) -- (252 : 1) -- (288 : 2) -- (324 : 1) -- cycle;
+          \draw (36 : 1) -- (36 : 2) (108 : 1) -- (108 : 2) (180 : 1) -- (180 : 2) (252 : 1) -- (252 : 2) (324 : 1) -- (324 : 2);
+          \draw (36 : 1) -- (108 : 1) -- (180 : 1) -- (252 : 1) -- (324 : 1) -- cycle;
+        \end{scope}
+        \\
+      };
+    \end{tikzfigure}
+  \end{proof}
+\end{lemma}
+
+Another thing to note, is that by combining substitution of \autoref{thm:eberhard} with \autoref{thm:eberhard:extended} some of the previously shown theorems generalize to arbitrary closed orientable 2-manifolds. For these one has to deduce an equation similarly to  \autoref{eq:valence:3} from Eulers relation for cell complex decompositions on a closed connected orientable 2-manifold. Let $v$, $e$ and $f$ be the number of vertices ($0$-cells), edges ($1$-cells) and faces ($2$-cells) of the decomposition. Then the Euler relation gives $v + f - e = 2(1-g)$ for a manifold of genus $g$. As seen previously in a similar way this can be transformed to
+\begin{align}
+  \sum_{k=3}^n \left(6 - k \right) p_k = 12(1-g) \label{eq:valence:3:manifold}
+\end{align}
+for valence $3$ and 
+\begin{align}
+  \sum_{k=3}^n \left(4 - k \right) p_k = 8(1-g)  \label{eq:valence:4:manifold}
+\end{align}
+for valence $4$. With these considerations one can now state:
+\begin{theorem}
+  Let $p = (p_3, p_4, p_5, \dots, p_n)$ be a given sequence satisfying \autoref{eq:valence:3:manifold}. Then the following holds:
+  \begin{itemize}
+    \item There exists $r \in \nats$ for which $p + r [5, 7]_3$ is $3$-realizable.
+    \item There exists $r \in \nats$ for which $p + r [2 \times 5, 8]_3$ is $3$-realizable.
+  \end{itemize}
+  \begin{proof}
+    Let $P$ be the realization of $p$ via \autoref{thm:eberhard:extended}. In the first case use \autoref{thm:construction:5:7} on $P$, in the second case use \autoref{thm:construction:5:8}
+  \end{proof}
+\end{theorem}
