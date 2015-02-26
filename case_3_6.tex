@@ -1,6 +1,6 @@
 \section{The case $[2 \times 3, 6]_4$}
 \begin{lemma}
-  Let $p = (p_3, p_4, p_5, \dots, p_n)$ be a given sequence satisfying \autoref{eq:valence:4} as well as $p_4 \leq 3$, $p_5 \leq 3$ and $3 \mid \sum_{k=3}^{n} p_k - 2$. Then $p$ is $[2 \times 3, 6]_4$-realizable.
+  Let $p = (p_3, p_4, p_5, \dots, p_n)$ be a given sequence satisfying \autoref{eq:valence:4} as well as $p_4 \leq 3$, $p_5 \leq 3$ and $3 \mid \sum_{k=3}^{n} p_k - 2$. Then $p$ is $[2 \times 3, 6]$-$4$-realizable.
 
   All the requirements in the statement will help utilizing Eberhards \autoref{thm:eberhard:3}. The conditions $p_4 \leq 3$, $p_5 \leq 3$ deal with different sign of curvatures when having valence $3$ and $4$ (note that quadrangles and pentagons have positive curvature in the case of $3$-valence but zero or negative curvature in the other case), while the condition $3 \mid \sum_{k=3}^{n} p_k - 2$ is necessary to keep the number of triangles natural. 
   \begin{proof}
@@ -65,9 +65,9 @@
 \end{lemma}
 
 \begin{lemma}
-  Let $p = (p_3, p_4, p_5, \dots, p_n)$ and $q = (q_3, q_4, q_5, \dots, q_m)$ be two sequence which can be $[2 \times 3, 6]_4$-realized, then the sequence $p + q + [(2r - 8) \times 3, r \times 6]_4 $ is $4$-realizable, for some $r \in \nats$. 
+  Let $p = (p_3, p_4, p_5, \dots, p_n)$ and $q = (q_3, q_4, q_5, \dots, q_m)$ be two sequence which can be $[2 \times 3, 6]$-$4$-realized, then the sequence $p + q - [8 \times 3]_4$ is $[2\times3, 6]$-$4$-realizable. 
   \begin{proof}
-    Let $P$ and $Q$ by the $4$-realizations of $p$ and $q$. Consider on each side of any polygon in $P$ the ($3 \times 4$) rectangle of \autoref{fig:case3:6:img2} added. This process in the case of an square is seen in \autoref{fig:case3:6:img3}. The outer arc of this construction is the ($\piece{2}$--$\piece{2}$--$\piece{2}$--$\piece{2}$--$\piece{2}$--$\piece{2}$)-expansion of the original face, by \autoref{thm:construction:arcs} this replacement results in $4$-valent polyhedra $P'$. $P'$ has the same number of faces for each type except triangles and hexagons.
+    Let $P$ and $Q$ be the $[2 \times 3, 6]$-$4$-realizations of $p$ and $q$. Consider on each side of any polygon in $P$ the ($3 \times 4$) rectangle of \autoref{fig:case3:6:img2} added. This process in the case of an square is seen in \autoref{fig:case3:6:img3}. The outer arc of this construction is the ($\piece{2}$--$\piece{2}$--$\piece{2}$--$\piece{2}$--$\piece{2}$--$\piece{2}$)-expansion of the original face, by \autoref{thm:construction:arcs} this replacement results in $4$-valent polyhedra $P'$. $P'$ has the same number of faces for each type except triangles and hexagons.
     
     \begin{tikzfigure}{\label{fig:case3:6:img2}}
       \begin{scope}[scale=0.5]
@@ -112,13 +112,13 @@
   There exists no 4-valent connected planar graph without monogons or digons where each but one face is a $k$-gon for some $k \in \nats$, $3 | k$. The single face with a number of edges not divisible by $3$ is called the exceptional face.
 \end{lemma}
 \begin{remark}
-  When counting planar graphs some oddities can occur. A graph could for example have a face which visits a single vertex multiple times or two sides which in the end denote the same edge. One of these graphs can be seen in \autoref{fig:case3:6:example}.
+  When considering connected planar graphs some oddities can occur. A graph could for example have a face which visits a single vertex multiple times or two sides which in the end denote the same edge. One of these graphs can be seen in \autoref{fig:case3:6:example}.
   \begin{tikzfigure}{\label{fig:case3:6:example}}
     \draw (-1, 0) -- (-1, -1) -- (-1, 1) -- (1, 1) -- (1, -1) -- (-1, -1) -- (-1, 0) -- (0, 0) -- (0.5, -0.5) -- (0.5, 0.5) -- (0, 0);
   \end{tikzfigure}
-  For the following considerations, one will count each of these occurrences separately, thus the example consists of a triangle, a decagon and a pentagon (as the outer face).
-  
+  For the following considerations, one will count each of these occurrences separately, thus the example consists of a triangle, a decagon and a pentagon (as the outer face). It has eight vertices and nine edges.  
 \end{remark}
+
 \begin{proof} The proof is made by contradiction. Let $G$ be a graph with the mentioned properties. The proof shows that if $G$ has the mentioned properties, then, after some transformations which let these properties invariant, a graph which does not meet the requirements can be held. The first thing to notice is that one can assume the number of edges of the exceptional face to be four or five. In fact, by changing two edges it is possible to ``cut out'' a square or a pentagon from larger exceptional faces.
   In \autoref{fig:case3:6:img4} let $B$ be the exceptional face with $b$ edges. Under the transformation $B$ is reduced to a square or a pentagon, depending on whether $b \equiv 1 (\operatorname{mod} 3)$ or $b \equiv 2 (\operatorname{mod} 3)$. In the first case $E$ has $b - 4$ edges, in the second $b-5$. In either case $E$ is not an exceptional face, its number of edges is divisible by $3$. If $A$ and $C$ are different faces the resulting graph is connected. As $A$ and $C$ have a number of edges which is divisible by $3$, so has the new face $D$. It remains the case that $A$ is the same face as $C$. Then the free space labeled with $D$ is separated by two cycles of length $d$ (denoting the length of ``left'' cycle) and $d'$ (denoting the length of ``right'' cycle). If $d$ is divisible by $3$ then the left component has exactly one exceptional face and has fewer edges then the original one. If $d$ is not divisible by $3$, then neither is $d'$, as their sum matches the sum of the number of edges of $A$ and $C$, thus the right component has exactly one exceptional face (the cycle labeled with $d'$) and fewer faces then $G$.
   \begin{tikzfigure}{\label{fig:case3:6:img4}}
@@ -243,7 +243,7 @@
   The previous proof is similar to \cite{ConvexPolytopes}, where a proof for $3$-valent graphs is given. As is the case there, digons can be allowed during the argument. They do not simplify the proof here, so they were omitted.
 \end{remark}
 \begin{corollary}
-  There is no $[2 \times 3, 6]_4$-realization of the sequence $[1 \times k]_4$ for $3 \nmid k$.
+  There is no $[2 \times 3, 6]$-$4$-realization of the sequence $[1 \times k]_4$ for $3 \nmid k$.
   \begin{proof}
     By \autoref{thm:steinitz} the existence of such a polyhedron is equivalent to the existence of a $3$-connected planar graph with as many faces of each type. \autoref{thm:case3:6:nonexistence} proves the non-existence of such graph which are only connected, thus no such $3$-connected planar graph and polyhedron exists.
   \end{proof}

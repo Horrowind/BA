@@ -179,10 +179,10 @@ Each $k$-gon of the sequence $(k > 5)$ can be grouped together with $k-4$ triang
     \end{scope}
   \end{tikzfigure}
 
-  As is with the basic building blocks, the north and east and respective west and south sides share the same number of edges.
+  As is with the basic building blocks, the north and east and as well as the west and south sides share the same number of edges.
 \end{definition}
 
-\begin{theorem} Let $p = (p_3, p_4, p_5, \dots, p_n)$ be a given sequence satisfying \autoref{eq:valence:4}. Then $p$ is $[3, 5]_4$-realizable.
+\begin{theorem}\label{thm:case3:5} Let $p = (p_3, p_4, p_5, \dots, p_n)$ be a given sequence satisfying \autoref{eq:valence:4}. Then $p$ is $[3, 5]$-$4$-realizable.
   \begin{proof}
     For each $k$-gon, $k > 3$ take the basic building block for this $k$-gon and form a basis out of these. Let $p'_k$ be the number of $k$-gons for each $3 \geq k$. The basis consists by construction only of the required $k$-gons, triangles and pentagons, so $p_k = p'_k$ for $k \neq 3, 5$. The basis can be closed in two steps. First add a ring of $2 \times 2$ basic blocks around the base and the pieces of \label{fig:case3:5:closedbasis1} in each corner (here four of the additional triangles are used, one in each corner). The construction is possible, since every side of the base has length divisible by two. The resulting figure has an outer face with twelve additional edges compared to the basis, albeit the number of edges is divisible by four. Also note that each vertex on the outer face is adjacent to two faces.
     \begin{tikzfigure}{\label{fig:case3:5:closedbasis1}}

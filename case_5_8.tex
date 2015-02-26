@@ -2,7 +2,7 @@
 \begin{construction}\label{thm:construction:5:8}
   Given a $3$-valent polyhedron $P$ with $p$-vector $(p_3, p_4, p_5, p_6, p_7, p_8, \dots, p_m)$ and $p'_6 \leq p_6$, there exists another $3$-valent polyhedron $P'$ with $p$-vector $(p_3, p_4, p'_5, p'_6, p_7, p'_8, \dots, p_m)$, where $2(p'_5 - p_5) = p'_8 - p_8$.
   \begin{proof}
-    As seen in \autoref{fig:case:5:8:img1}, one can create a (\piece{2}--\piece{1}--\piece{2}--\piece{1})-expansion of each polygon of the given realization $P$ (when labeling the vertices clockwise around each face). The construction forms around these $n$-gons a ring of pentagons, around which another ring of octagons is added. The resulting figure has $n$ vertices of valence $3$ on the outer arc, these will be the positions for final set of $n$ pentagons resulting in the shape given in \autoref{fig:case:5:8:img1}. It has the required outer arc since \piece{2}--\piece{1}--\piece{2}--\piece{1} is self-fitting, and therefore by \autoref{thm:construction:arcs} it gives rise to an polyhedron $\tilde{P}$.
+    As seen in \autoref{fig:case:5:8:img1}, one can create a (\piece{2}--\piece{1}--\piece{2}--\piece{1})-expansion of each polygon of the given realization $P$ (when labeling the vertices clockwise around each face). The construction forms around these $n$-gons a ring of pentagons, around which another ring of octagons is added. The resulting figure has $n$ vertices of valence $3$ on the outer arc, these will be the positions for final set of $n$ pentagons resulting in the shape given in \autoref{fig:case:5:8:img1}. It has the required outer arc and since \piece{2}--\piece{1}--\piece{2}--\piece{1} is self-fitting, the construction gives rise to a polyhedron $\tilde{P}$, by \autoref{thm:construction:arcs}.
     \begin{tikzfigure}{\label{fig:case:5:8:img1}}
       \matrix (m) [ column sep=1cm] {
         \begin{scope}
@@ -34,7 +34,7 @@
       };
     \end{tikzfigure}
 
-    In view of the hexagons one can now replace the figure held in the first construction step with the ones seen in \autoref{fig:case:5:8:img2}. Note that the left side of the figure is the result of the above construction in the case of an hexagon and the right side has the same outer arc, but consists only of pentagons and octagons. So one can substitute arbitrarily many hexagons by an amount of octagons and heptagons, creating hereby $P'$. $2(p'_5 - p_5) = p'_8 - p_8$ holds, since \autoref{eq:valence:3} holds for $P$ as well as for $P'$.
+    In view of the hexagons one can now replace the figure held in the first construction step with the ones seen in \autoref{fig:case:5:8:img2}. Note that the left side of the figure is the result of the above construction in the case of a hexagon and the right side has the same outer arc, but consists only of pentagons and octagons. So one can substitute arbitrarily many hexagons by an amount of octagons and heptagons, creating hereby $P'$. $2(p'_5 - p_5) = p'_8 - p_8$ holds, since \autoref{eq:valence:3} holds for $P$ as well as for $P'$.
     
     \begin{tikzfigure}{\label{fig:case:5:8:img2}}
       \matrix (m) [ column sep=1cm] {
@@ -211,7 +211,7 @@
 \end{construction}
 
 \begin{corollary}
-  Let $p = (p_3, p_4, p_5, \dots, p_n)$ be a given sequence satisfying \autoref{eq:valence:3}, then $p$ is $[2 \times 5, 8]_3$-realizable.
+  Let $p = (p_3, p_4, p_5, \dots, p_n)$ be a given sequence satisfying \autoref{eq:valence:3}, then $p$ is $[2 \times 5, 8]$-$3$-realizable.
   \begin{proof}
     The proof starts by using the construction given by Eberhards \autoref{thm:eberhard:3}. This results in a realization of $p$ which has many more hexagons then needed. The next step is to remove these hexagons and replace them by pentagons and heptagons. This is done by \autoref{thm:construction:5:8}. The resulting polyhedron has the required amount of polygons of each shape.
   \end{proof}

@@ -1,11 +1,11 @@
 \section{General Remarks}
 
-As seen in \autoref{thm:case3:6:nonexistence}, there seems to exist an inherent problem when $(q_3, \dots, q_n)_4$-realizing a single face if $3 | k$ for all $q_k \neq 0$. Similarities exists when dealing with valences $3$ and $4$, as the following theorem proves:
+As seen in \autoref{thm:case3:6:nonexistence}, there seems to exist an inherent problem when $(q_3, \dots, q_n)$-$4$-realizing a single face if $3 | k$ for all $q_k \neq 0$. Similarities exists when dealing with valences $3$ and $4$, as the following theorem proves:
 
 \begin{theorem}
   There exists no general Eberhard theorem of type $(q_3, \dots, q_n)_r$ if $\gcd (k : q_k \neq 0) > 1$ and $|\set{k : q_k \neq 0}|>1$.
   \begin{proof}
-    From the \autoref{eq:valence:3} follows, that if $r=3$ and $|\set{k : q_k \neq 0}|>1$ faces of positive and negative curvature must occur, thus $q_3 \neq 0$, $q_4 \neq 0$ or $q_5 \neq 0$ and $\gcd (k : q_k \neq 0) \in \set{2, 3, 4, 5}$. Similarly for $r=4$ or $r=5$ and from \autoref{eq:valence:4} or \autoref{eq:valence:5} one has $q_3 \neq 0$ and $\gcd (k : q_k \neq 0) = 3$. The nonexistence of the respective theorem then follows by the nonexistence of an $r$-valent graph where each but one face is of the size of a multiple of the respective $\gcd$. For $r = 3$ these proofs are established in \cite{ConvexPolytopes} (Theorem 13.4.2) and for $r=4$ this is simply \autoref{thm:case3:6:nonexistence}. The remaining case is $r=5$ and $\gcd (k : q_k \neq 0) = 3$, which will be proven in the following \autoref{thm:valence5:nonexistence}. As none of these graphs exists, there is no realization of a sequence consisting of a single face of size coprime to the $\gcd$, contradicting the potential general Eberhard theorem.
+    From the \autoref{eq:valence:3} follows, that if $r=3$ and $|\set{k : q_k \neq 0}|>1$ faces of positive and negative curvature must occur, thus $q_3 \neq 0$, $q_4 \neq 0$ or $q_5 \neq 0$ and $\gcd (k : q_k \neq 0) \in \set{2, 3, 4, 5}$. Similarly for $r=4$ or $r=5$ and from \autoref{eq:valence:4} or \autoref{eq:valence:5} one has $q_3 \neq 0$ and $\gcd (k : q_k \neq 0) = 3$. The nonexistence of such a theorem then follows by the nonexistence of a $r$-valent graph where each but one face is of the size of a multiple of the respective $\gcd$. For $r = 3$ these proofs are established in \cite{ConvexPolytopes} (Theorem 13.4.2) and for $r=4$ this is simply \autoref{thm:case3:6:nonexistence}. The remaining case is $r=5$ and $\gcd (k : q_k \neq 0) = 3$, which will be proven in the following \autoref{thm:valence5:nonexistence}. As none of these graphs exists, there is no realization of a sequence consisting of a single face of size coprime to the $\gcd$, contradicting the potential general Eberhard theorem.
   \end{proof}
 \end{theorem}
 
@@ -78,7 +78,7 @@ As seen in \autoref{thm:case3:6:nonexistence}, there seems to exist an inherent 
         \\
       };
     \end{tikzfigure}
-  
+    
     \begin{tikzfigure}{\label{fig:valence5:img5}}
       \matrix (m) [ column sep=1cm] {
         \begin{scope}
@@ -111,7 +111,7 @@ As seen in \autoref{thm:case3:6:nonexistence}, there seems to exist an inherent 
         \\
       };
     \end{tikzfigure}
-    The step of ``cutting out'' triangles will be used for the up to twelve or fifteens faces which share at least one vertex with the exceptional face (twelve if it is a square, fifteen if it is a pentagon). After these assume the exceptional face to be surrounded by triangles, else one could try the above step to ``cut out'' a triangle, resulting in fewer edges or in a triangle at the desired position. By iterating this step on the faces adjacent to these twelve or fifteen faces one has a graph which is the same as the skeleton of an ``generalized icosahedron'' (these are built by an similar constructions as the regular one, but with a $k$-gon as top and base face, see \autoref{fig:valence5:img6} for the resulting graphs with a quadrangle base and a pentagonal base), which has one additional exceptional face. The steps taken did not introduce new exceptional faces, a contradiction.
+    The step of ``cutting out'' triangles will be used for the up to twelve or fifteens faces which share at least one vertex with the exceptional face (twelve if it is a square, fifteen if it is a pentagon). After these assume the exceptional face to be surrounded by triangles, else one could try the above step to ``cut out'' a triangle, resulting in fewer edges or in a triangle at the desired position. By iterating this step on the faces adjacent to these twelve or fifteen faces one has a graph which is the same as the skeleton of a ``generalized icosahedron'' (these are built by a similar constructions as the regular one, but with a $k$-gon as top and base face, see \autoref{fig:valence5:img6} for the resulting graphs with a quadrangle base and a pentagonal base), which has one additional exceptional face. The steps taken did not introduce new exceptional faces, a contradiction.
     \begin{tikzfigure}{\label{fig:valence5:img6}}
       \matrix (m) [ column sep=1cm] {
         \begin{scope}[scale=0.5]
@@ -152,12 +152,62 @@ for valence $3$ and
 \end{align}
 for valence $4$. With these considerations one can now state:
 \begin{theorem}
-  Let $p = (p_3, p_4, p_5, \dots, p_n)$ be a given sequence satisfying \autoref{eq:valence:3:manifold}. Then the following holds:
+  Let $g \in \nats$ and $p = (p_3, p_4, p_5, \dots, p_n)$ be a given sequence satisfying \autoref{eq:valence:3:manifold}. Then the following holds:
   \begin{itemize}
-    \item There exists $r \in \nats$ for which $p + r [5, 7]_3$ $3$-realizes the closed compact 2-manifold of genus $g$.
-    \item There exists $r \in \nats$ for which $p + r [2 \times 5, 8]_3$ $3$-realizes the closed compact 2-manifold of genus $g$.
+  \item There exists $r \in \nats$ for which $p + r [5, 7]_3$ $3$-realizes the orientable closed compact 2-manifold of genus $g$.
+  \item There exists $r \in \nats$ for which $p + r [2 \times 5, 8]_3$ $3$-realizes the orientable closed compact 2-manifold of genus $g$.
   \end{itemize}
   \begin{proof}
     Let $P$ be the realization of $p$ via \autoref{thm:eberhard:extended}. In the first case use \autoref{thm:construction:5:7} on $P$, in the second case use \autoref{thm:construction:5:8}
+  \end{proof}
+\end{theorem}
+
+By using the direct construction given in \autoref{thm:case3:5} the proof can be extended for closed $2$-manifolds:
+
+\begin{theorem}
+  Let $g \in \nats$ and $p = (p_3, p_4, p_5, \dots, p_n)$ be a given sequence satisfying \autoref{eq:valence:3:manifold}. Then there exists $r \in \nats$ for which $p + r [3, 5]_4$ $4$-realizes the closed compact 2-manifold of genus $g$.
+
+  \begin{proof}
+    The proof uses additional two building blocks in the assembly of the basis in \autoref{thm:case3:5}.
+    \begin{tikzfigure}{\label{fig:case3:5:extended}}
+        \matrix (m) [ column sep=1cm] {
+          \begin{scope}[scale=0.3, label distance=-1mm, node distance=-1.5mm]
+            \draw (-5, -5) -- (5, -5) -- (5, 5) -- (-5, 5) -- cycle;
+            \draw (-4, -3) -- (-3, -4) -- (3, -4) -- (4, -3) -- (4, 3) -- (3, 4) -- (-3, 4) -- (-4, 3) -- cycle;
+            \draw (-5, -3) -- (-4, -3); \draw (-5, 0) -- (-4, 0); \draw (-5, 3) -- (-4, 3);
+            \draw (5, -3) -- (4, -3); \draw (5, 0) -- (4, 0); \draw (5, 3) -- (4, 3);
+            \draw (-3, -5) -- (-3, -4); \draw (0, -5) -- (0, -4); \draw (3, -5) -- (3, -4);
+            \draw (-3, 5) -- (-3, 4); \draw (0, 5) -- (0, 4); \draw (3, 5) -- (3, 4);
+            \draw (-5, -2) -- (-4, -1) (-5, -1) -- (-4, -2);
+            \draw (5, -2) -- (4, -1) (5, -1) -- (4, -2);
+            \draw (-5, 2) -- (-4, 1) (-5, 1) -- (-4, 2);
+            \draw (5, 2) -- (4, 1) (5, 1) -- (4, 2);
+            \draw (-2, -5) -- (-1, -4) (-1, -5) -- (-2, -4);
+            \draw (2, -5) -- (1, -4) (1, -5) -- (2, -4);
+            \draw (-2, 5) -- (-1, 4) (-1, 5) -- (-2, 4);
+            \draw (2, 5) -- (1, 4) (1, 5) -- (2, 4);
+            \node at (-3, -4) (w1) {}; \node [anchor=mid, above=of w1] {\tiny a};
+            \node at (-4, -3) (w2) {}; \node [anchor=mid, right=of w2] {\tiny b};
+            \node at (-4, -2) (w3) {}; \node [anchor=mid, right=of w3] {\tiny c};
+            \node at (-4, -1) (w4) {}; \node [anchor=mid, right=of w4] {\tiny d};
+            \node at (-4, 0) (w5) {}; \node [anchor=mid, right=of w5] {\tiny e};
+            \node at (-4, 1) (w6) {}; \node [anchor=mid, right=of w6] {\tiny f};
+            \node at (-4, 2) (w7) {}; \node [anchor=mid, right=of w7] {\tiny g};
+            \node at (-4, 3) (w8) [anchor=mid] {}; \node [right=of w8] {\tiny h};
+            \node at (-3, 4) (w9) [anchor=mid] {}; \node [below=of w9] {\tiny i};
+            \node at (-2, 4) (w10) [anchor=mid] {}; \node [below=of w10] {\tiny j};
+            \node at (-1, 4) (w11) [anchor=mid] {}; \node [below=of w11] {\tiny k};
+            \node at (0, 4) (w12) [anchor=mid] {}; \node [below=of w12] {\tiny l};
+            \node at (1, 4) (w13) [anchor=mid] {}; \node [below=of w13] {\tiny m};
+            \node at (2, 4) (w14) [anchor=mid] {}; \node [below=of w14] {\tiny n};
+            \node at (3, 4) (w15) {}; \node [anchor=mid, below=of w15] {\tiny a};
+          \end{scope}
+          &
+          \begin{scope}[scale=0.3]
+            \draw (-5, -5) -- (5, -5) -- (5, 5) -- (-5, 5) -- cycle;
+          \end{scope}
+          \\
+        };
+    \end{tikzfigure}
   \end{proof}
 \end{theorem}
