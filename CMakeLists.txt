@@ -6,9 +6,13 @@ project(BA NONE)
 
 #latex_get_output_path(output_dir)
 
+#set(LATEX_USE_SYNCTEX)
+set(LATEX_USE_SYNCTEX ON)
+
 set(sources
   head.tex
   title.tex
+  tableofcontents.tex
   preliminaries.tex
   arcs.tex
   case_3_5.tex
@@ -16,13 +20,13 @@ set(sources
   case_3_4.tex
   case_5_7.tex
   case_5_8.tex
+  negative_results.tex
   general_remarks.tex
   appendix.tex
   declaration.tex
 )
 
 
-set(LATEX_USE_SYNCTEX ON)
 add_latex_document(ba_main.tex
   INPUTS ${sources}
   IMAGES TU.png

@@ -1,5 +1,5 @@
-\section{The case $[2 \times 3, 4]_5$}
-For some stronger result in the field of $5$-valent polyhedra see \cite{trenkler1975face}. Here established are only some low-hanging fruits based on the mechanism as seen before. The proof utilizes Eberhards \autoref{thm:eberhard:4} for construction of the new solid.
+\section{The $5$-valent case $[2 \times 3, 4]$}
+For some stronger result in the field of $5$-valent polyhedra see \cite{trenkler1975face}. Here established are only some low-hanging fruits based on the mechanism seen before. The proof utilizes Eberhards \autoref{thm:eberhard:4} for construction of the new solid.
 \begin{theorem}
   Let $p = (p_3, p_4, p_5, \dots, p_n)$ be a given sequence satisfying \autoref{eq:valence:5}, then $p$ is $[2\times3, 4]$-$5$-realizable.
   \begin{proof}
@@ -9,14 +9,14 @@ For some stronger result in the field of $5$-valent polyhedra see \cite{trenkler
       \implies & \frac{p_3}{3} = \frac{20}{3} + \sum_{k=4}^n \left(k - \frac{10}{3} \right) p_k \geq \frac{20}{3} + \frac{2}{3} \sum_{k=4}^n p_k \\
       \implies & p_3 \geq \frac{20}{3} + \frac{2}{3} \sum_{k=3}^n p_k \geq - \frac{4}{3} + \frac{2}{3} \sum_{k=3}^n p_k
     \end{align*}
-    Therefore one can assume, that $p'_3 := p_3 + \frac{4}{3} - \frac{2}{3} \sum_{k=3}^n p_k \geq 0$ and for $p'_k = p_k$, $(k\geq 4)$ the resulting sequence fulfills:
+    Therefore one can assume, that $p'_3 := p_3 + \frac{4}{3} - \frac{2}{3} \sum_{k=3}^n p_k \geq 0$ and for $p'_k = p_k$, $(k\geq 4)$ the resulting sequence satisfies:
     \begin{align*}
       \sum_{k=3}^n (4 - k) p'_k =&~ p_3 + \frac{4}{3} - \frac{2}{3} \sum_{k=3}^n p_k + \sum_{k=4}^n (4 - k) p_k \\
       = \frac{4}{3} + \frac{1}{3} p_3 + \sum_{k=4}^n \left(k - \frac{10}{3} \right) p_k =&~ \frac{4}{3} + \sum_{k=3}^n \left(k - \frac{10}{3} \right) p_k = \frac{4}{3} + \frac{20}{3} = 8.
     \end{align*}
-    Hence the sequence $p'$ is $4$-realizable by Eberhards Theorem \autoref{thm:eberhard:4}. Let $P'$ be this realization with $e'$ edges and $v'$ vertices. One can now use $P'$ to create a realization with valence $5$ by inserting further triangles and quadrangles. This is done by replacing each edge of the realization by two triangles and each vertex by one square as shown in \autoref{fig:case34:img1}. For this, fix an orientation on $P'$ and replace each edge by two triangles so that around each vertex the same mill-shaped figure (shaded in dark gray in \autoref{fig:case34:img1}) assembles. By fixing the orientation it is prevented that mirrored images of the mill-shape appear, thus the construction is defined.
+    Hence the sequence $p'$ is $[4]$-$4$-realizable by Eberhards Theorem \autoref{thm:eberhard:4}. Let $P'$ be this realization with $e'$ edges and $v'$ vertices. One can now use $P'$ to create a realization with valence $5$ by inserting further triangles and quadrangles. This is done by replacing each edge of the realization by two triangles and each vertex by one square as shown in \autoref{fig:case34:img1}. For this fix an orientation on $P'$ and replace each edge by two triangles so that around each vertex the same mill-shaped figure (shaded in dark gray in \autoref{fig:case34:img1}) emerge. By fixing the orientation it is prevented that mirrored images of the mill-shape appear, thus the construction is defined.
 
-    \begin{tikzfigure}{\label{fig:case34:img1}}
+    \begin{tikzfigure}{\label{fig:case34:img1}}{Building a $4$-valent polyhedron out of a $3$-valent one by adding triangles and quadrangles}
       \matrix (m) [ column sep=1cm] {
         \begin{scope}[scale=0.5]
 
@@ -91,7 +91,7 @@ For some stronger result in the field of $5$-valent polyhedra see \cite{trenkler
       & \sum_{k=3}^n \left( \frac{10}{3} - k \right) p_k'' - \sum_{k=3}^n \left( \frac{10}{3} - k \right) p_k = 0 \\
       \implies& \frac{1}{3} (p''_3 - p_3) = \frac{2}{3} (p''_4 - p_4),
     \end{align*}
-    hence $p + r [2 \times 3, 4]_5 = p''$ is $5$-realizable for some $r \in \nats$.
+    hence $p + r [2 \times 3, 4] = p''$ is $5$-realizable for some $r \in \nats$.
   \end{proof}
 \end{theorem}
 

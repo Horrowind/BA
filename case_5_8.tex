@@ -1,9 +1,9 @@
-\section{The case $[5, 8]_3$}
+\section{The $3$-valent case $[5, 8]$}
 \begin{construction}\label{thm:construction:5:8}
   Given a $3$-valent polyhedron $P$ with $p$-vector $(p_3, p_4, p_5, p_6, p_7, p_8, \dots, p_m)$ and $p'_6 \leq p_6$, there exists another $3$-valent polyhedron $P'$ with $p$-vector $(p_3, p_4, p'_5, p'_6, p_7, p'_8, \dots, p_m)$, where $2(p'_5 - p_5) = p'_8 - p_8$.
   \begin{proof}
-    As seen in \autoref{fig:case:5:8:img1}, one can create a (\piece{2}--\piece{1}--\piece{2}--\piece{1})-expansion of each polygon of the given realization $P$ (when labeling the vertices clockwise around each face). The construction forms around these $n$-gons a ring of pentagons, around which another ring of octagons is added. The resulting figure has $n$ vertices of valence $3$ on the outer arc, these will be the positions for final set of $n$ pentagons resulting in the shape given in \autoref{fig:case:5:8:img1}. It has the required outer arc and since \piece{2}--\piece{1}--\piece{2}--\piece{1} is self-fitting, the construction gives rise to a polyhedron $\tilde{P}$, by \autoref{thm:construction:arcs}.
-    \begin{tikzfigure}{\label{fig:case:5:8:img1}}
+    As seen in \autoref{fig:case:5:8:img1}, one can create a $(2, 1, 2, 1)$-expansion of each polygon of the given realization $P$ (when labeling the vertices clockwise around each face). The construction forms around these $n$-gons a ring of pentagons, around which another ring of octagons is added. The resulting figure has $n$ vertices of valence $3$ on the face, these will be the positions for final set of $n$ pentagons resulting in the shape given in \autoref{fig:case:5:8:img1}. It has the required boundary structure and since $(2, 1, 2, 1)$ is self-fitting, the construction gives rise to a polyhedron $\tilde{P}$ by \autoref{thm:construction:patch}.
+    \begin{tikzfigure}{\label{fig:case:5:8:img1}}{A patch realizing the $(2, 1, 2, 1)$-expansion of a square}
       \matrix (m) [ column sep=1cm] {
         \begin{scope}
           \fill[fill=gray!50!white] (-1, -1) -- (1, -1) -- (1, 1) -- (-1, 1);
@@ -34,9 +34,9 @@
       };
     \end{tikzfigure}
 
-    In view of the hexagons one can now replace the figure held in the first construction step with the ones seen in \autoref{fig:case:5:8:img2}. Note that the left side of the figure is the result of the above construction in the case of a hexagon and the right side has the same outer arc, but consists only of pentagons and octagons. So one can substitute arbitrarily many hexagons by an amount of octagons and heptagons, creating hereby $P'$. $2(p'_5 - p_5) = p'_8 - p_8$ holds, since \autoref{eq:valence:3} holds for $P$ as well as for $P'$.
+    In view of the hexagons one can now replace the figure held in the first construction step with the ones seen in \autoref{fig:case:5:8:img2}. Note that the left side of the figure is the result of the above construction in the case of a hexagon and the right side has the same boundary structure, but consists only of pentagons and octagons. So one can substitute arbitrarily many hexagons by an amount of octagons and heptagons, creating hereby $P'$. $2(p'_5 - p_5) = p'_8 - p_8$ holds, since \autoref{eq:valence:3} holds for $P$ as well as for $P'$.
     
-    \begin{tikzfigure}{\label{fig:case:5:8:img2}}
+    \begin{tikzfigure}{\label{fig:case:5:8:img2}}{The replacement figure in the case of a hexagon}
       \matrix (m) [ column sep=1cm] {
 
         \begin{scope}[rotate=-30, yscale=0.866, scale=0.25] 

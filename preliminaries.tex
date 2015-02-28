@@ -11,7 +11,7 @@
 \end{definition}
 
 \begin{definition}\label{def:realizable}
-Sequences $a = (a_3, \dots, a_m)$, $b = (b_3, \dots, b_m)$ are said to be realizable, if there exists a polyhedron which has $a$ is its $p$-vector and $b$ as its $v$-vector.
+  Sequences $a = (a_3, \dots, a_m)$, $b = (b_3, \dots, b_m)$ are said to be realizable, if there exists a polyhedron which has $a$ is its $p$-vector and $b$ as its $v$-vector.
 \end{definition}
 
 With this setup, we want to discuss in this thesis a broad problem arising from the combinatorical properties of polyhedra:
@@ -47,30 +47,27 @@ Under these circumstances $r$ has to be in $\{3, 4, 5\}$, thus the following equ
   r &= 4: \sum_{k=3}^n \left(4 - k \right) p_k = 8  \label{eq:valence:4}\\
   r &= 5: \sum_{k=3}^n \left( \frac{10}{3} - k \right) p_k = \frac{20}{3} \label{eq:valence:5}
 \end{align}
-\begin{notation}
-  If a $p$-vector $(p_3, \dots, p_k)$ is meant to be seen in this context, that each vertex of the considered polyhedron has valence $r$, this valence will be appended to the sequence, i.e. $(p_3, \dots, p_k)_r$.
-\end{notation}
 Even in with this rather specific constraints the problem stated above has no easy definite answer, as in, not every $p$-vector satisfying on of these equations can be realized as a polyhedron.
 \begin{example}
-  The $p$-vector $(0, 12, 1)_3$ has no realization but satisfies \autoref{eq:valence:3}. To see this one can start with one hexagon. As only pentagons are left to build the rest of the polyhedron a ring of six pentagons has to be glued to the sides of the hexagon. Another ring of six pentagons is forced to be glued to the first, leaving a hole of the shape of a hexagon in the end, but no polygons left to fill it, see \autoref{fig:preliminaries:example}.
+  The $p$-vector $(0, 12, 1)$ has no $3$-realization but satisfies \autoref{eq:valence:3}. To see this one can start with one hexagon. As only pentagons are left to build the rest of the polyhedron a ring of six pentagons has to be glued to the sides of the hexagon. Another ring of six pentagons is forced to be glued to the first, leaving a hole of the shape of a hexagon in the end, but no polygons left to fill it, see \autoref{fig:preliminaries:example}.
 
-  \begin{tikzfigure}{\label{fig:preliminaries:example}}
-\begin{scope}[xscale=1.0, yscale=0.866]
-          \draw (-1, 0) -- ++(0.5, -1) -- ++(1, 0) -- ++(0.5, 1) -- ++(-0.5, 1) -- ++(-1, 0) -- ++(-0.5, -1);
-          \draw (-1, 0) -- (-2, 0) -- (-2.25, -1.5) -- (-1, -2) -- (-0.5, -1);
-          \draw (1, 0) -- (2, 0) -- (2.25, -1.5) -- (1, -2) -- (0.5, -1);
-          \draw (-0.5, 1) -- (-1, 2) -- (0, 3) -- (1, 2) -- (0.5, 1);
-          \draw (-1, -2) -- (0, -3) -- (1, -2);
-          \draw (-2, 0) -- (-2.25, 1.5) -- (-1, 2);
-          \draw (2, 0) -- (2.25, 1.5) -- (1, 2);
-          \draw (-3, -2) -- (-3, 2) -- (0, 4) -- (3, 2) -- (3, -2) -- (0, -4) -- (-3, -2);
-          \draw (-3, -2) -- (-2.25, -1.5);
-          \draw (3, -2) -- (2.25, -1.5);
-          \draw (-3, 2) -- (-2.25, 1.5);
-          \draw (3, 2) -- (2.25, 1.5);
-          \draw (0, -4) -- (0, -3);
-          \draw (0, 4) -- (0, 3);
-        \end{scope}   
+  \begin{tikzfigure}{\label{fig:preliminaries:example}}{Example for a non-realizable sequence}
+    \begin{scope}[xscale=1.0, yscale=0.866]
+      \draw (-1, 0) -- ++(0.5, -1) -- ++(1, 0) -- ++(0.5, 1) -- ++(-0.5, 1) -- ++(-1, 0) -- ++(-0.5, -1);
+      \draw (-1, 0) -- (-2, 0) -- (-2.25, -1.5) -- (-1, -2) -- (-0.5, -1);
+      \draw (1, 0) -- (2, 0) -- (2.25, -1.5) -- (1, -2) -- (0.5, -1);
+      \draw (-0.5, 1) -- (-1, 2) -- (0, 3) -- (1, 2) -- (0.5, 1);
+      \draw (-1, -2) -- (0, -3) -- (1, -2);
+      \draw (-2, 0) -- (-2.25, 1.5) -- (-1, 2);
+      \draw (2, 0) -- (2.25, 1.5) -- (1, 2);
+      \draw (-3, -2) -- (-3, 2) -- (0, 4) -- (3, 2) -- (3, -2) -- (0, -4) -- (-3, -2);
+      \draw (-3, -2) -- (-2.25, -1.5);
+      \draw (3, -2) -- (2.25, -1.5);
+      \draw (-3, 2) -- (-2.25, 1.5);
+      \draw (3, 2) -- (2.25, 1.5);
+      \draw (0, -4) -- (0, -3);
+      \draw (0, 4) -- (0, 3);
+    \end{scope}   
     
   \end{tikzfigure}
   
@@ -79,7 +76,7 @@ Even in with this rather specific constraints the problem stated above has no ea
 \begin{definition}[$(q_3, \dots, q_n)$-$r$-realizable]\label{def:eberhard:realizable}
   A sequence $p = (p_3, \dots, p_m)$ is said to be $(q_3, \dots, q_n)$-$r$-realizable, if there exists $c \in \nats$, such that $p + c q$ is $r$-realizable.
 \end{definition}
-\begin{problem}[General Eberhard's problem]
+\begin{problem}[General Eberhard's problem]\label{problem:eberhard}
   Let $r \in \{3, 4, 5\}$ and $(q_3, \dots, q_n)$ be a sequence which satisfies 
   \begin{align}
     r &= 3: \sum_{k=3}^n \left( 6            - k \right) q_k = 0 \label{eq:zero:curv:3}\\
@@ -89,9 +86,9 @@ Even in with this rather specific constraints the problem stated above has no ea
   respectively. Then show that all sequences $(p_3, \dots, p_m)$ satisfying the equations \ref{eq:valence:3}, \ref{eq:valence:4} or \ref{eq:valence:5} are $(q_3, \dots, q_n)$-$r$-realizable.
 \end{problem}
 \begin{notation}
-  Throughout the thesis we want to denote this problem as of $(p_3, \dots, p_n)_r$-type.
+  Throughout the thesis we want to denote this problem as of $(p_3, \dots, p_n)$-type for valence $r$.
 \end{notation}
-\autoref{eq:valence:3} and \autoref{eq:valence:4} suggest that $(6)_3$ or $(4)_4$ might be good candidates for such statements. Indeed, in these cases the important and well-known (non-general) Eberhard theorem in \cite{ConvexPolytopes} gives a complete answer:
+\autoref{eq:valence:3} and \autoref{eq:valence:4} suggest that $(6)$ might be a good candidate for a $3$-valent statement, as well as $(4)$ for $4$-valence. Indeed, in these cases the important and well-known classical Eberhard theorem in \cite{ConvexPolytopes} gives a complete answer:
 \renewcommand{\Itemautorefname}{Theorem \ref{thm:eberhard}}
 \begin{theorem}[Eberhards theorem] \label{thm:eberhard} The following holds:
   \begin{enumerate}[label=(\roman*)]
@@ -100,14 +97,40 @@ Even in with this rather specific constraints the problem stated above has no ea
   \end{enumerate}
 \end{theorem}
 
-A stronger theorem, which generalizes the first case, is given in \cite{jendrol1977generalization}.
+\begin{remark}
+  There is a subtle difference in the statements of the general and the classical Eberhard theorems. The given $p$-vector excludes a minimal number of hexagons or quadrangles which is required to be in the realization, while \autoref{problem:eberhard} takes these into account. In the end, this differentiation is not important as both versions of the theorem hold. Take a realization given by the classical Eberhard theorem with no information about the minimum number of hexagons or quadrangles. To satisfy the requirements of the general problem one has to add arbitrarily hexagons in the case of valence $3$ and quadrangles in the case of valence $4$. This can be done by a repeated substitution of each edge by a hexagon or each vertex by a quadrangle as seen in \autoref{fig:edge:replacement}. In each replacement the number of hexagons or quadrangle increases, resulting in an unbounded number of hexagons or quadrangles.
+  \begin{tikzfigure}{\label{fig:edge:replacement}}{
+      Replacing each edge of a polyhedron by a hexagon or each vertex by a quadrangle.
+      Thin-lined is the original graph (the tetrahedron left, an octahedron on the right), the new graph is drawn thick.
+    }
+    \matrix (m) [ column sep=1cm] {
+      \begin{scope}[xscale=1.0, yscale=0.866]
+        \draw (-1.5, -1) -- (1.5, -1) -- (0, 2) -- (-1.5, -1) -- (0, 0) --(1.5, -1) (0, 0) -- (0, 2);
+        \draw[very thick] (-2.25, -1.5) -- (2.25, -1.5) -- (0, 3) -- (-2.25, -1.5) -- (-1.5, -1) -- (-0.75, -0.75) -- (0.75, -0.75) -- (0, -0.25) -- (-0.75, -0.75);
+        \draw[very thick] (0.75, -0.75) -- (1.5, -1) -- (0.9375, -0.375) -- (0.1875, 1.125) -- (0.1875, 0.125) -- (0.9375, -0.375);
+        \draw[very thick] (0.1875, 1.125) -- (0, 2) -- (-0.1875, 1.125) -- (-0.9375, -0.375) -- (-0.1875, 0.125) -- (-0.1875, 1.125)  (-0.9375, -0.375) -- (-1.5, -1);
+        \draw[very thick] (1.5, -1) -- (2.25, -1.5) (0, 2) -- (0, 3);
+        \draw[very thick] (0, 0) -- (0, -0.25)  (0, 0) -- (0.1875, 0.125) (-0.1875, 0.125) -- (0, 0);
+      \end{scope}
+      &
+      \begin{scope}[xscale=1.0, yscale=0.866] 
+        \draw (-1.5, -1) -- (1.5, -1) -- (0, 2) -- (-1.5, -1) -- (0, -0.5) -- (1.5, -1) -- (0.375, 0.25) -- (0, 2) -- (-0.375, 0.25) -- (0.375, 0.25) -- (0, -0.5) -- (-0.375, 0.25) -- cycle;
+        \draw[very thick] (0, -1) -- (-0.75, -0.75) -- (-0.9375, -0.375) -- (-0.75, 0.5) -- (-0.1875, 1.125) -- (0.1875, 1.125) -- (0.75, 0.5) -- (0.9375, -0.375) -- (0.75, -0.75) -- (0.1875, -0.125) -- (0.9375, -0.375) -- (0.1875, 1.125) -- (0, 0.25) -- (-0.1875, 1.125) -- (-0.9375, -0.375) -- (-0.1875, -0.125) -- (0, 0.25) -- (0.1875, -0.125) -- (-0.1875, -0.125) -- (-0.75, -0.75) -- (0.75, -0.75) -- (0, -1) arc[x radius = 1.5, y radius = 1.732, start angle= -180, end angle= 120] arc[x radius = 1.5, y radius = 1.732, start angle= -60, end angle=240] arc[x radius = 1.5, y radius = 1.732, start angle= 60, end angle = 360];
+      \end{scope};
+      \\
+    };
+
+  \end{tikzfigure}
+\end{remark}
+
+A stronger theorem, which generalizes the first case, is given in \cite{jendrol1977generalization}:
 
 \begin{theorem}[Jendrol', Jucovi{\v{c}} 1977] \label{thm:eberhard:extended}
- Each sequence $p$ together with $v$ is realizable on the closed orientable $2$-manifold of genus $g$ for some $p_6 \in \nats$, $v_3 \in \nats$ if and only if
+  Each sequence $p$ together with $v$ is realizable on the closed orientable $2$-manifold of genus $g$ for some $p_6 \in \nats$, $v_3 \in \nats$ if and only if
   \begin{align*}
     \sum_{k=3}^m (6-k)p_k + 2 \sum_{k=4}^n (3-k)v_k &= 12(1-g) \\
-    \sum_{k=3,\, 2 \nmid k}^{m} p_k \neq 0 \text{ or} \sum_{k=4, \,3 \nmid k}^m v_k \neq 1 \text{ if } g &= 0 \\
-    p \neq [5, 7]_3 \text{ or } v \neq [k\times3]_3 \text{ for all } k \in \nats \text{ if } g &= 1
+    \sum_{k=3,\, 2 \nmid k}^{m} p_k \neq 0 \text{ or} \sum_{k=4, \,3 \nmid k}^m v_k \neq 1 &\text{ if } g = 0 \\
+    p \neq [5, 7] \text{ or } v \neq [k\times3] \text{ for all } k \in \nats &\text{ if } g = 1
   \end{align*}
 \end{theorem}
 

@@ -1,8 +1,8 @@
-\section{The case $[3, 5]_4$}
+\section{The $4$-valent case $[3, 5]$}
 In this section the main problem will be proved for the case of adding the same number of triangles and pentagons to realize a given sequence satisfying \autoref{eq:valence:4}. This proof will be given by an explicit construction, so some building blocks for this construction will be needed.
 
-\begin{definition}[Square arc]\label{def:square:arc}
-  When in the case of $4$-valent polyhedrons, a square arc denotes an arc consisting four times of the face count $1$, while every other vertex has has face count $2$.
+\begin{definition}[Square patch]\label{def:square:patch}
+  When in the case of $4$-valent polyhedrons, a square patch denotes a $4$-patch witch boundary structure consisting four times of the face count $1$, while every other vertex has has face count $2$.
 \end{definition}
 
 %% \begin{lemma}\label{thm:square:arc}
@@ -28,7 +28,7 @@ In this section the main problem will be proved for the case of adding the same 
 
 \begin{definition}[$2 \times 2$ building block]
   The following rectangle consisting of four triangles and four pentagons will be called a $2 \times 2$ building block.
-  \begin{tikzfigure}{\label{fig:case:3:5:2times2bb}}
+  \begin{tikzfigure}{\label{fig:case:3:5:2times2bb}}{$2 \times 2$ building block}
     \begin{scope}
       \fill[fill=gray!50!white] (0, 0.5) -- (0, 1) -- (1, 1) -- (1, 0) -- (0.5, 0);
       \draw (-1, -1) -- (1, -1) -- (1, 1) -- (-1, 1) -- (-1, -1);
@@ -39,9 +39,9 @@ In this section the main problem will be proved for the case of adding the same 
   \end{tikzfigure}
 \end{definition}
 
-Each $k$-gon of the sequence $(k > 5)$ can be grouped together with $k-4$ triangles to create a ``flat'' block (they fulfill \autoref{eq:zero:curv:4}). This can be brought to an square arc by adding $2 \times 2$ building blocks, as well as some additional triangles and pentagons as seen in the following picture.
+Each $k$-gon of the sequence $(k > 5)$ can be grouped together with $k-4$ triangles to create a ``flat'' block (they satisfy \autoref{eq:zero:curv:4}). This can be brought to an square patch by adding $2 \times 2$ building blocks, as well as some additional triangles and pentagons as seen in the following picture.
 \begin{definition}[Basic building block] For a $k$-gon with $k > 5$, the $4$-component in \autoref{fig:case:3:5:basicbb} will be called its ``basic building block''.
-  \begin{tikzfigure}{\label{fig:case:3:5:basicbb}}
+  \begin{tikzfigure}{\label{fig:case:3:5:basicbb}}{Basic building block for a $k$-gon, $k>5$, here a nonagon}
     \begin{scope}[scale=0.1]
       \fill[fill=gray!50!white] (-10, 10) -- (6, 10) -- (10, 6) -- (10, -10) -- (6, -10) -- (-10, 6) -- cycle;
       \draw (-10, -10) -- (10, -10) -- (10, 10) -- (-10, 10) -- (-10, -10);
@@ -64,7 +64,7 @@ Each $k$-gon of the sequence $(k > 5)$ can be grouped together with $k-4$ triang
   
   For $k = 4$, a quadrangle, the structures in \autoref{fig:case:3:5:quadbb} will be considered as the respective basic building block. For a pentagon the basic building block is seen in \autoref{fig:case:3:5:2times2bb}
 
-  \begin{tikzfigure}{\label{fig:case:3:5:quadbb}}
+  \begin{tikzfigure}{\label{fig:case:3:5:quadbb}}{Basic building block for a quadrangle}
     \begin{scope}[scale=0.5]
       \fill[fill=gray!50!white] (1, 1) -- (2, 1) -- (2, 2) -- (1, 2);
       \draw (-2, -2) -- (-2, 2) -- (2, 2) -- (2, -2) -- cycle;
@@ -77,11 +77,11 @@ Each $k$-gon of the sequence $(k > 5)$ can be grouped together with $k-4$ triang
     \end{scope}
   \end{tikzfigure}
 
-  Note that every basic building block has the outer arc is a square arc, where the north and east as well as the south and west ``sides'' have the same amount of edges, which is even. Each building block consists of the assigned $k$-gon, $k-4+r$ triangles and $r$ pentagons for some value $r \in \nats$.
+  Note that every basic building block is a square patch, where the north and east as well as the south and west ``sides'' have the same amount of edges, which is even. Each building block consists of the assigned $k$-gon, $k-4+r$ triangles and $r$ pentagons for some value $r \in \nats$.
 \end{definition}
 
 \begin{definition}[Basis] One is able to assemble many basic building blocks by stacking them diagonally as seen in \autoref{fig:case:3:5:basis} for the basic building blocks of an quadrangle, and pentagon and an nonagon. This shape can be completed to an quadrangle shape by inserting $(2 \times 2)$ building blocks. This is possible, since each side of an building block has an even number of edges.
-  \begin{tikzfigure}{\label{fig:case:3:5:basis}}
+  \begin{tikzfigure}{\label{fig:case:3:5:basis}}{The assembly of the basis from basic building blocks}
     \begin{scope}[scale=0.1]
       \fill[fill=gray!50!white] (-15, -15) -- (-10, -15) -- (-10, -10) -- (-15, -10);
       \draw[very thick] (-30, -30) -- (-30, -10) -- (-10, -10) -- (-10, -30) -- cycle;
@@ -184,8 +184,8 @@ Each $k$-gon of the sequence $(k > 5)$ can be grouped together with $k-4$ triang
 
 \begin{theorem}\label{thm:case3:5} Let $p = (p_3, p_4, p_5, \dots, p_n)$ be a given sequence satisfying \autoref{eq:valence:4}. Then $p$ is $[3, 5]$-$4$-realizable.
   \begin{proof}
-    For each $k$-gon, $k > 3$ take the basic building block for this $k$-gon and form a basis out of these. Let $p'_k$ be the number of $k$-gons for each $3 \geq k$. The basis consists by construction only of the required $k$-gons, triangles and pentagons, so $p_k = p'_k$ for $k \neq 3, 5$. The basis can be closed in two steps. First add a ring of $2 \times 2$ basic blocks around the base and the pieces of \label{fig:case3:5:closedbasis1} in each corner (here four of the additional triangles are used, one in each corner). The construction is possible, since every side of the base has length divisible by two. The resulting figure has an outer face with twelve additional edges compared to the basis, albeit the number of edges is divisible by four. Also note that each vertex on the outer face is adjacent to two faces.
-    \begin{tikzfigure}{\label{fig:case3:5:closedbasis1}}
+    For each $k$-gon, $k > 3$ take the basic building block for this $k$-gon and form a basis out of these. Let $p'_k$ be the number of $k$-gons for each $3 \geq k$. The basis consists by construction only of the required $k$-gons, triangles and pentagons, so $p_k = p'_k$ for $k \neq 3, 5$. The basis can be closed in two steps. First add a ring of $2 \times 2$ basic blocks around the base and the pieces of \label{fig:case3:5:closedbasis1} in each corner (here four of the additional triangles are used, one in each corner). The construction is possible, since every side of the base has length divisible by two. The resulting figure has an outer face with twelve additional edges compared to the basis, so the number of edges is divisible by four. Also note that each vertex on the outer face is adjacent to two faces.
+    \begin{tikzfigure}{\label{fig:case3:5:closedbasis1}}{Part one of closing the basis}
       \matrix (m) [ column sep=1cm] {
         \begin{scope}[scale=0.8]
           \draw (2, 1) -- (-1, 1) -- (-1, 3) -- (1, 3) -- (2, 2) -- (2, 0) -- (0, 0) -- (0, 3);
@@ -247,7 +247,7 @@ Each $k$-gon of the sequence $(k > 5)$ can be grouped together with $k-4$ triang
     \end{tikzfigure}
 
     The second step uses the remaining four triangles and several $2 \times 2$-building blocks and creates a fitting stripe, see \autoref{fig:case3:5:closedbasis2}. By adding in $2 \times 2$-building blocks, one can create stripes whose number of edges on the outer face is equal to any multiple of four, in this case equal to the number of edges of the previous construction. As it was previously, each vertex on the outer face is adjacent to two faces, therefore, after glueing the results of both steps together, the polyhedron held is $4$-valent.
-    \begin{tikzfigure}{\label{fig:case3:5:closedbasis2}}
+    \begin{tikzfigure}{\label{fig:case3:5:closedbasis2}}{Part two of closing the basis}
       \begin{scope}[scale=0.8]
         \draw (-4, -1) -- (-5, 0) -- (-4, 1);
         \draw (4, -1) -- (5, 0) -- (4, 1);
@@ -261,7 +261,7 @@ Each $k$-gon of the sequence $(k > 5)$ can be grouped together with $k-4$ triang
       \end{scope}
     \end{tikzfigure}
     
-    This polyhedron with $p$-vector $p''$ fulfills 
+    This polyhedron with $p$-vector $p''$ satisfies 
     \begin{align*}
       0 = 8 - 8 =& \sum_{k=3}^n (4 - k) p_k'' - \sum_{k=3}^n (4 - k) p_k\\
       \implies& \frac{1}{3} (p''_3 - p_3) = \frac{2}{3} (p''_5 - p_5), 

@@ -15,6 +15,10 @@
 \usepackage{setspace}
 \usepackage{array}
 \usepackage{graphicx}
+\usepackage{makeidx}
+\usepackage{aliascnt}
+\usepackage[inner=2cm,outer=2cm,top=1.5cm,bottom=1.5cm,includeheadfoot]{geometry}
+
 \counterwithin{figure}{section}
 
 %\usepackage{extarrows}
@@ -30,40 +34,33 @@
 
 \setlength{\parindent}{0pt}
 \renewcommand{\baselinestretch}{1.0}
-\usepackage[inner=2cm,outer=2cm,top=1.5cm,bottom=1.5cm,includeheadfoot]{geometry}
 \theoremstyle{definition}
 
 % figure enviroments
 \captionsetup[FLOAT_TYPE]{labelformat=simple, labelsep=none}
-\newenvironment{tikzfigure}[1]
-    {\begin{figure}[h!] \caption{} #1 \centering  \begin{tikzpicture}}
+\newenvironment{tikzfigure}[2]
+    {\begin{figure}[h!] \caption{#2} #1 \centering  \begin{tikzpicture}[line cap=round, line join=round]}
     {\end{tikzpicture} \end{figure}}
 
-
-
+\newcommand{\newthm}[3]{%
+  \newaliascnt{#2}{#1}%
+  \newtheorem{#2}[#2]{#3}%
+  \aliascntresetthe{#2}%
+  \expandafter\def\csname#2autorefname\endcsname{#3}%
+}
 
 
 % math environments
 \newtheorem{theorem}{Theorem}[section]
-\newtheorem*{theorem*}{Theorem}
-\newtheorem{lemma}[theorem]{Lemma}
-\newtheorem*{lemma*}{Lemma}
-\newtheorem{problem}[theorem]{Problem}
-\newtheorem*{problem*}{Problem}
-\newtheorem{notation}[theorem]{Notation}
-\newtheorem*{notation*}{Notation}
-\newtheorem{example}[theorem]{Example}
-\newtheorem*{example*}{Example}
-\newtheorem{remark}[theorem]{Remark}
-\newtheorem*{remark*}{Remark}
-\newtheorem{conjecture}[theorem]{Conjecture}
-\newtheorem*{conjecture*}{Conjecture}
-\newtheorem{definition}[theorem]{Definition}
-\newtheorem*{definition*}{Definition}
-\newtheorem{corollary}[theorem]{Corollary}
-\newtheorem*{corollary*}{Corollary}
-\newtheorem{construction}[theorem]{Construction}
-\newtheorem*{construction*}{Construction}
+\newthm{theorem}{lemma}{Lemma}
+\newthm{theorem}{problem}{Problem}
+\newthm{theorem}{notation}{Notation}
+\newthm{theorem}{example}{Example}
+\newthm{theorem}{remark}{Remark}
+\newthm{theorem}{conjecture}{Conjecture}
+\newthm{theorem}{definition}{Definition}
+\newthm{theorem}{corollary}{Corollary}
+\newthm{theorem}{construction}{Construction}
 
 \renewcommand*{\theenumi}{\thetheorem\,(\roman{enumi})}%
 \renewcommand*{\labelenumi}{\thetheorem\,(\roman{enumi})}%
@@ -77,6 +74,8 @@
 \newcommand{\nats}{\mathbb{N}}
 \newcommand{\wholes}{\mathbb{Z}}
 \newcommand{\floor}[1]{\ensuremath{\left \lfloor #1 \right \rfloor}}
+\renewcommand{\mod}{\operatorname{mod}}
+\newcommand{\cyctup}[1]{{(#1)}_{\operatorname{cyc}}}
 
 \newcommand{\eps}{\varepsilon}
 \renewcommand{\phi}{\varphi}
