@@ -1,13 +1,13 @@
 \section{Preliminaries}
 
 \begin{definition}[Sequence]
-  A sequence $a$ in this thesis is a map $\nats \setminus \{0, 1, 2\} \rightarrow \nats$ with finite support. These maps will be written as $(a(3), a(4), ..., a(k))$, where $k = \operatorname{max} \operatorname{supp} a$. If $a$ has a small but wide support these notation will be further abbreviated as $[a(k_1) \times k_1, a(k_2) \times k_2, ...]$, where each entry not equal to zero occurs. Further $a(k) \times k$ will be simply written as $k$ if $a(k) = 1$.
+  A sequence $a$ in this thesis is a map $\nats \setminus \{0, 1, 2\} \rightarrow \nats$ with finite support. These maps will be written as $(a(3), a(4), ..., a(k))$, where $k = \operatorname{max} \operatorname{supp} a$. If $a$ has a small but wide support these notation will be further abbreviated as $[a(k_1) \times k_1, a(k_2) \times k_2, ...]$, where only entries not equal to zero occur. Further $a(k) \times k$ will be simply written as $k$ if $a(k) = 1$.
 \end{definition}
 \begin{example}
-  $(2, 0, 0, 1)$, $[2 \times 3, 1 \times 6]$ and $[2 \times 3, 6]$ all denote the same sequence. 
+  $(2, 0, 0, 1)$, $[2 \times 3, 1 \times 6]$ and $[2 \times 3, 6]$ all denote the same sequence.
 \end{example}
 \begin{definition}[$p$-vector and $v$-vector of a polyhedron]\label{def:relizable}
-  The $p$-vector of a polyhedron $P$ is the sequence $(p_3, \dots, p_m)$, where $p_k$ denotes the number of faces with exactly $k$ vertices. Similarly the $v$-vector of $P$ is the sequence $(v_1, \dots, v_n)$, where each $v_k$ measures the number of edges of $P$ with valence $k$. 
+  The $p$-vector of a polyhedron $P$ is the sequence $(p_3, \dots, p_m)$, where $p_k$ denotes the number of faces with exactly $k$ vertices. Similarly the $v$-vector of $P$ is the sequence $(v_1, \dots, v_n)$, where each $v_k$ measures the number of edges of $P$ with valence $k$.
 \end{definition}
 
 \begin{definition}\label{def:realizable}
@@ -17,8 +17,8 @@
 With this setup, we want to discuss in this thesis a broad problem arising from the combinatorical properties of polyhedra:
 \begin{problem} Are two arbitrarily given sequences realizable?
 \end{problem}
-The most fundamental result giving a necessary condition is Eulers relation.
-\begin{theorem}[Eulers relation]\label{thm:eulers:relation}
+The most fundamental result giving a necessary condition is Euler's relation.
+\begin{theorem}[Euler's relation]\label{thm:eulers:relation}
   For each polyhedron with $v$ vertices, $e$ edges and $f$ faces holds
   \begin{align*}
     v - e + f = 2.
@@ -28,7 +28,7 @@ Given the notation as above one can immediately draw some basic conclusions from
 \begin{align*}
   2e = \sum_{k=3}^{m} k \cdot p_k = \sum_{k=3}^{n} k \cdot f_k
 \end{align*}
-Putting these equations in Eulers relation \autoref{thm:eulers:relation} gives for some $t \in (0, 1)$
+Putting these equations in Euler's relation \autoref{thm:eulers:relation} gives for some $t \in (0, 1)$
 \begin{align*}
   \sum_{k=3}^m v_k - \left(\frac{t}{2} \sum_{k=3}^m k v_k + \frac{1-t}{2} \sum_{k=3}^n k p_k \right) + \sum_{k=3}^n p_k = 2
 \end{align*}
@@ -36,7 +36,7 @@ which can be transformed into:
 \begin{align}
   t \sum_{k=3}^m \left(\frac{2}{t} - k \right) v_k + (1-t) \sum_{k=3}^n \left( \frac{2}{1-t} - k \right) p_k = 4. \label{eq:general:vp:relation}
 \end{align}
-This equation is independent of the value of some $v_k$ or $p_{k'}$ when the value of $t$ is appropriately chosen. Of special interest in this thesis are the cases of one $v_r$ giving no information in the above equation (so $r \geq 3$ fixed and $t = \frac{2}{r}$) and having $v_{k} = 0$ for each $k \geq 3$, $k \neq r$. The resulting polyhedron has the property that each of his vertices has valence $r$. 
+This equation is independent of the value of some $v_k$ or $p_{k'}$ when the value of $t$ is appropriately chosen. Of special interest in this thesis are the cases of one $v_r$ giving no information in the above equation (so $r \geq 3$ fixed and $t = \frac{2}{r}$) and having $v_{k} = 0$ for each $k \geq 3$, $k \neq r$. The resulting polyhedron has the property that each of his vertices has valence $r$.
 % TODO Explain this.
 \begin{definition}[$r$-realizable]\label{def:r:realizable}
   A sequence $p = (p_3, \dots, p_m)$ is said to be $r$-realizable, if $p$ is realizable by a polyhedron which has only $r$-valent vertices.
@@ -67,17 +67,17 @@ Even in with this rather specific constraints the problem stated above has no ea
       \draw (3, 2) -- (2.25, 1.5);
       \draw (0, -4) -- (0, -3);
       \draw (0, 4) -- (0, 3);
-    \end{scope}   
-    
+    \end{scope}
+
   \end{tikzfigure}
-  
+
 \end{example}
 
 \begin{definition}[$(q_3, \dots, q_n)$-$r$-realizable]\label{def:eberhard:realizable}
   A sequence $p = (p_3, \dots, p_m)$ is said to be $(q_3, \dots, q_n)$-$r$-realizable, if there exists $c \in \nats$, such that $p + c q$ is $r$-realizable.
 \end{definition}
 \begin{problem}[General Eberhard's problem]\label{problem:eberhard}
-  Let $r \in \{3, 4, 5\}$ and $(q_3, \dots, q_n)$ be a sequence which satisfies 
+  Let $r \in \{3, 4, 5\}$ and $(q_3, \dots, q_n)$ be a sequence which satisfies
   \begin{align}
     r &= 3: \sum_{k=3}^n \left( 6            - k \right) q_k = 0 \label{eq:zero:curv:3}\\
     r &= 4: \sum_{k=3}^n \left( 4            - k \right) q_k = 0 \label{eq:zero:curv:4}\\
@@ -90,10 +90,10 @@ Even in with this rather specific constraints the problem stated above has no ea
 \end{notation}
 \autoref{eq:valence:3} and \autoref{eq:valence:4} suggest that $(6)$ might be a good candidate for a $3$-valent statement, as well as $(4)$ for $4$-valence. Indeed, in these cases the important and well-known classical Eberhard theorem in \cite{ConvexPolytopes} gives a complete answer:
 \renewcommand{\Itemautorefname}{Theorem \ref{thm:eberhard}}
-\begin{theorem}[Eberhards theorem] \label{thm:eberhard} The following holds:
+\begin{theorem}[Eberhard'S theorem] \label{thm:eberhard} The following holds:
   \begin{enumerate}[label=(\roman*)]
-  \item \label{thm:eberhard:3} For each $p_3, p_4, p_5, p_7, \dots, p_m$ satisfying \autoref{eq:valence:3} there exists a number $p_6$ such that $(p_3, \dots, p_m)$ is $3$-realizable. 
-  \item \label{thm:eberhard:4} For each $p_3, p_5, \dots, p_m$ satisfying \autoref{eq:valence:4} there exists a number $p_4$ such that $(p_3, \dots, p_m)$ is $4$-realizable. 
+  \item \label{thm:eberhard:3} For each $p_3, p_4, p_5, p_7, \dots, p_m$ satisfying \autoref{eq:valence:3} there exists a number $p_6$ such that $(p_3, \dots, p_m)$ is $3$-realizable.
+  \item \label{thm:eberhard:4} For each $p_3, p_5, \dots, p_m$ satisfying \autoref{eq:valence:4} there exists a number $p_4$ such that $(p_3, \dots, p_m)$ is $4$-realizable.
   \end{enumerate}
 \end{theorem}
 
@@ -113,7 +113,7 @@ Even in with this rather specific constraints the problem stated above has no ea
         \draw[very thick] (0, 0) -- (0, -0.25)  (0, 0) -- (0.1875, 0.125) (-0.1875, 0.125) -- (0, 0);
       \end{scope}
       &
-      \begin{scope}[xscale=1.0, yscale=0.866] 
+      \begin{scope}[xscale=1.0, yscale=0.866]
         \draw (-1.5, -1) -- (1.5, -1) -- (0, 2) -- (-1.5, -1) -- (0, -0.5) -- (1.5, -1) -- (0.375, 0.25) -- (0, 2) -- (-0.375, 0.25) -- (0.375, 0.25) -- (0, -0.5) -- (-0.375, 0.25) -- cycle;
         \draw[very thick] (0, -1) -- (-0.75, -0.75) -- (-0.9375, -0.375) -- (-0.75, 0.5) -- (-0.1875, 1.125) -- (0.1875, 1.125) -- (0.75, 0.5) -- (0.9375, -0.375) -- (0.75, -0.75) -- (0.1875, -0.125) -- (0.9375, -0.375) -- (0.1875, 1.125) -- (0, 0.25) -- (-0.1875, 1.125) -- (-0.9375, -0.375) -- (-0.1875, -0.125) -- (0, 0.25) -- (0.1875, -0.125) -- (-0.1875, -0.125) -- (-0.75, -0.75) -- (0.75, -0.75) -- (0, -1) arc[x radius = 1.5, y radius = 1.732, start angle= -180, end angle= 120] arc[x radius = 1.5, y radius = 1.732, start angle= -60, end angle=240] arc[x radius = 1.5, y radius = 1.732, start angle= 60, end angle = 360];
       \end{scope};
@@ -134,7 +134,7 @@ A stronger theorem, which generalizes the first case, is given in \cite{jendrol1
   \end{align*}
 \end{theorem}
 
-Building upon these two, this thesis will present a bunch of new theorems of general Eberhards type. One of these proofs takes a similar approach as the proof given in \cite{ConvexPolytopes} for \autoref{thm:eberhard:4}. The rest of the proofs directly use \autoref{thm:eberhard}. This is done by taking a sequence not too different form the given one which suffices either \autoref{eq:valence:3} or \autoref{eq:valence:4}, constructing a polyhedron by the statements of \autoref{thm:eberhard} and then by adding or deleting some polygons create a polyhedron with a $p$-vector as stated. This is done by either substituting edges and vertices or every face by some larger structure. 
+Building upon these two, this thesis will present a bunch of new theorems of general Eberhard's type. One of these proofs takes a similar approach as the proof given in \cite{ConvexPolytopes} for \autoref{thm:eberhard:4}. The rest of the proofs directly use \autoref{thm:eberhard}. This is done by taking a sequence not too different form the given one which suffices either \autoref{eq:valence:3} or \autoref{eq:valence:4}, constructing a polyhedron by the statements of \autoref{thm:eberhard} and then by adding or deleting some polygons create a polyhedron with a $p$-vector as stated. This is done by either substituting edges and vertices or every face by some larger structure.
 
 These construction are transformation of graphs and therefore use heavily a result of Steinitz, stating that the necessary condition for a graph to be realizable as a polytope is to be planar and $3$-connected.
 
@@ -142,4 +142,3 @@ These construction are transformation of graphs and therefore use heavily a resu
   A Graph $G$ is realizable as a polyhedron if and only if $G$ is planar and $3$-connected.
 \end{theorem}
 A proof of this theorem can also be found in \cite{ConvexPolytopes}.
-

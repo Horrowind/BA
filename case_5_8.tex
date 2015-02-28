@@ -10,7 +10,7 @@
           \draw (-1, -1) circle[radius=2pt] -- (1, -1) circle[radius=2pt] -- (1, 1) circle[radius=2pt] -- (-1, 1) circle[radius=2pt] -- (-1, -1);
         \end{scope}
         &
-        \begin{scope}[scale=0.25] 
+        \begin{scope}[scale=0.25]
           \draw (-6, 0) -- (-7, -3) -- (-6, -6) -- (-3, -7) -- (0, -6) -- (3, -7) -- (6, -6) -- (7, -3) -- (6, 0) -- (7, 3) -- (6, 6) -- (3, 7) -- (0, 6) -- (-3, 7) -- (-6, 6) -- (-7, 3) -- (-6, 0);
           \draw (-5, 0) -- (-6, 0);
           \draw (0, -5) -- (0, -6);
@@ -22,7 +22,7 @@
           \draw (2, -2) -- (1, -1);
           \draw (2, 2) -- (1, 1);
           \draw (-2, 2) -- (-1, 1);
-          
+
           \filldraw[fill=gray!50!white] (-1, -1) -- (1, -1) -- (1, 1) -- (-1, 1) -- (-1, -1);
           \draw (-7, -3)  -- (-9, -1) -- (-9, 1) circle[radius=8pt]-- (-7, 3);
           \draw ( 7, -3) -- ( 9, -1) circle[radius=8pt]-- ( 9, 1) -- ( 7, 3) ;
@@ -35,11 +35,11 @@
     \end{tikzfigure}
 
     In view of the hexagons one can now replace the figure held in the first construction step with the ones seen in \autoref{fig:case:5:8:img2}. Note that the left side of the figure is the result of the above construction in the case of a hexagon and the right side has the same boundary structure, but consists only of pentagons and octagons. So one can substitute arbitrarily many hexagons by an amount of octagons and heptagons, creating hereby $P'$. $2(p'_5 - p_5) = p'_8 - p_8$ holds, since \autoref{eq:valence:3} holds for $P$ as well as for $P'$.
-    
+
     \begin{tikzfigure}{\label{fig:case:5:8:img2}}{The replacement figure in the case of a hexagon}
       \matrix (m) [ column sep=1cm] {
 
-        \begin{scope}[rotate=-30, yscale=0.866, scale=0.25] 
+        \begin{scope}[rotate=-30, yscale=0.866, scale=0.25]
           \draw (-1, 8) -- (1, 8) -- (1.5, 7) -- (3.5, 7) -- (4.5, 5) -- (5.5, 5) -- (6.5, 3) -- (6, 2) -- (7, 0) -- (6, -2) -- (6.5, -3) -- (5.5, -5) -- (4.5, -5) -- (3.5, -7) -- (1.5, -7) -- (1, -8) -- (-1, -8) -- (-1.5, -7) -- (-3.5, -7) -- (-4.5, -5) -- (-5.5, -5) -- (-6.5, -3) -- (-6, -2) -- (-7, 0) -- (-6, 2) -- (-6.5, 3) -- (-5.5, 5) -- (-4.5, 5) -- (-3.5, 7) -- (-1.5, 7) -- (-1, 8);
           \draw (-1.5, 7) -- (0, 6) -- (1.5, 7);
           \draw (4.5, 5) -- (4.5, 3) -- (6, 2);
@@ -54,7 +54,7 @@
           \draw (0, -6) -- (0, -4);
           \draw (-4.5, 3) -- (-3, 2);
           \draw (-4.5, -3) -- (-3, -2);
-          
+
           \draw (0, 4) -- (1, 2) -- (3, 2) -- (2, 0) -- (3, -2) -- (1, -2) -- (0, -4) -- (-1, -2) -- (-3, -2) -- (-2, 0) -- (-3, 2) -- (-1, 2) -- (0, 4);
 
           \draw (2, 0) -- (1, 0);
@@ -68,7 +68,7 @@
 
         \end{scope}
         &
-        \begin{scope}[rotate=-30, yscale=0.866, scale=0.25] 
+        \begin{scope}[rotate=-30, yscale=0.866, scale=0.25]
           \draw (-1, 8) -- (1, 8) -- (1.5, 7) -- (3.5, 7) -- (4.5, 5) -- (5.5, 5) -- (6.5, 3) -- (6, 2) -- (7, 0) -- (6, -2) -- (6.5, -3) -- (5.5, -5) -- (4.5, -5) -- (3.5, -7) -- (1.5, -7) -- (1, -8) -- (-1, -8) -- (-1.5, -7) -- (-3.5, -7) -- (-4.5, -5) -- (-5.5, -5) -- (-6.5, -3) -- (-6, -2) -- (-7, 0) -- (-6, 2) -- (-6.5, 3) -- (-5.5, 5) -- (-4.5, 5) -- (-3.5, 7) -- (-1.5, 7) -- (-1, 8);
 
           \draw (-1.5, 7) -- (-1.5, 5) -- (1, 2) -- (2, 2) -- (2.5, 3) -- (1.5, 7);
@@ -86,7 +86,7 @@
           \draw (-1.5, -7) -- (0, -6);
           \draw (6, -2) -- (4.5, -3);
         \end{scope}
-        
+
         \\
       };
     \end{tikzfigure}
@@ -103,7 +103,7 @@
     %       &
 
 
-    %       \begin{scope}[rotate=40, xscale=1.0, yscale=0.866, scale=0.5] 
+    %       \begin{scope}[rotate=40, xscale=1.0, yscale=0.866, scale=0.5]
     %         \filldraw[fill=gray!50!white] (0, 1) -- ++(0.5, -1) -- ++(1, 0) -- ++(0.5, 1) -- ++(-0.5, 1) -- ++(-1, 0) -- ++(-0.5, -1);
     %         \filldraw[fill=white] (-1.5, 0) -- ++(0.5, -1) -- ++(1, 0) -- ++(0.5, 1) -- ++(-0.5, 1) -- ++(-1, 0) -- ++(-0.5, -1);
     %         \filldraw[fill=white] (0, -1) -- ++(0.5, -1) -- ++(1, 0) -- ++(0.5, 1) -- ++(-0.5, 1) -- ++(-1, 0) -- ++(-0.5, -1);
@@ -119,7 +119,7 @@
     %         \filldraw[fill=white] (6, 1) -- ++(0.5, -1) -- ++(1, 0) -- ++(0.5, 1) -- ++(-0.5, 1) -- ++(-1, 0) -- ++(-0.5, -1);
     %         \filldraw[fill=white] (4.5, 2) -- ++(0.5, -1) -- ++(1, 0) -- ++(0.5, 1) -- ++(-0.5, 1) -- ++(-1, 0) -- ++(-0.5, -1);
     %         \filldraw[fill=white] (3, 1) -- ++(0.5, -1) -- ++(1, 0) -- ++(0.5, 1) -- ++(-0.5, 1) -- ++(-1, 0) -- ++(-0.5, -1);
-            
+
     %         \filldraw[fill=gray!50!white] (1.5, -4) -- ++(0.5, -1) -- ++(1, 0) -- ++(0.5, 1) -- ++(-0.5, 1) -- ++(-1, 0) -- ++(-0.5, -1);
     %         \filldraw[fill=white] (0, -5) -- ++(0.5, -1) -- ++(1, 0) -- ++(0.5, 1) -- ++(-0.5, 1) -- ++(-1, 0) -- ++(-0.5, -1);
     %         \filldraw[fill=white] (1.5, -6) -- ++(0.5, -1) -- ++(1, 0) -- ++(0.5, 1) -- ++(-0.5, 1) -- ++(-1, 0) -- ++(-0.5, -1);
@@ -134,7 +134,7 @@
     % \end{figure}
 
 
-    % One now chooses a set $S$ of hexagons one wants to keep, $|S| = p_6$. Each hexagon not in $S$ and the surrounding six hexagons are replaced by the following structure: 
+    % One now chooses a set $S$ of hexagons one wants to keep, $|S| = p_6$. Each hexagon not in $S$ and the surrounding six hexagons are replaced by the following structure:
 
     % \begin{figure}[htpp]
     %   \centering
@@ -152,7 +152,7 @@
 
     %       &
 
-    %       \begin{scope}[xscale=1.0, yscale=0.866, scale=0.5] 
+    %       \begin{scope}[xscale=1.0, yscale=0.866, scale=0.5]
     %         \draw (-1.5, 0) -- ++(0.5, -1) -- ++(1, 0) -- ++(0.25, 1.5) -- ++(-1.25, 0.5) -- ++(-0.5, -1);
     %         \draw (0, -1) -- ++(0.5, -1) -- ++(1, 0) -- ++(0.5, 1) -- ++(-0.25, 1.5) -- ++(-0.75, 0.5) -- ++(-0.75, -0.5);
     %         \draw (1.75, 0.5) -- ++(0.25, -1.5) -- ++(1, 0) -- ++(0.5, 1) -- ++(-0.5, 1) -- ++(-1.25, -0.5);
@@ -160,7 +160,7 @@
     %         \draw (0, 3) -- ++(1, -1) -- ++(1, 1) -- ++(-0.5, 1) -- ++(-1, 0) -- ++(-0.5, -1);
     %         \draw (-1.5, 2) -- ++(0.5, -1) -- ++(1.25, -0.5) -- ++(0.75, 0.5) -- ++(0, 1) -- ++(-1, 1) -- ++(-1, 0) -- ++(-0.5, -1);
     %       \end{scope};
-          
+
     %       \\
     %     };
     %   \end{tikzpicture}
@@ -173,7 +173,7 @@
     %   \begin{tikzpicture}
     %     \matrix (m) [ column sep=1cm] {
 
-    %       \begin{scope}[scale=0.25] 
+    %       \begin{scope}[scale=0.25]
     %         \draw (-3, 0) -- (0, -3) -- (3, 0) -- (0, 3) -- (-3, 0);
     %         \draw (-3, 0) -- (-6, 0);
     %         \draw (0, -3) -- (0, -6);
@@ -182,7 +182,7 @@
     %         \draw (-6, 0) -- (-7, -3) -- (-3, -7) -- (0, -6) -- (3, -7) -- (7, -3) -- (6, 0) -- (7, 3) -- (3, 7) -- (0, 6) -- (-3, 7) -- (-7, 3) -- (-6, 0);
     %       \end{scope}
     %       &
-    %       \begin{scope}[scale=0.25] 
+    %       \begin{scope}[scale=0.25]
     %         \draw (-6, 0) -- (-7, -3) -- (-6, -6) -- (-3, -7) -- (0, -6) -- (3, -7) -- (6, -6) -- (7, -3) -- (6, 0) -- (7, 3) -- (6, 6) -- (3, 7) -- (0, 6) -- (-3, 7) -- (-6, 6) -- (-7, 3) -- (-6, 0);
     %         \draw (-5, 0) -- (-6, 0);
     %         \draw (0, -5) -- (0, -6);
@@ -194,7 +194,7 @@
     %         \draw (2, -2) -- (1, -1);
     %         \draw (2, 2) -- (1, 1);
     %         \draw (-2, 2) -- (-1, 1);
-            
+
     %         \draw (-1, -1) -- (1, -1) -- (1, 1) -- (-1, 1) -- (-1, -1);
     %         \draw (-7, -3) -- (-9, -1) -- (-9, 1) -- (-7, 3);
     %         \draw ( 7, -3) -- ( 9, -1) -- ( 9, 1) -- ( 7, 3);
@@ -202,7 +202,7 @@
     %         \draw (3, 7) -- (1, 9) -- (-1, 9) -- (-3, 7);
 
     %       \end{scope}
-          
+
     %       \\
     %     };
     %   \end{tikzpicture}
@@ -213,7 +213,6 @@
 \begin{corollary}
   Let $p = (p_3, p_4, p_5, \dots, p_n)$ be a given sequence satisfying \autoref{eq:valence:3}, then $p$ is $[2 \times 5, 8]$-$3$-realizable.
   \begin{proof}
-    The proof starts by using the construction given by Eberhards \autoref{thm:eberhard:3}. This results in a realization of $p$ which has many more hexagons then needed. The next step is to remove these hexagons and replace them by pentagons and heptagons. This is done by \autoref{thm:construction:5:8}. The resulting polyhedron has the required amount of polygons of each shape.
+    The proof starts by using the construction given by Eberhard's \autoref{thm:eberhard:3}. This results in a realization of $p$ which has many more hexagons then needed. The next step is to remove these hexagons and replace them by pentagons and heptagons. This is done by \autoref{thm:construction:5:8}. The resulting polyhedron has the required amount of polygons of each shape.
   \end{proof}
 \end{corollary}
-
