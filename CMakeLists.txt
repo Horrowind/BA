@@ -13,6 +13,7 @@ set(sources
   head.tex
   title.tex
   tableofcontents.tex
+  introduction.tex
   preliminaries.tex
   arcs.tex
   case_3_5.tex

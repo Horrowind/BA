@@ -28,6 +28,11 @@ If one is interested in whether two patches of a construction fit together to as
   TODO.
   \begin{tikzfigure}{\label{fig:patch:example}}{Glueing two patches together}
     \draw (-1, -2) -- (1, -2) (0, -2) -- (0, 2)  (-1, 2) -- (1, 2);
+    \draw[dotted] (-1, -2) -- (-2, -1.5);
+    \draw[dotted] (1, -2) -- (2, -1.5);
+    \draw[dotted] (-1, 2) -- (-2, 1.5);
+    \draw[dotted] (1, 2) -- (2, 1.5);
+
     \node at (0, -2) [anchor=north] {$v_i=v_{j'}$};
     \fill [black] (0, -2) circle (2pt);
     \node at (0, 2) [anchor=south] {$v_j=v_{i'}$};
@@ -47,9 +52,11 @@ If one is interested in whether two patches of a construction fit together to as
 
 With this, one is able to describe a general construction scheme:
 
-\begin{construction}\label{thm:construction:patch} Let $G$ be a planar graph of valence $r$. Let $w = (w_1, \dots, w_n)$ be a self-fitting tuple. Let for each $k$-gonal face $f$ a $r$-patch $\mathcal{P}(f)$ be given, whose boundary structure is the $w$-expansion of the boundary structure of a $k$-gon. Subdivide each edge of $G$ by $n$ vertices - a $k$-gonal face of $G$ is now  $(n+1)k$-gonal and - replace the subdivision of $f$ with $\mathcal{P}(f)$ such that the newly inserted vertices are side vertices of $\mathcal{P}(f)$ and the original vertices are corner vertices. Each side vertex is on the boundary of two patches and has by \label{thm:fitting:arcs}
+\begin{construction}\label{thm:construction:patch}
+TODO.
+% Let $G$ be a planar graph of valence $r$. Let $w = (w_1, \dots, w_n)$ be a self-fitting tuple. Let for each $k$-gonal face $f$ a $r$-patch $\mathcal{P}(f)$ be given, whose boundary structure is the $w$-expansion of the boundary structure of a $k$-gon. Subdivide each edge of $G$ by $n$ vertices - a $k$-gonal face of $G$ is now  $(n+1)k$-gonal and - replace the subdivision of $f$ with $\mathcal{P}(f)$ such that the newly inserted vertices are side vertices of $\mathcal{P}(f)$ and the original vertices are corner vertices. Each side vertex is on the boundary of two patches and has by \label{thm:fitting:arcs}
 \end{construction}
 
 \begin{remark}
-  \autoref{thm:construction:arcs} still holds on an orientable closed $2$-manifold, as the arguments used were only ``local planarity'' and the existence of an orientation, thus \autoref{thm:fitting:arcs} can be used for all pairs of adjacent faces. If the piece of an arc of length $n$ is also symmetric, that is, $w_i = w_{n-i}$, $i = 1, \dots n$, even the requirement of an orientation can be dropped, the necessary equations of \autoref{thm:fitting:arcs} then hold regardless of the numbering of the vertices. If $w_i$ is a weight in a symmetric self-fitting piece of an arc of length $n$, then $w_i + w_{n-i} = 2 w_i = r$, therefore for these kinds of arcs to exists $r$ has to be even; reviewing the considered cases only $r = 4$ remains.
+  \autoref{thm:construction:patch} still holds on an orientable closed $2$-manifold, as the arguments used were only ``local planarity'' and the existence of an orientation, thus \autoref{thm:fitting:arcs} can be used for all pairs of adjacent faces. If the piece of an arc of length $n$ is also symmetric, that is, $w_i = w_{n-i}$, $i = 1, \dots n$, even the requirement of an orientation can be dropped, the necessary equations of \autoref{thm:fitting:arcs} then hold regardless of the numbering of the vertices. If $w_i$ is a weight in a symmetric self-fitting piece of an arc of length $n$, then $w_i + w_{n-i} = 2 w_i = r$, therefore for these kinds of arcs to exists $r$ has to be even; reviewing the considered cases only $r = 4$ remains.
 \end{remark}
