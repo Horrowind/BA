@@ -3,7 +3,7 @@ This theorem is already established in \cite{devos2010eberhard}. Here we present
 
 
 \begin{construction}\label{thm:construction:5:7}
-  Given a $3$-valent polyhedron $P$ with $p$-vector $(p_3, p_4, p_5, p_6, p_7, p_8, \dots, p_m)$ and $p'_6 \leq p_6$, there exists another $3$-valent polyhedron $P'$ with $p$-vector $(p_3, p_4, p'_5, p'_6, p'_7, p_8, \dots, p_m)$, where $p'_5 - p_5 = p'_7 - p_7$.
+  Given a $3$-valent polyhedron $P$ with $p$-vector $(p_3, p_4, p_5, p_6, p_7, p_8, \dots, p_m)$ and $a \leq p_6$, there exists $p'_5, p'_7 \in \nats, p'_5 \geq p_5, p_7' \geq p_7, p'_5 - p_5 = p'_7 - p_7$ and another $3$-valent polyhedron $P'$ with $p$-vector $(p_3, p_4, p'_5, a, p'_7, p_8, \dots, p_m)$.
   \begin{proof}
 
     For each $k$-gonal face of $P$ one can create a $(2, 1)$-expansion by adding pentagons and heptagons only. Put a ring of pentagons around each face of $P$ and around these pentagons another ring of heptagons, as seen in \autoref{fig:case57:img1}.\\
@@ -15,11 +15,10 @@ This theorem is already established in \cite{devos2010eberhard}. Here we present
           \filldraw[fill=gray!50!white] (0.75, 0.5) -- (0.5, 0.5) -- (0.25, 0) -- (0.5, -0.5) -- (0.75, -0.5);
           \filldraw[fill=gray!50!white] (-0.375, -0.75) -- (-0.5, -0.5) -- (-0.25, 0) -- (0.25, 0) -- (0.5, -0.5) -- (0.375, -0.75);
           \filldraw[fill=gray!50!white] (-0.375, 0.75) -- (-0.5, 0.5) -- (-0.25, 0) -- (0.25, 0) -- (0.5, 0.5) -- (0.375, 0.75);
-          \draw[very thick] (-0.25, 0) -- (0.25, 0);
         \end{scope}
         &
         \begin{scope}[xscale=1.0, yscale=0.866]
-          \filldraw[fill=gray!50!white] (-0.25, -3.5) --  (-0.5, -3) -- (-0.25, -2.5) -- (0.25, -2.5) -- (0.5, -3) -- (0.25, -3.5) -- (-0.25, -3.5);
+          \filldraw[fill=gray!50!white] (-0.375, -3.25) --  (-0.5, -3) -- (-0.25, -2.5) -- (0.25, -2.5) -- (0.5, -3) -- (0.375, -3.25);
           \filldraw[fill=gray!50!white] (-0.375, 3.25) --  (-0.5, 3) -- (-0.25, 2.5) -- (0.25, 2.5) -- (0.5, 3) -- (0.375, 3.25);
           \filldraw[fill=gray!50!white] (4.5, 0.5) -- (4.25, 0.5) -- (4, 0) -- (4.25, -0.5) -- (4.5, -0.5);
           \filldraw[fill=gray!50!white] (-4.5, 0.5) -- (-4.25, 0.5) -- (-4, 0) -- (-4.25, -0.5) -- (-4.5, -0.5);
@@ -93,7 +92,7 @@ This theorem is already established in \cite{devos2010eberhard}. Here we present
       };
     \end{tikzfigure}
 
-    Now fix a set $S$ of hexagons to replace, $|S| = p_6 - p'_6$. For each of these hexagons one can replace the before mentioned ring structure circumscribing the hexagon by another arrangement as seen in \autoref{fig:case57:img3}.
+    Now fix a set $S$ of hexagons to replace, $|S| = p_6 - a$. For each of these hexagons one can replace the before mentioned ring structure circumscribing the hexagon by another arrangement as seen in \autoref{fig:case57:img3}.
 
     \begin{tikzfigure}{\label{fig:case57:img3}}{Replacement figure in the case of hexagons}
       \matrix (m) [ column sep=1cm] {
@@ -122,10 +121,10 @@ This theorem is already established in \cite{devos2010eberhard}. Here we present
       };
     \end{tikzfigure}
 
-    Thus every face of $P$ is replaced by some $(2, 1)$-expansion of itself. Since $(2, 1)$ is a self-fitting tuple, using \autoref{thm:construction:patch} results in a $3$-valent polyhedron $P'$. Its $p$-vector $p''$ differs by construction only in the number of pentagons, hexagons and heptagons from $p$. $p''_6 = p'_6$, since one replaced the required amount of hexagons in $P$, while $p''_5 - p_5 = p''_7 - p_7$ follows from \autoref{eq:valence:3}:
+    Thus every face of $P$ is replaced by some $(2, 1)$-expansion of itself. Since $(2, 1)$ is a self-fitting tuple, using \autoref{thm:construction:patch} results in a $3$-valent polyhedron $P'$. Its $p$-vector $p'$ differs by construction only in the number of pentagons, hexagons and heptagons from $p$. $a = p'_6$, since one replaced the required amount of hexagons in $P$, while $p'_5 - p_5 = p'_7 - p_7$ follows from \autoref{eq:valence:3}:
     \begin{align*}
-      &0 = \sum_{k=3}^n \left(6 - k \right) p''_k - \sum_{k=3}^n \left(6 - k \right) p_k \\
-      \implies & (p''_5 - p''_7) - (p_5 -p_7) = 0
+      &0 = \sum_{k=3}^n \left(6 - k \right) p'_k - \sum_{k=3}^n \left(6 - k \right) p_k \\
+      \implies & (p'_5 - p'_7) - (p_5 -p_7) = 0
     \end{align*}
   \end{proof}
 \end{construction}

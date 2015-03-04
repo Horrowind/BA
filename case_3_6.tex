@@ -1,8 +1,8 @@
 \section{The $4$-valent case $[2 \times 3, 6]$}
 \begin{lemma}\label{thm:case3:6:mainlemma}
-  Let $p = (p_3, p_4, p_5, \dots, p_n)$ be a given sequence satisfying \autoref{eq:valence:4} as well as $p_4 + p_5 \leq 6$ and $3 \mid \sum_{k=3}^{n} p_k - 2$. Then $p$ is $[2 \times 3, 6]$-$4$-realizable.
+  Let $p = (p_3, p_4, p_5, \dots, p_n)$ be a given sequence satisfying \autoref{eq:valence:4} as well as $p_4 + p_5 \leq 6$ and $3 \mid \sum_{k=3}^{n} p_k - 2$. Then $p$ is $[2 \times 3, 6]$-$4$-realizable.\\
 
-  All the requirements in the statement will help utilizing Eberhard's \autoref{thm:eberhard:3}. The condition $p_4 + p_5 \leq 6$ deals with different the sign of curvatures when having valence $3$ and $4$ (note that quadrangles and pentagons have positive curvature in the case of $3$-valence but zero or negative curvature in the other case), while the condition $3 \mid \sum_{k=3}^{n} p_k - 2$ is necessary to keep the number of triangles natural.
+  All the requirements in the statement will help utilizing Eberhard's \autoref{thm:eberhard:3}. The condition $p_4 + p_5 \leq 6$ deals with the different sign of curvatures when having valence $3$ and $4$, respectively (note that quadrangles and pentagons have positive curvature in the case of $3$-valence but zero or negative curvature in the other case), while the condition $3 \mid \sum_{k=3}^{n} p_k - 2$ is necessary to keep the number of triangles natural.
   \begin{proof}
     One can restate \autoref{eq:valence:4} to a form looking more like \autoref{eq:valence:3}:
     \begin{align*}
@@ -14,7 +14,7 @@
       3 r_3 &= 2 \sum_{k=3}^{n} p_k - 4 =  2 p_3 + 2 p_4 + 2 p_5 + 2 \sum_{k=6}^{n} p_k - 4\\
       \implies 3 r_3 - 2 p_3 &= 2(p_4 + p_5) - 4 + 2 \sum_{k=6}^{n} p_k \leq 8 + 2 \sum_{k=6}^{n} p_k \leq 8 + \sum_{k=4}^{n} (k - 4) p_k = p_3
     \end{align*}
-    follows, that $p_3' := p_3 - r_3 \geq 0$ (so $p'_3 \in \nats$) and setting $p_k' := p_k$ for $k \geq 4$ the resulting sequence $p'$ suffices \autoref{eq:valence:3}. Using \autoref{thm:eberhard:3} one get a $3$-realization $P'$ of $p'$. Inserting in $P'$ an hexagon for every edge and four triangles for every vertex as seen in \autoref{fig:case3:6:img1} one can construct a $4$-realization of some sequence $p''$.
+    follows, that $p_3' := p_3 - r_3 \geq 0$ (so $p'_3 \in \nats$) and setting $p_k' := p_k$ for $k \geq 4$ the resulting sequence $p'$ suffices \autoref{eq:valence:3}. Using \autoref{thm:eberhard:3} one gets a $3$-realization $P'$ of $p'$. Inserting in $P'$ a hexagon for every edge and four triangles for every vertex as seen in \autoref{fig:case3:6:img1} one can construct a $4$-realization of some sequence $p''$.
 
     \begin{tikzfigure}{\label{fig:case3:6:img1}}{Building a $4$-valent polyhedron out of a $3$-valent one by adding triangles and hexagon}
       \matrix (m) [ column sep=1cm] {
@@ -58,16 +58,16 @@
     $p''$ coincides with $p$ for every entry but $3$ and $6$. They both comply with \autoref{eq:valence:4}, therefore
     \begin{align*}
       0 = 8 - 8 = & \sum_{k=3}^n \left( 4 - k \right) p''_k  - \sum_{k=3}^n \left( 4 - k \right) p_k \\
-      \implies & 2(p''_3 - p_3) = p''_6 - p_6
+      \implies & p''_3 - p_3 = 2(p''_6 - p_6)
     \end{align*}
-    and $p'' = p + (p''_6 - p_6)[2 \times 3, 6]_4$ is $4$-realizable, which finishes the proof.
+    and $p'' = p + (p''_6 - p_6)[2 \times 3, 6]$ is $4$-realizable, which finishes the proof.
   \end{proof}
 \end{lemma}
 
 \begin{lemma}\label{thm:case3:6:compose}
-  Let $p = (p_3, p_4, p_5, \dots, p_n)$ and $q = (q_3, q_4, q_5, \dots, q_m)$ be two sequence which can be $[2 \times 3, 6]$-$4$-realized, then the sequence $p + q - [8 \times 3]_4$ is $[2\times3, 6]$-$4$-realizable.
+  Let $p = (p_3, p_4, p_5, \dots, p_n)$ and $q = (q_3, q_4, q_5, \dots, q_m)$ be two sequences which can be $[2 \times 3, 6]$-$4$-realized, then the sequence $p + q - [8 \times 3]$ is $[2\times3, 6]$-$4$-realizable.
   \begin{proof}
-    Let $P$ and $Q$ be the $[2 \times 3, 6]$-$4$-realizations of $p$ and $q$. Consider on each side of any polygon in $P$ the ($3 \times 4$) rectangle of \autoref{fig:case3:6:img2} added. This process in the case of an square is seen in \autoref{fig:case3:6:img3}. The boundary structure of this patch is the $(2, 2, 2, 2, 2, 2)$-expansion of the original face, by \autoref{thm:construction:patch} this replacement results in $4$-valent polyhedra $P'$. $P'$ has the same number of faces for each type except triangles and hexagons.
+    Let $P$ and $Q$ be the $[2 \times 3, 6]$-$4$-realizations of $p$ and $q$. Consider on each side of any polygon in $P$ the ($3 \times 4$) rectangle of \autoref{fig:case3:6:img2} to be added. For a square this process is shown in \autoref{fig:case3:6:img3}. The boundary structure of this patch is the $(2, 2, 2, 2, 2, 2)$-expansion of the original face, by \autoref{thm:construction:patch} this replacement results in a $4$-valent polyhedron $P'$. $P'$ has the same number of faces for each type as $P$ except triangles and hexagons.
 
     \begin{tikzfigure}{\label{fig:case3:6:img2}}{A $3 \times 4$ rectangle used during the construction}
       \begin{scope}[scale=0.5]
@@ -76,7 +76,7 @@
         \draw (-1, 5) -- ++(0, 2) -- ++(8, 0) -- ++(0, -2) -- ++(-8, 0) ++(2,0) -- ++(2, 0.5) ++(0, 1) -- ++(-2, 0.5) ++(4, 0) -- ++(-2, -0.5) ++(0, -1) -- ++(2, -0.5) ++(-2, 0) -- ++(0, 2);
       \end{scope}
     \end{tikzfigure}
-    The same can be done with $Q$ resulting in $Q'$. Both $P'$ and $Q'$ have at least one of the diamond shaped construct consisting of four triangles which is marked by thick lines in \autoref{fig:case3:6:img3}. By removing these four triangles on both of them one can ``glue'' the resulting quadrangles together, the established polyhedron has the desired number of faces.
+    The same can be done with $Q$ resulting in $Q'$. Both $P'$ and $Q'$ have at least one of the diamond shaped constructs consisting of four triangles which (an example of which is drawn by thick lines in \autoref{fig:case3:6:img3}). By removing these four triangles on both of them one can ``glue'' the resulting quadrangles together, the established polyhedron has the desired number of faces.
     \begin{tikzfigure}{\label{fig:case3:6:img3}}{Construction by replacing each face gives a diamond shape}
       \matrix (m) [ column sep=1cm] {
         \begin{scope}
@@ -117,13 +117,13 @@ These lemmas can be combined to the following theorem:
   \end{align*}
   then $p$ is $[2 \times 3, 6]$-$4$-realizable.
   \begin{proof}
-    Each sequence of the form $[2k \times 3, 2 \times k]$ can be $4$-realized by the $k$-sided antiprism. Therefore, by applying \autoref{thm:case3:6:compose}, $p$ is $[2 \times 3, 6]$-$4$-realizable if $p - [2k \times 3, 2 \times k] + [8 \times 3]$ is realizable. One can use this fact to create a sequence satisfying the conditions of \autoref{thm:case3:6:mainlemma}. First consider the case that $p_4 + p_5 \leq 6$. Let $k_1$ and $k_2$  be two of the indices where $\floor{\frac{p_k}{2}} > 0$, $3 \nmid k_1, k_2$. Note that $k_1$ and $k_2$ can potentially be the same if $\floor{\frac{p_{k_1}}{2}} \geq 2$. Define the sequences
+    Each sequence of the form $[2k \times 3, 2 \times k]$ can be $4$-realized by the $k$-sided antiprism. Therefore, by applying \autoref{thm:case3:6:compose}, $p$ is $[2 \times 3, 6]$-$4$-realizable if $p - [2k \times 3, 2 \times k] + [8 \times 3]$ is $4$-realizable. One can use this fact to create a sequence satisfying the conditions of \autoref{thm:case3:6:mainlemma}. First consider the case that $p_4 + p_5 \leq 6$. Let $k_1$ and $k_2$  be two of the indices where $\floor{\frac{p_k}{2}} > 0$, $3 \nmid k_1, k_2$. Note that $k_1$ and $k_2$ can potentially be the same if $\floor{\frac{p_{k_1}}{2}} \geq 2$. Define the sequences
     \begin{align*}
       p^{(1)} &= p - [2(k_1 - 4) \times 3, 2 \times k_1], \\
       p^{(2)} &= p - [2(k_2 - 4) \times 3, 2 \times k_2] \text{ and } \\
       p^{(12)} &= p - [2(k_1 - 4) \times 3, 2 \times k_1] - [2(k_2 - 4) \times 3, 2 \times k_2].
     \end{align*}
-    If one of these sequences satisfies $\sum_{k\geq 3} q_k \equiv 2 (\mod 3)$, it would be $[2 \times 3, 6]$-$4$-realizable by \autoref{thm:case3:6:mainlemma} and in conclusion $p$ would be $[2 \times 3, 6]$-$4$-realizable. A calculation shows
+    If one of these sequences $q$ satisfies $\sum_{k\geq 3} q_k \equiv 2 (\mod 3)$, it would be $[2 \times 3, 6]$-$4$-realizable by \autoref{thm:case3:6:mainlemma} and in conclusion $p$ would be $[2 \times 3, 6]$-$4$-realizable. A calculation shows
     \begin{align*}
       &\sum_{k\geq 3} (p - [2(k_1 - 4) \times 3, 2 \times k_1])_k  \equiv \sum_{k\geq 3} p_k - \sum_{k\geq 3} ([2(k_1 - 4) \times 3, 2 \times k_1])_k \\
       \equiv& \sum_{k\geq 3} p_k - 2k_1 + 6 \equiv \sum_{k\geq 3} p_k + k_1 \qquad (\mod 3),
@@ -134,6 +134,6 @@ These lemmas can be combined to the following theorem:
       \sum_{k\geq 3} p^{(2)}_k  &\equiv \sum_{k\geq 3} p_k + k_2  & (\mod 3) \\
       \sum_{k\geq 3} p^{(12)}_k  &\equiv \sum_{k\geq 3} p_k + k_1 + k_2  & (\mod 3)
     \end{align*}
-    If $k_1 \not\equiv k_2 (\mod 3)$ then either $\sum_{k\geq 3} p_k$, $\sum_{k\geq 3} p_k + k_1$ or $\sum_{k\geq 3} p_k + k_2$ is equivalent to $2$ modulo $3$, else either $\sum_{k\geq 3} p_k$, $\sum_{k\geq 3} p_k + k_1$ or $\sum_{k\geq 3} p_k + k_1 + k_2$ is equivalent to $2$ modulo $3$, since $k_1, k_2 \not\equiv 0 (\mod 3)$ and thus all residual classes occur. This proves the first case. If $p_4 + p_5 > 6$ one can subtract $[2 \times 4]$ or $[2 \times 3, 2 \times 5]$ from $p$ until $p_4 + p_5$ is either $5$ or $6$ (and while $p_4, p_5$ remain to be greater than or equal to $0$). The new sequence is then of the form of the first case, therefore $[2 \times 3, 6]$-$4$-realizable and with \autoref{thm:case3:6:compose} also the original $p$ is $[2 \times 3, 6]$-$4$-realizable.
+    If $k_1 \not\equiv k_2 (\mod 3)$ then either $\sum_{k\geq 3} p_k$, $\sum_{k\geq 3} p_k + k_1$ or $\sum_{k\geq 3} p_k + k_2$ is equivalent to $2$ modulo $3$, else either $\sum_{k\geq 3} p_k$, $\sum_{k\geq 3} p_k + k_1$ or $\sum_{k\geq 3} p_k + k_1 + k_2$ is equivalent to $2$ modulo $3$, since $k_1, k_2 \not\equiv 0\,(\mod 3)$ and thus all residual classes occur. This proves the first case. If $p_4 + p_5 > 6$ one can subtract $[2 \times 4]$ or $[2 \times 3, 2 \times 5]$ from $p$ until $p_4 + p_5$ is either $5$ or $6$ (and while $p_4, p_5$ remain to be greater than or equal to $0$). The new sequence is then of the form of the first case, therefore $[2 \times 3, 6]$-$4$-realizable and the original $p$ is $[2 \times 3, 6]$-$4$-realizable too, by the first argument given in the proof.
   \end{proof}
 \end{theorem}
