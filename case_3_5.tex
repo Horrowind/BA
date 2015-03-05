@@ -2,7 +2,7 @@
 In this section the main problem will be proven for the case of adding the same number of triangles and pentagons to realize a given sequence satisfying \autoref{eq:valence:4}. This proof will be given by an explicit construction consisting of several building blocks which are described below.
 
 \begin{definition}[Square patch]\label{def:square:patch}
-  When in the case of $4$-valent polyhedrons a square patch denotes a $4$-patch where exactly four vertices on the outer have face  count $1$, while every other boundary vertex has face count $2$.
+  In the case of $4$-valent polyhedrons a square patch denotes a $4$-patch where exactly four vertices on the outer have face  count $1$, while every other boundary vertex has face count $2$.
 \end{definition}
 
 %% \begin{lemma}\label{thm:square:arc}
@@ -39,7 +39,7 @@ In this section the main problem will be proven for the case of adding the same 
   \end{tikzfigure}
 \end{definition}
 
-Each $k$-gon, $(k > 5)$ can be grouped together with $k-4$ triangles to create a ``flat'' block (flat meaning they satisfy \autoref{eq:zero:curv:4}). This can be further transformed into to a square patch by adding $2 \times 2$ building blocks, as well as some additional triangles and pentagons as seen in \autoref{fig:case:3:5:basicbb}.
+Each $k$-gon, $(k > 5)$ can be grouped together with $k-4$ triangles to create a ``flat'' block (flat meaning they satisfy \autoref{eq:zero:curv:4}). This can be further transformed into a square patch by adding $2 \times 2$ building blocks, as well as some additional triangles and pentagons, as seen in \autoref{fig:case:3:5:basicbb}.
 \begin{definition}[Basic building block] For a $k$-gon with $k > 5$, the $4$-patch in \autoref{fig:case:3:5:basicbb} will be called its ``basic building block''.
   \begin{tikzfigure}{\label{fig:case:3:5:basicbb}}{Basic building block for a $k$-gon, $k>5$, here a nonagon}
     \begin{scope}[scale=0.1]
@@ -62,7 +62,7 @@ Each $k$-gon, $(k > 5)$ can be grouped together with $k-4$ triangles to create a
     \end{scope}
   \end{tikzfigure}
   
-  For $k = 4$, a quadrangle, the structures in \autoref{fig:case:3:5:quadbb} will be considered as the respective basic building block. For a pentagon the basic building block is seen in \autoref{fig:case:3:5:2times2bb}
+  For $k = 4$, a quadrangle, the structures in \autoref{fig:case:3:5:quadbb} will be considered as the respective basic building block. For a pentagon the basic building block is seen in \autoref{fig:case:3:5:2times2bb}.
 
   \begin{tikzfigure}{\label{fig:case:3:5:quadbb}}{Basic building block for a quadrangle}
     \begin{scope}[scale=0.5]
@@ -179,12 +179,12 @@ Each $k$-gon, $(k > 5)$ can be grouped together with $k-4$ triangles to create a
     \end{scope}
   \end{tikzfigure}
 
-  As it is with the basic building blocks, the north and east as well as the west and south sides share the same number of edges.
+  Similar to the basic building blocks, the north and east as well as the west and south sides share the same number of edges.
 \end{definition}
 
 \begin{theorem}\label{thm:case3:5} Let $p = (p_3, p_4, p_5, \dots, p_n)$ be a given sequence satisfying \autoref{eq:valence:4}. Then $p$ is $[3, 5]$-$4$-realizable.
   \begin{proof}
-    For each $k$-gon, $k > 3$ take the basic building block for this $k$-gon and form a basis out of these. Let $p'_k$ be the number of $k$-gons for each $3 \geq k$. According to the construction, the basis only consists of the required $k$-gons, triangles and pentagons, so $p_k = p'_k$ for $k \neq 3, 5$. The basis can be closed in two steps. First add a ring of $2 \times 2$ building blocks around the base and put the pieces seen on the left of \autoref{fig:case3:5:closedbasis1} in each corner (here four of the additional triangles are used, one in each corner). The construction is possible, since every side of the base has a length divisible by two. The resulting figure has an outer face with twelve additional edges compared to the basis, so the number of edges is divisible by four. Also note that each vertex on the outer face is adjacent to two faces.
+    For each $k$-gon, $k > 3$ take the basic building block for this $k$-gon and form a basis out of these. Let $p'_k$ be the number of $k$-gons for each $3 \geq k$. According to the construction, the basis only consists of the required $k$-gons, triangles and pentagons, so $p_k = p'_k$ for $k \neq 3, 5$. The basis can be closed in two steps. First add a ring of $2 \times 2$ building blocks around the base and put the pieces seen on the left of \autoref{fig:case3:5:closedbasis1} in each corner (here four of the additional triangles are used, one in each corner). The construction is possible, since every side of the base has a length divisible by two. The resulting figure has an outer face with twelve additional edges compared to the basis, so the number of edges is divisible by four. Also note, that each vertex on the outer face is adjacent to two faces.
     \begin{tikzfigure}{\label{fig:case3:5:closedbasis1}}{Part one of closing the basis}
       \matrix (m) [ column sep=1cm] {
         \begin{scope}[scale=0.8]
@@ -246,7 +246,7 @@ Each $k$-gon, $(k > 5)$ can be grouped together with $k-4$ triangles to create a
       };
     \end{tikzfigure}
 
-    The second step uses the remaining four triangles and several $2 \times 2$ building blocks and creates a fitting stripe, see \autoref{fig:case3:5:closedbasis2}. By adding in $2 \times 2$-building blocks, one can create stripes whose number of edges on the outer face is equal to any multiple of four, in this case equal to the number of edges of the previous construction. As it was previously, each vertex on the outer face is adjacent to two faces, therefore, after glueing the results of both steps together, the polyhedron held is $4$-valent.
+    The second step uses the remaining four triangles and several $2 \times 2$ building blocks and creates a fitting stripe, see \autoref{fig:case3:5:closedbasis2}. By adding in $2 \times 2$-building blocks, one can create stripes, with number of edges on the outer face equal to any multiple of four - in this case the number of edges of the previous construction. As before, each vertex on the outer face is adjacent to two faces, therefore, after glueing the results of both steps together, the polyhedron held is $4$-valent.
     \begin{tikzfigure}{\label{fig:case3:5:closedbasis2}}{Part two of closing the basis}
       \begin{scope}[scale=0.8]
         \draw (-4, -1) -- (-5, 0) -- (-4, 1);

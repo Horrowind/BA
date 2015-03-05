@@ -11,7 +11,7 @@
 \end{definition}
 
 \begin{definition}\label{def:realizable}
-  Sequences $p = (p_3, \dots, p_m)$, $q = (q_3, \dots, q_m)$ are said to be realizable, if there exists a polyhedron having $p$ as its $p$-vector and $q$ as its $v$-vector.
+  Sequences $p = (p_3, \dots, p_m)$, $q = (q_3, \dots, q_n)$ are said to be realizable, if there exists a polyhedron having $p$ as its $p$-vector and $q$ as its $v$-vector.
 \end{definition}
 
 With this setup, we want to discuss in this thesis a broad problem arising from the combinatorical properties of polyhedra:
@@ -26,13 +26,13 @@ The most fundamental result giving a necessary condition is Euler's relation.
 \end{theorem}
 Given the notation as above one can immediately draw some basic conclusions from this relation: For one the number of vertices $v$ is obviously the sum of the entries of $v$-vector, as is the same with $f$, which is the sum of the $p$-vector. Using a double counting argument (each edge is adjacent to two faces and each edge is adjacent to two vertices) the following for the number of edges holds:
 \begin{align*}
-  2e = \sum_{k=3}^{m} k \cdot p_k = \sum_{k=3}^{n} k \cdot f_k
+  2e = \sum_{k=3}^{m} k \cdot p_k = \sum_{k=3}^{n} k \cdot f_k.
 \end{align*}
 Putting these equations into Euler's relation \autoref{thm:eulers:relation} gives for some $t \in (0, 1)$
 \begin{align*}
-  \sum_{k=3}^m v_k - \left(\frac{t}{2} \sum_{k=3}^m k v_k + \frac{1-t}{2} \sum_{k=3}^n k p_k \right) + \sum_{k=3}^n p_k = 2
+  \sum_{k=3}^m v_k - \left(\frac{t}{2} \sum_{k=3}^m k v_k + \frac{1-t}{2} \sum_{k=3}^n k p_k \right) + \sum_{k=3}^n p_k = 2,
 \end{align*}
-which can be transformed into:
+which can be transformed into
 \begin{align}
   t \sum_{k=3}^m \left(\frac{2}{t} - k \right) v_k + (1-t) \sum_{k=3}^n \left( \frac{2}{1-t} - k \right) p_k = 4. \label{eq:general:vp:relation}
 \end{align}
@@ -41,15 +41,15 @@ This equation is independent of the value of some $v_k$ or $p_{k'}$ when the val
 \begin{definition}[$r$-realizable]\label{def:r:realizable}
   A sequence $p = (p_3, \dots, p_m)$ is said to be $r$-realizable, if $p$ is realizable by a polyhedron which has only $r$-valent vertices.
 \end{definition}
-Under these circumstances $r$, has to be in $\{3, 4, 5\}$, thus the following equations arise:
+Under these circumstances, $r$ has to be in $\{3, 4, 5\}$, thus the following equations arise:
 \begin{align}
-  r &= 3: \sum_{k=3}^n \left(6 - k \right) p_k = 12 \label{eq:valence:3}\\
-  r &= 4: \sum_{k=3}^n \left(4 - k \right) p_k = 8  \label{eq:valence:4}\\
-  r &= 5: \sum_{k=3}^n \left( \frac{10}{3} - k \right) p_k = \frac{20}{3} \label{eq:valence:5}
+  r &= 3: \sum_{k=3}^n \left(6 - k \right) p_k = 12 \label{eq:valence:3},\\
+  r &= 4: \sum_{k=3}^n \left(4 - k \right) p_k = 8  \label{eq:valence:4},\\
+  r &= 5: \sum_{k=3}^n \left( \frac{10}{3} - k \right) p_k = \frac{20}{3} \label{eq:valence:5}.
 \end{align}
 Even with these rather specific constraints the problem stated above has no easy definite answer, i.e., not every $p$-vector satisfying one of these equations can be realized as a polyhedron.
 \begin{example}
-  The $p$-vector $(0, 0, 12, 1)$ has no $3$-realization but satisfies \autoref{eq:valence:3}. To see this one can start with one hexagon. As only pentagons are left to build the rest of the polyhedron a ring of six pentagons has to be glued to the sides of the hexagon. Another ring of six pentagons is forced to be glued to the first, leaving a hole of the shape of a hexagon in the end, but no polygons left to fill it, see \autoref{fig:preliminaries:example}.
+  The $p$-vector $(0, 0, 12, 1)$ has no $3$-realization but satisfies \autoref{eq:valence:3}. To see this one can start with one hexagon. As only pentagons are left to build the rest of the polyhedron a ring of six pentagons has to be glued to the sides of the hexagon. Another ring of six pentagons is forced to be glued to the first, leaving a hole of the shape of a hexagon, but no polygons left to fill it, see \autoref{fig:preliminaries:example}.
 
   \begin{tikzfigure}{\label{fig:preliminaries:example}}{Example for a non-realizable sequence}
     \begin{scope}[xscale=1.0, yscale=0.866]
@@ -79,8 +79,8 @@ Even with these rather specific constraints the problem stated above has no easy
 \begin{problem}[General Eberhard's problem]\label{problem:eberhard}
   Let $r \in \{3, 4, 5\}$ and $(q_3, \dots, q_n)$ be a sequence which satisfies
   \begin{align}
-    r &= 3: \sum_{k=3}^n \left( 6            - k \right) q_k = 0 \label{eq:zero:curv:3}\\
-    r &= 4: \sum_{k=3}^n \left( 4            - k \right) q_k = 0 \label{eq:zero:curv:4}\\
+    r &= 3: \sum_{k=3}^n \left( 6            - k \right) q_k = 0 \label{eq:zero:curv:3},\\
+    r &= 4: \sum_{k=3}^n \left( 4            - k \right) q_k = 0 \label{eq:zero:curv:4},\\
     r &= 5: \sum_{k=3}^n \left( \frac{10}{3} - k \right) q_k = 0 \label{eq:zero:curv:5}
   \end{align}
   respectively. Then show that all sequences $(p_3, \dots, p_m)$ satisfying the equations \ref{eq:valence:3}, \ref{eq:valence:4} or \ref{eq:valence:5} are $(q_3, \dots, q_n)$-$r$-realizable.
@@ -90,7 +90,7 @@ Even with these rather specific constraints the problem stated above has no easy
 \end{notation}
 \autoref{eq:valence:3} and \autoref{eq:valence:4} suggest that $q = (6)$ might be a good candidate for a $3$-valent statement, as well as $q = (4)$ for $4$-valence. Indeed, in these cases the important and well-known classical Eberhard theorem in \cite{ConvexPolytopes} gives a complete answer:
 \renewcommand{\Itemautorefname}{Theorem \ref{thm:eberhard}}
-\begin{theorem}[Eberhard'S theorem] \label{thm:eberhard} The following holds:
+\begin{theorem}[Eberhard's theorem] \label{thm:eberhard} The following holds:
   \begin{enumerate}[label=(\roman*)]
   \item \label{thm:eberhard:3} For each $p_3, p_4, p_5, p_7, \dots, p_m$ satisfying \autoref{eq:valence:3} there exists a number $p_6$ such that $(p_3, \dots, p_m)$ is $3$-realizable.
   \item \label{thm:eberhard:4} For each $p_3, p_5, \dots, p_m$ satisfying \autoref{eq:valence:4} there exists a number $p_4$ such that $(p_3, \dots, p_m)$ is $4$-realizable.
@@ -98,7 +98,7 @@ Even with these rather specific constraints the problem stated above has no easy
 \end{theorem}
 
 \begin{remark}
-  There is a subtle difference in the statements of the general and the classical Eberhard theorems. While the first one states a number of hexagons which has to appear, the second one leaves out any constraints on $p_6$ completely. In other words, the general Eberhard theorems requires for all given numbers of hexagons, that there exists a realization with more hexagons. In the end, this differentiation is not important as both versions of the theorem hold. Take a realization given by the classical Eberhard theorem with no information about the minimum number of hexagons or quadrangles. To satisfy the requirements of the general problem one has to add arbitrarily many hexagons in the case of valence $3$ and quadrangles in the case of valence $4$. This can be done by a repeated substitution of each edge by a hexagon or each vertex by a quadrangle as seen in \autoref{fig:edge:replacement}. In each replacement the number of hexagons or quadrangle increases, resulting in an unbounded number of hexagons or quadrangles.
+  There is a subtle difference in the statements of the general and the classical Eberhard theorems. While the first one states a number of hexagons which has to appear, the second does not imply any constraints on $p_6$. In other words, the general Eberhard theorems requires for all given numbers of hexagons, that there exists a realization with more hexagons. Ultimately, this differentiation is not important as both versions of the theorem hold. Take a realization given by the classical Eberhard theorem with no information about the minimum number of hexagons or quadrangles. To satisfy the requirements of the general problem one has to add arbitrarily many hexagons in the case of valence $3$ and quadrangles in the case of valence $4$. This can be done by a repeated substitution of each edge by a hexagon or each vertex by a quadrangle as seen in \autoref{fig:edge:replacement}. In each replacement the number of hexagons or quadrangle increases, resulting in an unbounded number of hexagons or quadrangles.
   \begin{tikzfigure}{\label{fig:edge:replacement}}{
       Replacing each edge of a polyhedron by a hexagon or each vertex by a quadrangle.
       Thin-lined is the original graph (the tetrahedron left, an octahedron on the right), the new graph is drawn thick.
@@ -125,12 +125,12 @@ Even with these rather specific constraints the problem stated above has no easy
 
 A stronger theorem, which generalizes the first case, is given in \cite{jendrol1977generalization}:
 
-\begin{theorem}[Jendrol', Jucovi{\v{c}} 1977] \label{thm:eberhard:extended}
+\begin{theorem}[Jendrol', Jucovi{\v{c}}, 1977] \label{thm:eberhard:extended}
   Each sequence $p$ together with $v$ is realizable on the closed orientable $2$-manifold of genus $g$ for some $p_6 \in \nats$, $v_3 \in \nats$ if and only if
   \begin{align*}
-    \sum_{k=3}^m (6-k)p_k + 2 \sum_{k=4}^n (3-k)v_k &= 12(1-g) \\
-    \sum_{k=3,\, 2 \nmid k}^{m} p_k \neq 0 \text{ or} \sum_{k=4, \,3 \nmid k}^m v_k \neq 1 &\text{ if } g = 0 \\
-    p \neq [5, 7] \text{ or } v \neq [k\times3] \text{ for all } k \in \nats &\text{ if } g = 1
+    \sum_{k=3}^m (6-k)p_k + 2 \sum_{k=4}^n (3-k)v_k &= 12(1-g), \\
+    \sum_{k=3,\, 2 \nmid k}^{m} p_k \neq 0 \text{ or} \sum_{k=4, \,3 \nmid k}^m v_k \neq 1 &\text{ if } g = 0, \\
+    p \neq [5, 7] \text{ or } v \neq [k\times3] \text{ for all } k \in \nats &\text{ if } g = 1.
   \end{align*}
 \end{theorem}
 
