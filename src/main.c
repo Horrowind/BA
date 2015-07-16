@@ -204,12 +204,35 @@ struct boundary_size {
     int size;
 };
 
-struct boundary_size insert(inttype boundary, int size, int ngon) {
+struct boundary_size insert_ngon(inttype boundary, int size, int ngon) {
+    struct boundary_size bs = {0, 0};
+    unsigned char first = boundary & MASK;
+    if(first >= VALENCE - 2) return bs;
+    inttype masked_boundary = boundary & ngon_masks[size];
+    /* if(masked_boundary == ngon_compare[size]) { */
+        
+    /* } else { */
+        uint32_t shift = __builtin_ctzll(ngon_compare[size] ^ (boundary & ngon_masks[size]));
+        shift = shift - (shift % BITS) - BITS;
+        ngon -= 2;
+        if(shift / BITS > ngon) return bs;
+        ngon -= shift;
+        bs.boundary   = ((boundary >> shift) & ~MASK);
+        bs.boundary  += (1 << BITS);
+        bs.boundary <<= BITS * (ngon);
+        bs.boundary  += first + 1;
+        bs.size       = size + ngon - shift / BITS;
+        //bs.boundary  &= (1 << bs.size) - 1;
+        //}
+    return bs;
+}
+
+struct boundary_size remove_ngon(inttype boundary, int size, int ngon) {
     struct boundary_size bs = {0, 0};
     unsigned char first = boundary & MASK;
     if(first >= VALENCE - 2) return bs;
     uint32_t shift = __builtin_ctzll(ngon_compare[ngon] ^ (boundary & ngon_masks[ngon]));
-    shift = shift - BITS;
+    shift = shift - (shift % BITS) - BITS;
     ngon -= 2;
     if(shift / BITS > ngon) return bs;
     ngon -= shift;
@@ -224,77 +247,83 @@ struct boundary_size insert(inttype boundary, int size, int ngon) {
 
 int small_ngon = 5;
 int large_ngon = 7;
-#define MAX_SIZE 33
-pool_t database[MAX_SIZE];
+#define MAX_SIZE 30
+
 queue_t queues[MAX_SIZE];
+uint8_t* database[MAX_SIZE];
+
+void database_init() {
+    for(int i = 3; i < MAX_SIZE; i++) {
+        uint64_t size = ((1 << i) + 7) / 8;
+        database[i] = malloc(size);
+        if(database[i] == 0) printf("Allocation of Database[%i] failed\n", i);
+    }
+}
 
 uint8_t database_contains(inttype boundary, int size) {
-    for(int i = 0; i < database[size].fill; i++) {
-        if(database[size].data[i].boundary == boundary) return 1;
-    }
-    return 0;
+    /* printf("%x %i\n", boundary, size); */
+    /* printf("%x\n", database[size][boundary >> 3]); */
+    /* printf("%x\n", (1 << (boundary & 7))); */
+    /* printf("%x\n\n", (boundary & 7)); */
+    
+    
+    return (database[size][boundary >> 3] & (1 << (boundary & 7))) >> (boundary & 7);
 }
 
 void database_add(inttype boundary, int size) {
-    //printf("Boundary [%i]: %08x\n", size, (int)boundary);
-    pool_alloc(&database[size], boundary);
+    database[size][boundary >> 3] |= 1 << (boundary & 7);
 }
 
 
 void clever_search(inttype boundary, int size) {
+    database_init();
     for(int i = 0; i < MAX_SIZE; i++) {
-        pool_init(&database[i]);
+        //pool_init(&database[i]);
         queue_init(&queues[i]);
     }
     queue_enqueue(&queues[size], normalize(boundary, size));
     struct boundary_size bs;
-    int sum = 0;
-
     int found = 0;
-    
-outer:
-    /* for(int i = 3; i < MAX_SIZE; i++) { */
-    /*     sum += (queues[i].head - queues[i].tail + queues[i].length) % queues[i].length; */
-    /* } */
-    //printf("sum: %i\n", sum);
-    
-    for(int size = 3; size < MAX_SIZE; size++) {
-        //printf("%i(%i) ", i, (queues[i].head - queues[i].tail + queues[i].length) % queues[i].length);
-        if(!queue_is_empty(&queues[size])) {
-            if(found < size) {
-                printf("Found %i\n", size);
-                found = size;
-            }
-            //printf("\n");
-            boundary = queue_dequeue(&queues[size]);
-            if(!database_contains(boundary, size)) {
-                database_add(boundary, size);
-                for(int j = 0; j < size; j++) {
-                    bs = insert(boundary, size, small_ngon);
-                    //printf("%04x[%i] ", (int)normalize(bs.boundary, bs.size), bs.size);
-                    if(bs.size < MAX_SIZE && bs.size != 0) {
-                        /* printf("Huhu:  %08x[%i] (%i)=> %08ux[%u]\n", boundary, size, small_ngon, bs.boundary, bs.size); */
-                        /* //if(__builtin_ffsll(normalize(bs.boundary, bs.size)) > bs.size) */
-                        /* printf("Huhu!: %08x[%i] (%i)=> %08ux[%u]\n", boundary, size, small_ngon, normalize(bs.boundary, bs.size), bs.size); */
-                        queue_enqueue(&queues[bs.size], normalize(bs.boundary, bs.size));
+    while(1) {
+        //printf("sum: %i\n", sum);
+        for(int size = 3; size < MAX_SIZE; size++) {
+            //printf("%i(%i) ", i, (queues[i].head - queues[i].tail + queues[i].length) % queues[i].length);
+            if(!queue_is_empty(&queues[size])) {
+                /* if(found < size) { */
+                /*     printf("Found %i\n", size); */
+                /*     found = size; */
+                /* } */
+                //printf("\n");
+                boundary = queue_dequeue(&queues[size]);
+                if(!database_contains(boundary, size)) {
+                    database_add(boundary, size);
+                    for(int j = 0; j < size; j++) {
+                        bs = insert_ngon(boundary, size, small_ngon);
+                        if(bs.size < MAX_SIZE && bs.size != 0) {
+                            inttype normalized = normalize(bs.boundary, bs.size);
+                            if(normalized == 0x000084) printf("SFound: 0x000084 %lx[%i]\n", boundary, size);
+                            if(normalized == 0x000C50) printf("SFound: 0x000C50 %lx[%i]\n", boundary, size);
+                            if(normalized == 0x01C520) printf("SFound: 0x01C520 %lx[%i]\n", boundary, size);
+                            if(normalized == 0x38a441) printf("SFound: 0x38a441 %lx[%i]\n", boundary, size);
+                            queue_enqueue(&queues[bs.size], normalized);
+                        }
+                        bs = insert_ngon(boundary, size, large_ngon);
+                        if(bs.size < MAX_SIZE && bs.size != 0) {
+                            inttype normalized = normalize(bs.boundary, bs.size);
+                            if(normalized == 0x000084) printf("LFound: 0x000084 %lx[%i]\n", boundary, size);
+                            if(normalized == 0x000C50) printf("LFound: 0x000C50 %lx[%i]\n", boundary, size);
+                            if(normalized == 0x01C520) printf("LFound: 0x01C520 %lx[%i]\n", boundary, size);
+                            if(normalized == 0x38a441) printf("LFound: 0x38a441 %lx[%i]\n", boundary, size);
+                            queue_enqueue(&queues[bs.size], normalized);
+                        }
+                        boundary = rotl(boundary, BITS, size);
                     }
-                    bs = insert(boundary, size, large_ngon);
-                    //printf("%04x[%i] ", normalize(bs.boundary, bs.size), bs.size);
-                    if(bs.size < MAX_SIZE && bs.size != 0) {
-                        /* printf("Huhu:  %08x[%i] (%i)=> %08x[%i]\n", boundary, size, large_ngon, bs.boundary, bs.size); */
-                        /* printf("Huhu!: %08x[%i] (%i)=> %08x[%i]\n", boundary, size, large_ngon, normalize(bs.boundary, bs.size), bs.size); */
-                        queue_enqueue(&queues[bs.size], normalize(bs.boundary, bs.size));
-                    }
-                    boundary = rotl(boundary, BITS, size);
                 }
+                break;
             }
-            goto outer;
         }
     }
-    printf("\n");
-
 }
-
 
 
 
@@ -319,10 +348,10 @@ outer:
 /* } */
 
 void insert_test() {
-    for(int size = 3; size < 9; size++) {
+    for(int size = 1; size < 3; size++) {
         for(int i = 0; i < (1 << size); i++) {
-            for(int j = 3; j < 4; j++) {
-                struct boundary_size bs = insert(i, size, j);
+            for(int j = 3; j < 5; j++) {
+                struct boundary_size bs = insert_ngon(i, size, j);
                 printf("Insert %i-gon in %02x[%x]: %04x[%x]\n", j, i, size, (int)bs.boundary, bs.size); 
             }
         }
@@ -336,7 +365,15 @@ int main(int argc, char* argv[]) {
     if(argc == 3) {
         small_ngon = atoi(argv[1]);
         large_ngon = atoi(argv[2]);
+    } else {
+        small_ngon = 5;
+        large_ngon = 7;
     }
+
+    /* struct boundary_size bs = insert_ngon(0xc50, 12, 7); */
+    /* printf("%lx[%i]\n",bs.boundary, bs.size); */
+    /* printf("%lx[%i]\n",normalize(bs.boundary, bs.size), bs.size); */
+    
     
     //insert_test();
     //queue_test();
