@@ -1,2 +1,2 @@
 all:
-	clang -std=c11 -O3 -g main.c
+	clang -std=c11 -g -O3 -lpthread main.c
