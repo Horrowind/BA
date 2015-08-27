@@ -5,7 +5,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-#include <immintrin.h>
+//#include <immintrin.h>
 
 #include <pthread.h>
 
@@ -162,13 +162,18 @@ void queue_test2() {
     }
 }
 
+inline void check_boundary_size(inttype boundary, int size) {
+    printf("[%02i] %lx\n", size, boundary);
+    if(boundary != 0) assert(sizeof(inttype) * 8 - __builtin_clzll(boundary) <= size && "Boundary is longer then size");
+}
+
 inline inttype ngon_masks(int size) {
-    assert(size <= (BITS ? 14 : 31));
+    assert(size <= (BITS - 1 ? 14 : 31));
     return (1ull << (BITS *  (size - 1))) - 1;
 }
 
 inline inttype ngon_add_compare(int size) {
-    assert(size <= (BITS ? 14 : 31));
+    assert(size <= (BITS - 1 ? 14 : 31));
     return (VALENCE - 2) * (((1ull << (BITS *  (size - 1))) - 1) / MASK);
 };
     
@@ -201,9 +206,9 @@ struct boundary_size insert_ngon(inttype boundary, int size, int ngon) {
             bs.boundary >>= shift;
             if(bs.boundary == VALENCE - 2) { //We have reached the first node twice
                 if(ngon > 0) {               //Check if we have enough nodes to insert from the ngon left
-#if (VALENCE != 3)
-                    bs.boundary = 1ull;
-#endif
+#                   if (VALENCE != 3)
+		    bs.boundary = 1ull;
+#                   endif
                     bs.boundary <<= BITS * (ngon - 1);
                     bs.size       = ngon;
                     return bs;
@@ -230,7 +235,10 @@ struct boundary_size remove_ngon(inttype boundary, int size, int ngon) {
     if(boundary == 1) {
         
     }
-                     
+
+    return (struct boundary_size){.boundary = 0, .size = 0};
+
+    
     /* struct boundary_size bs = {.boundary = 0, .size = 0}; */
     /* unsigned char first = boundary & ~ngon_masks(size); */
     /* // Check if we can add an edge to the first node) */
@@ -258,7 +266,25 @@ struct boundary_size remove_ngon(inttype boundary, int size, int ngon) {
     /*         } */
     /*     } */
     /* } */
-    /* return (struct boundary_size){.boundary = 0, .size = 0}; */
+}
+
+inline char is_mouse(inttype boundary, int size) {
+    // A mouse boundary complex has odd length and the head has valence 1
+    if((size & 1) == 1 && ((boundary & MASK) == 0)) {
+	boundary >>= 1;
+        inttype v = boundary;
+	inttype s = sizeof(inttype) * 8; // bit size; must be power of 2
+	inttype mask = ~0ull;
+	while ((s >>= 1ull) >= (1ull << (BITS - 1))) {
+	    mask ^= (mask << s);
+	    v = ((v >> s) & mask) | ((v << s) & ~mask);
+	}
+	v >>= (sizeof(inttype) / BITS) * 8 - size + 1;
+	if(boundary + v == (1 << (size - 1)) - 1) {
+	    return 1;
+	}
+    }
+    return 0;
 }
 
 #if 0
@@ -404,6 +430,13 @@ void remove_test() {
     }
 }
 
+void mouse_test() {
+    inttype mouse;
+    int size;
+    mouse = 0x1A8; size = 9;
+    printf("Mouse: %lx[%i] %c\n", mouse, size, is_mouse(mouse, size) ? 'y' : 'n');
+}
+
 int small_ngon = 5;
 int large_ngon = 7;
 #define MAX_SIZE 20
@@ -412,7 +445,7 @@ queue_t queues[MAX_SIZE];
 uint8_t* database[MAX_SIZE];
 
 void database_init() {
-    for(int i = 3; i < MAX_SIZE; i++) {
+    for(int i = 1; i < MAX_SIZE; i++) {
         uint64_t size = ((1ull << i) + 15) / 8;
         database[i] = malloc(size);
         if(database[i] <= 0) {
@@ -424,7 +457,7 @@ void database_init() {
 }
 
 void database_deinit() {
-    for(int i = 3; i < MAX_SIZE; i++) {
+    for(int i = 0; i < MAX_SIZE; i++) {
         if(database[i] > 0) {
             free(database[i]);
         }
@@ -436,7 +469,7 @@ uint8_t database_contains(inttype boundary, int size) {
 }
 
 void database_add(inttype boundary, int size) {
-    printf("[%02i] %lx\n", size, boundary);
+    //printf("[%02i] %lx\n", size, boundary);
     database[size][boundary >> 3] |= 1ull << (boundary & 7);
 }
 
@@ -448,7 +481,7 @@ void* search_worker(void* dummy) {
 
 void clever_search2(inttype boundary, int size) {
     database_init();
-    for(int i = 0; i < MAX_SIZE; i++) {
+    for(int i = 1; i < MAX_SIZE; i++) {
         queue_init(&queues[i]);
     }
     queue_enqueue(&queues[size], normalize(boundary, size));
@@ -468,21 +501,28 @@ void build_database(inttype boundary, int size) {
     struct boundary_size bs;
     int found = 0;
 start:
-    for(int size = 3; size < MAX_SIZE; size++) {
+    for(int size = 1; size < MAX_SIZE; size++) {
         if(!queue_is_empty(&queues[size])) {
             boundary = queue_dequeue(&queues[size]);
-            printf("[%02i] %lx\n", size, boundary);
             if(!database_contains(boundary, size)) {
                 database_add(boundary, size);
+		if(is_mouse(boundary, size)) {
+		    printf("MOUSE ");
+		}
+		check_boundary_size(boundary, size);
                 for(int j = 0; j < size; j++) {
                     bs = insert_ngon(boundary, size, small_ngon);
                     if(bs.size != 0 && bs.size < MAX_SIZE) {
                         inttype normalized = normalize(bs.boundary, bs.size);
+			if(bs.boundary == 0x60 && size == 6)
+			    printf("Found [%02i] %lx\n", bs.size, normalized);
                         queue_enqueue(&queues[bs.size], normalized);
                     }
                     bs = insert_ngon(boundary, size, large_ngon);
                     if(bs.size != 0 && bs.size < MAX_SIZE) {
                         inttype normalized = normalize(bs.boundary, bs.size);
+			if(bs.boundary == 0x41 && size == 6)
+			    printf("Found [%02i] %lx\n", bs.size, normalized);
                         queue_enqueue(&queues[bs.size], normalized);
                     }
                     boundary = rotl(boundary, BITS, size);
@@ -515,10 +555,9 @@ int main(int argc, char* argv[]) {
     //insert_test();
     //queue_test2();
     //debug_search(a, 6);
-
-    remove_test();
+    //remove_test();
     
-    /* build_database(a, 6); */
+    build_database(a, 1);
 
-    /* database_deinit(); */
+    database_deinit();
 }
