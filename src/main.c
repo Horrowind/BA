@@ -5,14 +5,20 @@
 #include <stdlib.h>
 #include <string.h>
 
+#include <unistd.h>
+#include <sys/mman.h>
+#include <sys/types.h>
+#include <errno.h>
+
+#include <pthread.h>
+
 //#include <immintrin.h>
 
 
-#define VALENCE     3
-#define BITS        (VALENCE < 4 ? 1 : 2)
-#define MASK        ((1ull << BITS) - 1)
-#define inttype     uint64_t
-#define NUM_THREADS 5
+#define VALENCE        3
+#define BITS           (VALENCE < 4 ? 1 : 2)
+#define LAST_NODE_MASK ((1ull << BITS) - 1)
+#define inttype        uint64_t
 
 #define rotl(value, shift, size) (((value << shift) & ((1ull << size) - 1)) | (value >> (size - shift)))
 #define rotr(value, shift, size) (((value >> shift) | (value << (size - shift))) & ((1ull << size) - 1))
@@ -61,16 +67,6 @@ typedef struct {
 
 uint32_t hash(inttype input, int size) {
     return input * hash_prime_table[size] % (1ull << size);
-}
-
-void hash_init(hashmap_t* pool) {
-    pool->data   = malloc(sizeof(inttype));
-    pool->length = 8;
-    pool->fill   = 0;
-}
-
-void hash_insert(hashmap_t* pool, inttype input) {
-    
 }
 
 typedef struct {
@@ -160,7 +156,10 @@ void queue_test2() {
     }
 }
 
-inline void check_boundary_size(inttype boundary, int size) {
+#if 0
+inline
+#endif
+void check_boundary_size(inttype boundary, int size) {
 #   ifndef NDEBUG
     if(boundary != 0 && sizeof(inttype) * 8 - __builtin_clzll(boundary) > size * BITS) {
         printf("Boundary %lx is larger then size %i\n", boundary, size);
@@ -169,14 +168,20 @@ inline void check_boundary_size(inttype boundary, int size) {
 #   endif
 }
 
-inline inttype ngon_masks(int size) {
+#if 0
+inline
+#endif
+inttype ngon_masks(int size) {
     assert(size <= (BITS - 1 ? 14 : 31));
-    return (MASK << (BITS *  (size - 1)));
+    return (LAST_NODE_MASK << (BITS *  (size - 1)));
 }
 
-inline inttype ngon_add_compare(int size) {
+#if 0
+inline
+#endif
+inttype ngon_add_compare(int size) {
     assert(size <= (BITS - 1 ? 14 : 31));
-    return (VALENCE - 2) * (((1ull << (BITS *  (size - 1))) - 1) / MASK);
+    return (VALENCE - 2) * (((1ull << (BITS *  (size - 1))) - 1) / LAST_NODE_MASK);
 };
     
 
@@ -194,84 +199,73 @@ struct boundary_size {
     int size;
 };
 
-struct boundary_size insert_ngon(inttype boundary, int size, int ngon) {
-    struct boundary_size bs = {.boundary = 0, .size = 0};
-    // Check if we can add an edge to the first node)
-    if(boundary >> (BITS * (size - 1)) < VALENCE - 2) {
-        bs.boundary = boundary + (1 << (BITS * (size - 1)));
-        uint32_t shift = __builtin_ctzll(ngon_add_compare(size) ^ bs.boundary);
-        shift = shift - (shift % BITS);
-        ngon -= 2;
-        if(shift / BITS <= ngon) {
-            ngon -= shift / BITS;
-            bs.boundary >>= shift;
-            if(bs.boundary == VALENCE - 2) { //We have reached the first node twice
-                if(ngon > 0) {               //Check if we have enough nodes to insert from the ngon left
+struct boundary_size insert_ngon(inttype boundary, int size, int ngon) {         // Example: boundary = 0b01001, size = 5, ngon = 3
+                                                                                 //                                   and valence 3
+    struct boundary_size bs = {.boundary = 0, .size = 0};                        // Initialize...
+    if(boundary >> (BITS * (size - 1)) < VALENCE - 2) {                          // Get the first node (0b*0*1001) and check if one
+                                                                                 //                               could add an ngon
+        bs.boundary = boundary + (1 << (BITS * (size - 1)));                     // bs.boundary = 0b*1*1001
+        uint32_t shift = __builtin_ctzll(ngon_add_compare(size) ^ bs.boundary);  // shift = 1 (the number of trailing 1s of 0b11001
+                                                                                 //                                           is 1) 
+        shift = shift - (shift % BITS);                                          // in the case of valence > 3, we round down (here
+                                                                                 //                                     shift is 1)
+        ngon -= 2;                                                               // ngon = 1
+        if(shift / BITS <= ngon) {                                               // Test if one can insert all the necessary nodes
+            ngon -= shift / BITS;                                                // ngon = 0
+            bs.boundary >>= shift;                                               // bs.boundary = 0b1100
+            if(bs.boundary == VALENCE - 2) {                                     // Check if we have reached the first node for the
+                                                                                 //                   second time (here: we do not)
+                if(ngon > 0) {                                                   // Check if one has  enough nodes to insert to the
+                                                                                 //                                left of the ngon
+                    // Case #1
 #                   if (VALENCE != 3)
                     bs.boundary = 1ull;
 #                   endif
                     bs.boundary <<= BITS * (ngon - 1);
                     bs.size       = ngon;
-                    return bs;
                 } 
             } else {
-                if((bs.boundary & MASK) < VALENCE - 2) {
-                    bs.boundary  += 1;
-                    bs.boundary <<= BITS * (ngon);
-                    bs.size       = size + ngon - shift / BITS;
-                    return bs;
+                if((bs.boundary & LAST_NODE_MASK) < VALENCE - 2) {               // Check if one could add something to the last node (0b110*0*, here: yes)
+                    bs.boundary  += 1;                                           // bs.boundary = 0b1101
+                    bs.boundary <<= BITS * (ngon);                               // bs.boundary = 0b1101
+                    bs.size       = size + ngon - shift / BITS;                  // bs.size = 5 + 0 - 1 = 4
                 }
             }
+        } else {
+            bs.boundary = 0;
         }
     }
-    return (struct boundary_size){.boundary = 0, .size = 0};
+    return bs;
 }
 
-struct boundary_size remove_ngon(inttype boundary, int size, int ngon) {
-    uint32_t shift = __builtin_ctzll(boundary);
-    shift = shift - (shift % BITS);
-    ngon -= shift / BITS;
-    if(ngon < 0) return (struct boundary_size){.boundary = 0, .size = 0}; // something like this
-    boundary <<= shift;
-    if(boundary == 1) {
+struct boundary_size remove_ngon(inttype boundary, int size, int ngon) {        // Example: boundary = 0b1101, size = 4, ngon = 3
+    if((boundary & (boundary - 1)) == 0 && ngon >= size + 2) {                    // Check if we are in Case #1 above
         
-    }
+    } else {
 
-    return (struct boundary_size){.boundary = 0, .size = 0};
 
+        uint32_t shift = __builtin_ctzll(boundary);                                 // shift = 1 (the number of trailing 1s of 0b1101 is 1)
+        shift = shift - (shift % BITS);                                             // round down shift if valence > 3 (here shift = 1)
+        ngon -= shift / BITS;                                                       // ngon = 2
+        if(ngon < 0) return (struct boundary_size){.boundary = 0, .size = 0};       // something like this
+        boundary <<= shift;
+        if((boundary & (boundary - 1)) == 0 && ngon ) {                                             // if boundary is not a power of 2
+        
+        }
     
-    /* struct boundary_size bs = {.boundary = 0, .size = 0}; */
-    /* unsigned char first = boundary & ~ngon_masks(size); */
-    /* // Check if we can add an edge to the first node) */
-    /* if(first < (VALENCE - 2) << (BITS * (size - 1))) { */
-    /*     bs.boundary = boundary + (1 << (BITS * (size - 1))); */
-    /*     uint32_t shift = __builtin_ctzll(ngon_add_compare(size) ^ bs.boundary); */
-    /*     shift = shift - (shift % BITS); */
-    /*     ngon -= 2; */
-    /*     if(shift / BITS <= ngon) { */
-    /*         ngon -= shift / BITS; */
-    /*         bs.boundary >>= shift; */
-    /*         if(bs.boundary == VALENCE - 2) { */
-    /*             if(ngon > 0) { */
-    /*                 bs.boundary <<= BITS * (ngon - 1); */
-    /*                 bs.size       = ngon; */
-    /*                 return bs; */
-    /*             }  */
-    /*         } else { */
-    /*             if((bs.boundary & MASK) < VALENCE - 2) { */
-    /*                 bs.boundary  += 1; */
-    /*                 bs.boundary <<= BITS * (ngon); */
-    /*                 bs.size       = size + ngon - shift / BITS; */
-    /*                 return bs; */
-    /*             } */
-    /*         } */
-    /*     } */
-    /* } */
+        return (struct boundary_size){.boundary = 0, .size = 0};
+    
+    }
+    return (struct boundary_size){.boundary = 0, .size = 0};
 }
 
-inline char is_mouse(inttype boundary, int size) {
+
+#if 0
+inline
+#endif
+char is_mouse(inttype boundary, int size) {
     // A mouse boundary complex has odd length and the head has valence 1
-    if((size & 1) == 1 && ((boundary & MASK) == 0)) {
+    if((size & 1) == 1 && ((boundary & LAST_NODE_MASK) == 0)) {
         boundary >>= 1;
         inttype v = boundary;
         inttype s = sizeof(inttype) * 8; // bit size; must be power of 2
@@ -290,78 +284,78 @@ inline char is_mouse(inttype boundary, int size) {
 
 #if 0
 const inttype ngon_masks2[] = {
-    MASK * ((1 << (BITS *  1)) - 1) / MASK << BITS,
-    MASK * ((1 << (BITS *  2)) - 1) / MASK << BITS,
-    MASK * ((1 << (BITS *  3)) - 1) / MASK << BITS,
-    MASK * ((1 << (BITS *  4)) - 1) / MASK << BITS,
-    MASK * ((1 << (BITS *  5)) - 1) / MASK << BITS,
-    MASK * ((1 << (BITS *  6)) - 1) / MASK << BITS,
-    MASK * ((1 << (BITS *  7)) - 1) / MASK << BITS,
-    MASK * ((1 << (BITS *  8)) - 1) / MASK << BITS,
-    MASK * ((1 << (BITS *  9)) - 1) / MASK << BITS,
-    MASK * ((1 << (BITS * 10)) - 1) / MASK << BITS,
-    MASK * ((1 << (BITS * 11)) - 1) / MASK << BITS,
-    MASK * ((1 << (BITS * 12)) - 1) / MASK << BITS,
-    MASK * ((1 << (BITS * 13)) - 1) / MASK << BITS,
-    MASK * ((1 << (BITS * 14)) - 1) / MASK << BITS,
+    LAST_NODE_MASK * ((1 << (BITS *  1)) - 1) / LAST_NODE_MASK << BITS,
+    LAST_NODE_MASK * ((1 << (BITS *  2)) - 1) / LAST_NODE_MASK << BITS,
+    LAST_NODE_MASK * ((1 << (BITS *  3)) - 1) / LAST_NODE_MASK << BITS,
+    LAST_NODE_MASK * ((1 << (BITS *  4)) - 1) / LAST_NODE_MASK << BITS,
+    LAST_NODE_MASK * ((1 << (BITS *  5)) - 1) / LAST_NODE_MASK << BITS,
+    LAST_NODE_MASK * ((1 << (BITS *  6)) - 1) / LAST_NODE_MASK << BITS,
+    LAST_NODE_MASK * ((1 << (BITS *  7)) - 1) / LAST_NODE_MASK << BITS,
+    LAST_NODE_MASK * ((1 << (BITS *  8)) - 1) / LAST_NODE_MASK << BITS,
+    LAST_NODE_MASK * ((1 << (BITS *  9)) - 1) / LAST_NODE_MASK << BITS,
+    LAST_NODE_MASK * ((1 << (BITS * 10)) - 1) / LAST_NODE_MASK << BITS,
+    LAST_NODE_MASK * ((1 << (BITS * 11)) - 1) / LAST_NODE_MASK << BITS,
+    LAST_NODE_MASK * ((1 << (BITS * 12)) - 1) / LAST_NODE_MASK << BITS,
+    LAST_NODE_MASK * ((1 << (BITS * 13)) - 1) / LAST_NODE_MASK << BITS,
+    LAST_NODE_MASK * ((1 << (BITS * 14)) - 1) / LAST_NODE_MASK << BITS,
 #if (BITS == 1)
-    MASK * ((1 << (BITS * 15)) - 1) / MASK << BITS,
-    MASK * ((1 << (BITS * 16)) - 1) / MASK << BITS,
-    MASK * ((1 << (BITS * 17)) - 1) / MASK << BITS,
-    MASK * ((1 << (BITS * 18)) - 1) / MASK << BITS,
-    MASK * ((1 << (BITS * 19)) - 1) / MASK << BITS,
-    MASK * ((1 << (BITS * 20)) - 1) / MASK << BITS,
-    MASK * ((1 << (BITS * 21)) - 1) / MASK << BITS,
-    MASK * ((1 << (BITS * 22)) - 1) / MASK << BITS,
-    MASK * ((1 << (BITS * 23)) - 1) / MASK << BITS,
-    MASK * ((1 << (BITS * 24)) - 1) / MASK << BITS,
-    MASK * ((1 << (BITS * 25)) - 1) / MASK << BITS,
-    MASK * ((1 << (BITS * 26)) - 1) / MASK << BITS,
-    MASK * ((1 << (BITS * 27)) - 1) / MASK << BITS,
-    MASK * ((1 << (BITS * 28)) - 1) / MASK << BITS,
-    MASK * ((1 << (BITS * 29)) - 1) / MASK << BITS,
-    MASK * ((1 << (BITS * 30)) - 1) / MASK << BITS,
+    LAST_NODE_MASK * ((1 << (BITS * 15)) - 1) / LAST_NODE_MASK << BITS,
+    LAST_NODE_MASK * ((1 << (BITS * 16)) - 1) / LAST_NODE_MASK << BITS,
+    LAST_NODE_MASK * ((1 << (BITS * 17)) - 1) / LAST_NODE_MASK << BITS,
+    LAST_NODE_MASK * ((1 << (BITS * 18)) - 1) / LAST_NODE_MASK << BITS,
+    LAST_NODE_MASK * ((1 << (BITS * 19)) - 1) / LAST_NODE_MASK << BITS,
+    LAST_NODE_MASK * ((1 << (BITS * 20)) - 1) / LAST_NODE_MASK << BITS,
+    LAST_NODE_MASK * ((1 << (BITS * 21)) - 1) / LAST_NODE_MASK << BITS,
+    LAST_NODE_MASK * ((1 << (BITS * 22)) - 1) / LAST_NODE_MASK << BITS,
+    LAST_NODE_MASK * ((1 << (BITS * 23)) - 1) / LAST_NODE_MASK << BITS,
+    LAST_NODE_MASK * ((1 << (BITS * 24)) - 1) / LAST_NODE_MASK << BITS,
+    LAST_NODE_MASK * ((1 << (BITS * 25)) - 1) / LAST_NODE_MASK << BITS,
+    LAST_NODE_MASK * ((1 << (BITS * 26)) - 1) / LAST_NODE_MASK << BITS,
+    LAST_NODE_MASK * ((1 << (BITS * 27)) - 1) / LAST_NODE_MASK << BITS,
+    LAST_NODE_MASK * ((1 << (BITS * 28)) - 1) / LAST_NODE_MASK << BITS,
+    LAST_NODE_MASK * ((1 << (BITS * 29)) - 1) / LAST_NODE_MASK << BITS,
+    LAST_NODE_MASK * ((1 << (BITS * 30)) - 1) / LAST_NODE_MASK << BITS,
 #endif
 };
 
 const inttype ngon_compare2[] = {
-    (VALENCE - 2) * ((1 << (BITS *  1)) - 1) / MASK << BITS,
-    (VALENCE - 2) * ((1 << (BITS *  2)) - 1) / MASK << BITS,
-    (VALENCE - 2) * ((1 << (BITS *  3)) - 1) / MASK << BITS,
-    (VALENCE - 2) * ((1 << (BITS *  4)) - 1) / MASK << BITS,
-    (VALENCE - 2) * ((1 << (BITS *  5)) - 1) / MASK << BITS,
-    (VALENCE - 2) * ((1 << (BITS *  6)) - 1) / MASK << BITS,
-    (VALENCE - 2) * ((1 << (BITS *  7)) - 1) / MASK << BITS,
-    (VALENCE - 2) * ((1 << (BITS *  8)) - 1) / MASK << BITS,
-    (VALENCE - 2) * ((1 << (BITS *  9)) - 1) / MASK << BITS,
-    (VALENCE - 2) * ((1 << (BITS * 10)) - 1) / MASK << BITS,
-    (VALENCE - 2) * ((1 << (BITS * 11)) - 1) / MASK << BITS,
-    (VALENCE - 2) * ((1 << (BITS * 12)) - 1) / MASK << BITS,
-    (VALENCE - 2) * ((1 << (BITS * 13)) - 1) / MASK << BITS,
-    (VALENCE - 2) * ((1 << (BITS * 14)) - 1) / MASK << BITS,
+    (VALENCE - 2) * ((1 << (BITS *  1)) - 1) / LAST_NODE_MASK << BITS,
+    (VALENCE - 2) * ((1 << (BITS *  2)) - 1) / LAST_NODE_MASK << BITS,
+    (VALENCE - 2) * ((1 << (BITS *  3)) - 1) / LAST_NODE_MASK << BITS,
+    (VALENCE - 2) * ((1 << (BITS *  4)) - 1) / LAST_NODE_MASK << BITS,
+    (VALENCE - 2) * ((1 << (BITS *  5)) - 1) / LAST_NODE_MASK << BITS,
+    (VALENCE - 2) * ((1 << (BITS *  6)) - 1) / LAST_NODE_MASK << BITS,
+    (VALENCE - 2) * ((1 << (BITS *  7)) - 1) / LAST_NODE_MASK << BITS,
+    (VALENCE - 2) * ((1 << (BITS *  8)) - 1) / LAST_NODE_MASK << BITS,
+    (VALENCE - 2) * ((1 << (BITS *  9)) - 1) / LAST_NODE_MASK << BITS,
+    (VALENCE - 2) * ((1 << (BITS * 10)) - 1) / LAST_NODE_MASK << BITS,
+    (VALENCE - 2) * ((1 << (BITS * 11)) - 1) / LAST_NODE_MASK << BITS,
+    (VALENCE - 2) * ((1 << (BITS * 12)) - 1) / LAST_NODE_MASK << BITS,
+    (VALENCE - 2) * ((1 << (BITS * 13)) - 1) / LAST_NODE_MASK << BITS,
+    (VALENCE - 2) * ((1 << (BITS * 14)) - 1) / LAST_NODE_MASK << BITS,
 #if (BITS == 1)
-    (VALENCE - 2) * ((1 << (BITS * 15)) - 1) / MASK << BITS,
-    (VALENCE - 2) * ((1 << (BITS * 16)) - 1) / MASK << BITS,
-    (VALENCE - 2) * ((1 << (BITS * 17)) - 1) / MASK << BITS,
-    (VALENCE - 2) * ((1 << (BITS * 18)) - 1) / MASK << BITS,
-    (VALENCE - 2) * ((1 << (BITS * 19)) - 1) / MASK << BITS,
-    (VALENCE - 2) * ((1 << (BITS * 20)) - 1) / MASK << BITS,
-    (VALENCE - 2) * ((1 << (BITS * 21)) - 1) / MASK << BITS,
-    (VALENCE - 2) * ((1 << (BITS * 22)) - 1) / MASK << BITS,
-    (VALENCE - 2) * ((1 << (BITS * 23)) - 1) / MASK << BITS,
-    (VALENCE - 2) * ((1 << (BITS * 24)) - 1) / MASK << BITS,
-    (VALENCE - 2) * ((1 << (BITS * 25)) - 1) / MASK << BITS,
-    (VALENCE - 2) * ((1 << (BITS * 26)) - 1) / MASK << BITS,
-    (VALENCE - 2) * ((1 << (BITS * 27)) - 1) / MASK << BITS,
-    (VALENCE - 2) * ((1 << (BITS * 28)) - 1) / MASK << BITS,
-    (VALENCE - 2) * ((1 << (BITS * 29)) - 1) / MASK << BITS,
-    (VALENCE - 2) * ((1 << (BITS * 30)) - 1) / MASK << BITS,
+    (VALENCE - 2) * ((1 << (BITS * 15)) - 1) / LAST_NODE_MASK << BITS,
+    (VALENCE - 2) * ((1 << (BITS * 16)) - 1) / LAST_NODE_MASK << BITS,
+    (VALENCE - 2) * ((1 << (BITS * 17)) - 1) / LAST_NODE_MASK << BITS,
+    (VALENCE - 2) * ((1 << (BITS * 18)) - 1) / LAST_NODE_MASK << BITS,
+    (VALENCE - 2) * ((1 << (BITS * 19)) - 1) / LAST_NODE_MASK << BITS,
+    (VALENCE - 2) * ((1 << (BITS * 20)) - 1) / LAST_NODE_MASK << BITS,
+    (VALENCE - 2) * ((1 << (BITS * 21)) - 1) / LAST_NODE_MASK << BITS,
+    (VALENCE - 2) * ((1 << (BITS * 22)) - 1) / LAST_NODE_MASK << BITS,
+    (VALENCE - 2) * ((1 << (BITS * 23)) - 1) / LAST_NODE_MASK << BITS,
+    (VALENCE - 2) * ((1 << (BITS * 24)) - 1) / LAST_NODE_MASK << BITS,
+    (VALENCE - 2) * ((1 << (BITS * 25)) - 1) / LAST_NODE_MASK << BITS,
+    (VALENCE - 2) * ((1 << (BITS * 26)) - 1) / LAST_NODE_MASK << BITS,
+    (VALENCE - 2) * ((1 << (BITS * 27)) - 1) / LAST_NODE_MASK << BITS,
+    (VALENCE - 2) * ((1 << (BITS * 28)) - 1) / LAST_NODE_MASK << BITS,
+    (VALENCE - 2) * ((1 << (BITS * 29)) - 1) / LAST_NODE_MASK << BITS,
+    (VALENCE - 2) * ((1 << (BITS * 30)) - 1) / LAST_NODE_MASK << BITS,
 #endif
 };
 
 struct boundary_size insert_ngon2(inttype boundary, int size, int ngon) {
     struct boundary_size bs = {0, 0};
-    unsigned char first = boundary & MASK;
+    unsigned char first = boundary & LAST_NODE_MASK;
     if(first >= VALENCE - 2) return bs;
     inttype masked_boundary = boundary & ngon_masks2[size];
     /* if(masked_boundary == ngon_compare[size]) { */
@@ -372,7 +366,7 @@ struct boundary_size insert_ngon2(inttype boundary, int size, int ngon) {
         ngon -= 2;
         if(shift / BITS > ngon) return bs;
         ngon -= shift;
-        bs.boundary   = ((boundary >> shift) & ~MASK);
+        bs.boundary   = ((boundary >> shift) & ~LAST_NODE_MASK);
         bs.boundary  += (1 << BITS);
         bs.boundary <<= BITS * (ngon);
         bs.boundary  += first + 1;
@@ -384,14 +378,14 @@ struct boundary_size insert_ngon2(inttype boundary, int size, int ngon) {
 
 struct boundary_size remove_ngon2(inttype boundary, int size, int ngon) {
     struct boundary_size bs = {0, 0};
-    unsigned char first = boundary & MASK;
+    unsigned char first = boundary & LAST_NODE_MASK;
     if(first == 0) return bs;
     uint32_t shift = __builtin_ctzll(ngon_add_compare[ngon] ^ (boundary & ngon_masks[ngon]));
     shift = shift - (shift % BITS) - BITS;
     ngon -= 2;
     if(shift / BITS > ngon) return bs;
     ngon -= shift;
-    bs.boundary   = ((boundary >> shift) & ~MASK);
+    bs.boundary   = ((boundary >> shift) & ~LAST_NODE_MASK);
     bs.boundary  += (1ull << BITS);
     bs.boundary <<= BITS * (ngon);
     bs.boundary  += first + 1;
@@ -440,19 +434,26 @@ void mouse_test() {
 
 int small_ngon = 5;
 int large_ngon = 7;
-#define MAX_SIZE 20
+#define MAX_SIZE 30
 
-queue_t queues[MAX_SIZE];
 uint8_t* database[MAX_SIZE];
 
 void database_init() {
     for(int i = 1; i < MAX_SIZE; i++) {
-        uint64_t size = ((1ull << i) + 15) / 8;
-        database[i] = malloc(size);
-        if(database[i] <= 0) {
-            printf("Allocation of Database[%i] failed\n", i);
+        uint64_t size = i < 3 ? 1 : 1ull << (i - 3);
+        if(size < sysconf(_SC_PAGESIZE)) {
+            database[i] = malloc(size);
+            if(database[i] <= 0) {
+                printf("Allocation of Database[%i] failed (size: 0x%lx)\n", i, size);
+            } else {
+                memset(database[i], 0, size);
+            }
         } else {
-            memset(database[i], 0, size);
+            database[i] = mmap(NULL, size, PROT_READ | PROT_WRITE, MAP_PRIVATE | MAP_ANONYMOUS, -1, 0);
+            if(database[i] == MAP_FAILED) {
+                char* error_string = strerror(errno);
+                printf("Allocation of Database[%i] failed (size: 0x%lx): %s\n", i, size, error_string);
+            }
         }
     }
 }
@@ -460,7 +461,12 @@ void database_init() {
 void database_deinit() {
     for(int i = 0; i < MAX_SIZE; i++) {
         if(database[i] > 0) {
-            free(database[i]);
+            uint64_t size = i < 3 ? 1 : 1ull << (i - 3);
+            if(size < sysconf(_SC_PAGESIZE))  {
+                free(database[i]);
+            } else {
+                munmap(database[i], size);
+            }
         }
     }
 }
@@ -475,38 +481,71 @@ void database_add(inttype boundary, int size) {
 }
 
 
-void* search_worker(void* dummy) {
+/* void clever_search2(inttype boundary, int size) { */
+/*     database_init(); */
+/*     for(int i = 1; i < MAX_SIZE; i++) { */
+/*         queue_init(&queues[i]); */
+/*     } */
+/*     queue_enqueue(&queues[size], normalize(boundary, size)); */
+/*     //pthread_t threads[NUM_THREADS]; */
+/*     for(int i = 0; i < NUM_THREADS; i++) { */
+/*         //pthread_create(&threads[i], NULL, search_worker, NULL); */
+/*     } */
+/* } */
 
-    return NULL;
-}
+pthread_mutex_t number_of_active_threads_mutex;
+int number_of_active_threads;
 
-void clever_search2(inttype boundary, int size) {
-    database_init();
-    for(int i = 1; i < MAX_SIZE; i++) {
-        queue_init(&queues[i]);
-    }
-    queue_enqueue(&queues[size], normalize(boundary, size));
-    //pthread_t threads[NUM_THREADS];
-    for(int i = 0; i < NUM_THREADS; i++) {
-        //pthread_create(&threads[i], NULL, search_worker, NULL);
-    }
-}
-
-
-void build_database(inttype boundary, int size) {
-    database_init();
+struct thread_data {
+    queue_t queues[MAX_SIZE];
+};
+    
+void thread_data_init(struct thread_data* data) {
     for(int i = 0; i < MAX_SIZE; i++) {
-        queue_init(&queues[i]);
+        queue_init(&data->queues[i]);
     }
-    queue_enqueue(&queues[size], normalize(boundary, size));
+}
+
+#define NUM_THREADS 2
+
+void* working_thread(void* thread_data_ptr) {
+    pthread_detach(pthread_self());
+    pthread_mutex_lock(&number_of_active_threads_mutex);
+    number_of_active_threads++;
+    pthread_mutex_unlock(&number_of_active_threads_mutex);
+    struct thread_data data = *(struct thread_data*)thread_data_ptr;
+    free(thread_data_ptr);
+    
+    
+    
     struct boundary_size bs;
     int found = 0;
 start:
+    if(number_of_active_threads < NUM_THREADS) {
+        int res = pthread_mutex_trylock(&number_of_active_threads_mutex);
+        if(res == 0) {
+            // We have the mutex
+            if(number_of_active_threads < NUM_THREADS) {
+                struct thread_data* new_data = malloc(sizeof(struct thread_data));
+                for(int i = 0; i < MAX_SIZE; i++) {
+                    new_data->queues[i] = data.queues[i];
+                    new_data->queues[i].data = malloc(sizeof(inttype) * data.queues[i].length);
+                    memcpy(new_data->queues[i].data, data.queues[i].data, sizeof(inttype) * data.queues[i].length);
+                }
+                pthread_t dummy;
+                pthread_create(&dummy, NULL, working_thread, new_data);
+            }
+            pthread_mutex_unlock(&number_of_active_threads_mutex);
+        } else if(res != EBUSY) {
+            // An error occured:
+            assert(0 && "Error when trying to lock the mutex");
+        }
+    }
+    
     for(int size = 1; size < MAX_SIZE; size++) {
-        if(!queue_is_empty(&queues[size])) {
-            boundary = queue_dequeue(&queues[size]);
+        if(!queue_is_empty(&data.queues[size])) {
+            inttype boundary = queue_dequeue(&data.queues[size]);
             if(!database_contains(boundary, size)) {
-                database_add(boundary, size);
                 check_boundary_size(boundary, size);
                 for(int j = 0; j < size; j++) {
                     if(is_mouse(boundary, size)) {
@@ -515,30 +554,38 @@ start:
                     bs = insert_ngon(boundary, size, small_ngon);
                     if(bs.size != 0 && bs.size < MAX_SIZE) {
                         inttype normalized = normalize(bs.boundary, bs.size);
-                        if(bs.boundary == 0x41 && bs.size == 6)
-                            printf("Found [%02i] %lx during inserting %i in [%02i] %lx\n", bs.size, normalized, small_ngon, size, boundary);
-                        queue_enqueue(&queues[bs.size], normalized);
+                        queue_enqueue(&data.queues[bs.size], normalized);
                     }
                     bs = insert_ngon(boundary, size, large_ngon);
                     if(bs.size != 0 && bs.size < MAX_SIZE) {
                         inttype normalized = normalize(bs.boundary, bs.size);
-                        if(bs.boundary == 0x41 && bs.size == 6)
-                            printf("Found [%02i] %lx during inserting %i in [%02i] %lx\n", bs.size, normalized, small_ngon, size, boundary);
-                        queue_enqueue(&queues[bs.size], normalized);
+                        queue_enqueue(&data.queues[bs.size], normalized);
                     }
                     boundary = rotl(boundary, BITS, size);
                 }
+                database_add(boundary, size);
             }
             goto start;
         }
     }
     for(int i = 0; i < MAX_SIZE; i++) {
-        queue_deinit(&queues[i]);
+        queue_deinit(&data.queues[i]);
     }
+
+    pthread_mutex_lock(&number_of_active_threads_mutex);
+    number_of_active_threads--;
+    pthread_mutex_unlock(&number_of_active_threads_mutex);
+    return NULL;
 }
 
 
+
+long task_ids[NUM_THREADS];
 int main(int argc, char* argv[]) {
+
+    pthread_mutex_init(&number_of_active_threads_mutex, NULL);
+    number_of_active_threads = 0;
+    
     inttype a = 0;
     if(argc == 3) {
         small_ngon = atoi(argv[1]);
@@ -548,17 +595,15 @@ int main(int argc, char* argv[]) {
         large_ngon = 7;
     }
 
-    /* struct boundary_size bs = insert_ngon(0xc50, 12, 7); */
-    /* printf("%lx[%i]\n",bs.boundary, bs.size); */
-    /* printf("%lx[%i]\n",normalize(bs.boundary, bs.size), bs.size); */
+    database_init();
     
-    
-    //insert_test();
-    //queue_test2();
-    //debug_search(a, 6);
-    //remove_test();
-    
-    build_database(a, 1);
+    struct thread_data* new_data = malloc(sizeof(struct thread_data));
+    for(int i = 0; i < MAX_SIZE; i++) {
+        queue_init(&new_data->queues[i]);
+    }
+    queue_enqueue(&new_data->queues[1], 0);
+    pthread_t dummy;
+    pthread_create(&dummy, NULL, working_thread, new_data);
 
-    database_deinit();
+    pthread_exit(0);
 }
