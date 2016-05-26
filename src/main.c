@@ -498,6 +498,7 @@ int number_of_active_threads;
 
 struct thread_data {
     queue_t queues[MAX_SIZE];
+    int items;
 };
     
 void thread_data_init(struct thread_data* data) {
@@ -519,22 +520,24 @@ void* working_thread(void* thread_data_ptr) {
     
     
     struct boundary_size bs;
-    int found = 0;
 start:
     if(number_of_active_threads < NUM_THREADS) {
         int res = pthread_mutex_trylock(&number_of_active_threads_mutex);
         if(res == 0) {
             // We have the mutex
-            if(number_of_active_threads < NUM_THREADS) {
+            if(number_of_active_threads < NUM_THREADS && data.items > 100) {
                 struct thread_data* new_data = malloc(sizeof(struct thread_data));
                 for(int i = 0; i < MAX_SIZE; i++) {
                     queue_init(&new_data->queues[i]);
                     int tmp = data.queues[i].head - data.queues[i].tail;
                     int workload = (tmp % data.queues[i].length + data.queues[i].length) % data.queues[i].length;
                     int half_of_the_work = (workload + 1) / 2;
-                    new_data->queues[i].data = malloc(sizeof(inttype) * half_of_the_work);
-                    for(int j = 0; j < half_of_the_work; j++) {
+                    int part_of_the_work = half_of_the_work > 50 ? 50 : half_of_the_work;                        
+                    new_data->queues[i].data = malloc(sizeof(inttype) * part_of_the_work);
+                    for(int j = 0; j < part_of_the_work; j++) {
                         queue_enqueue(&new_data->queues[i], queue_dequeue(&data.queues[i]));
+                        new_data->items++;
+                        data.items--;
                     }
                 }
                 pthread_t dummy;
@@ -550,6 +553,7 @@ start:
     for(int size = 1; size < MAX_SIZE; size++) {
         if(!queue_is_empty(&data.queues[size])) {
             inttype boundary = queue_dequeue(&data.queues[size]);
+            data.items--;
             if(!database_contains(boundary, size)) {
                 check_boundary_size(boundary, size);
                 for(int j = 0; j < size; j++) {
@@ -562,11 +566,13 @@ start:
                     if(bs.size != 0 && bs.size < MAX_SIZE) {
                         inttype normalized = normalize(bs.boundary, bs.size);
                         queue_enqueue(&data.queues[bs.size], normalized);
+                        data.items++;
                     }
                     bs = insert_ngon(boundary, size, large_ngon);
                     if(bs.size != 0 && bs.size < MAX_SIZE) {
                         inttype normalized = normalize(bs.boundary, bs.size);
                         queue_enqueue(&data.queues[bs.size], normalized);
+                        data.items++;
                     }
                     boundary = rotl(boundary, BITS, size);
                 }
