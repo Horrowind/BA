@@ -528,9 +528,14 @@ start:
             if(number_of_active_threads < NUM_THREADS) {
                 struct thread_data* new_data = malloc(sizeof(struct thread_data));
                 for(int i = 0; i < MAX_SIZE; i++) {
-                    new_data->queues[i] = data.queues[i];
-                    new_data->queues[i].data = malloc(sizeof(inttype) * data.queues[i].length);
-                    memcpy(new_data->queues[i].data, data.queues[i].data, sizeof(inttype) * data.queues[i].length);
+                    queue_init(&new_data->queues[i]);
+                    int tmp = data.queues[i].head - data.queues[i].tail;
+                    int workload = (tmp % data.queues[i].length + data.queues[i].length) % data.queues[i].length;
+                    int half_of_the_work = (workload + 1) / 2;
+                    new_data->queues[i].data = malloc(sizeof(inttype) * half_of_the_work);
+                    for(int j = 0; j < half_of_the_work; j++) {
+                        queue_enqueue(&new_data->queues[i], queue_dequeue(&data.queues[i]));
+                    }
                 }
                 pthread_t dummy;
                 pthread_create(&dummy, NULL, working_thread, new_data);
@@ -548,9 +553,11 @@ start:
             if(!database_contains(boundary, size)) {
                 check_boundary_size(boundary, size);
                 for(int j = 0; j < size; j++) {
+//#ifndef NDEBUG
                     if(is_mouse(boundary, size)) {
                         printf("MOUSE [%02i] %lx\n", size, boundary);
                     }
+//#endif
                     bs = insert_ngon(boundary, size, small_ngon);
                     if(bs.size != 0 && bs.size < MAX_SIZE) {
                         inttype normalized = normalize(bs.boundary, bs.size);
