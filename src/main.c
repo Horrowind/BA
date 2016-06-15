@@ -21,7 +21,7 @@
 #define NUM_THREADS 2
 int small_ngon = 5;
 int large_ngon = 7;
-#define MAX_SIZE 29
+#define MAX_SIZE 30
 
 #define VALENCE        3
 #define BITS           (VALENCE < 4 ? 1 : 2)
@@ -192,12 +192,10 @@ void database_add(boundary_t boundary, int size) {
 }
 
 enum thread_state {
-    THREAD_STATE_TERMINATING    =   0,
-    THREAD_STATE_NO_ITEMS       =   1,
-    THREAD_STATE_WAITING        =   2,
-    THREAD_STATE_RESUMING       =   3,
-    THREAD_STATE_RUNNING        =   4,
-    THREAD_STATE_CAN_SHARE      =   5,
+    THREAD_STATE_TERMINATING,
+    THREAD_STATE_WAITING,
+    THREAD_STATE_RUNNING,
+    THREAD_STATE_CAN_SHARE,
 };
 
 struct thread_data {
@@ -230,109 +228,13 @@ void* working_thread(void* thread_number_disguised_as_ptr) {
     struct thread_data* data = &thread_manager.data[thread_number];
 
     while(1) {
-        if(data->state == THREAD_STATE_NO_ITEMS) {
-#ifndef NDEBUG
-            printf("Thread %li has no items...\n", thread_number);
-#endif //NDEBUG
-            pthread_mutex_lock(&thread_manager.mutex);
-            thread_manager.number_of_active_threads--;
-            if(thread_manager.number_of_active_threads == 0) {
-                for(long other_thread = (thread_number + 1) % NUM_THREADS;
-                    other_thread != thread_number;
-                    other_thread = (other_thread + 1) % NUM_THREADS) {
-                    thread_manager.data[other_thread].state = THREAD_STATE_TERMINATING;
-#ifndef NDEBUG
-                    printf("Thread %li signals thread %li to shut down...\n", thread_number, other_thread);
-#endif //NDEBUG
-                    pthread_cond_signal(&thread_manager.data[other_thread].thread_cond);
-                }
-#ifndef NDEBUG
-                printf("Thread %li frees the lock...\n", thread_number);
-#endif //NDEBUG
-                pthread_mutex_unlock(&thread_manager.mutex);
-                page_allocator_deinit(&data->page_allocator);
-                /* for(int size = 1; size < MAX_SIZE; size++) { */
-                /*     queue_deinit(&data->queues[size]); */
-                /* } */
-#ifndef NDEBUG
-                printf("Canceled thread %li\n", thread_number);
-#endif //NDEBUG
-                pthread_exit(NULL);
-            }
-            data->state = THREAD_STATE_WAITING;
-
-            while(data->state == THREAD_STATE_WAITING) {
-#ifndef NDEBUG
-                printf("Thread %li waits...\n", thread_number);
-#endif //NDEBUG
-                pthread_cond_wait(&data->thread_cond, &thread_manager.mutex);
-            }
-#ifndef NDEBUG
-            printf("Thread %li finished waiting...\n", thread_number);
-#endif //NDEBUG
-            if(data->state == THREAD_STATE_TERMINATING) {
-                pthread_mutex_unlock(&thread_manager.mutex);
-                page_allocator_deinit(&data->page_allocator);
-#ifndef NDEBUG
-                printf("Canceled thread %li\n", thread_number);
-#endif //NDEBUG
-                pthread_exit(NULL);
-            }
-#ifndef NDEBUG
-            printf("Thread %li sees %i active threads\n", thread_number, thread_manager.number_of_active_threads);
-#endif //NDEBUG
-            /* for(int i = 1; i < MAX_SIZE; i++) { */
-            /*     printf("Thread %li has head_page %lx\n", thread_number, (ulong)data->queues[i].head_page); */
-            /*     printf("Thread %li has tail_page %lx\n", thread_number, (ulong)data->queues[i].tail_page); */
-            /*     printf("Thread %li has head_index %i\n", thread_number, data->queues[i].head_index); */
-            /*     printf("Thread %li has tail_index %i\n", thread_number, data->queues[i].tail_index); */
-            /* } */
-            data->state = THREAD_STATE_RUNNING;
-#ifndef NDEBUG
-            printf("Thread %li frees the lock...\n", thread_number);
-#endif //NDEBUG
-            pthread_mutex_unlock(&thread_manager.mutex);
-        }
-        
         if(thread_manager.number_of_active_threads < NUM_THREADS && data->state == THREAD_STATE_CAN_SHARE) {
-#ifndef NDEBUG
-            printf("Thread %li considers handing out items...\n", thread_number);
-#endif //NDEBUG
             int res = pthread_mutex_trylock(&thread_manager.mutex);
             if(res == 0) {
-#ifndef NDEBUG
-                printf("Thread %li has the lock...\n", thread_number);
-                printf("Thread %li sees %i active threads\n", thread_number, thread_manager.number_of_active_threads);
-#endif //NDEBUG
                 if(thread_manager.number_of_active_threads < NUM_THREADS) {
                     ulong next_waiting_thread = (thread_number + 1) % NUM_THREADS;
                     while(thread_manager.data[next_waiting_thread].state != THREAD_STATE_WAITING) {
                         next_waiting_thread = (next_waiting_thread + 1) % NUM_THREADS;
-#ifndef NDEBUG
-                        switch(thread_manager.data[next_waiting_thread].state) {
-                        case THREAD_STATE_TERMINATING:
-                            printf("Observation: Thread %li is terminating\n", next_waiting_thread);
-                            break;
-                        case THREAD_STATE_NO_ITEMS:
-                            printf("Observation: Thread %li has no items\n", next_waiting_thread);
-                            break;
-                        case THREAD_STATE_WAITING:
-                            printf("Observation: Thread %li is waiting\n", next_waiting_thread);
-                            break;
-                        case THREAD_STATE_RESUMING:
-                            printf("Observation: Thread %li is resuming\n", next_waiting_thread);
-                            break;
-                        case THREAD_STATE_RUNNING:
-                            printf("Observation: Thread %li is running\n", next_waiting_thread);
-                            break;
-                        case THREAD_STATE_CAN_SHARE:
-                            printf("Observation: Thread %li can share\n", next_waiting_thread);
-                            break;
-                        default:
-                            assert(0 && "Found impossible thread state!\n");
-                        }
-#endif //NDEBUG
-
                     }
 
                     struct thread_data* other_data = &thread_manager.data[next_waiting_thread];
@@ -342,22 +244,13 @@ void* working_thread(void* thread_number_disguised_as_ptr) {
                             queue_move_first_page(&data->queues[i], &other_data->queues[i]);
                         }
                     }
-                    other_data->state = THREAD_STATE_RESUMING;
+                    other_data->state = THREAD_STATE_RUNNING;
                     thread_manager.number_of_active_threads++;
 
-#ifndef NDEBUG
-                    printf("Thread %li signals thread %li to wake up...\n", thread_number, next_waiting_thread);
-#endif //NDEBUG
                     pthread_cond_signal(&other_data->thread_cond);
                 }
-#ifndef NDEBUG
-                printf("Thread %li frees the lock...\n", thread_number);
-#endif //NDEBUG
                 pthread_mutex_unlock(&thread_manager.mutex);
             } else {
-#ifndef NDEBUG
-                printf("Thread %li did not get the lock.\n", thread_number);
-#endif //NDEBUG
                 assert(res == EBUSY && "Error when trying to lock the mutex");
             }
         }
@@ -366,21 +259,16 @@ void* working_thread(void* thread_number_disguised_as_ptr) {
         boundary_size_t bs;
         for(int size = 1; size < MAX_SIZE; size++) {
             if(!queue_is_empty(&data->queues[size])) {
-
-                /* printf("Thread %li dequeues.\n", thread_number); */
                 boundary_t boundary = queue_dequeue(&data->queues[size]);
-                /* printf("Thread %li did dequeue.\n", thread_number); */
                 check_boundary_size(boundary, size);
                 if(!database_contains(boundary, size)) {
 #ifndef NDEBUG
                     printf("Thread %li found [%02i] %lx\n", thread_number, size, boundary);
 #endif
                     for(int j = 0; j < size; j++) {
-//#ifndef NDEBUG
                         if(is_mouse(boundary, size)) {
                             printf("Thread %li found MOUSE [%02i] %lx\n", thread_number, size, boundary);
                         }
-//#endif
                         bs = insert_ngon(boundary, size, small_ngon);
                         if(bs.size != 0 && bs.size < MAX_SIZE) {
                             boundary_t normalized = normalize(bs.boundary, bs.size);
@@ -401,7 +289,33 @@ void* working_thread(void* thread_number_disguised_as_ptr) {
             }
             
         }
-        if(has_no_items) data->state = THREAD_STATE_NO_ITEMS;
+        
+        if(has_no_items) {
+            pthread_mutex_lock(&thread_manager.mutex);
+            thread_manager.number_of_active_threads--;
+            if(thread_manager.number_of_active_threads == 0) {
+                for(long other_thread = (thread_number + 1) % NUM_THREADS;
+                    other_thread != thread_number;
+                    other_thread = (other_thread + 1) % NUM_THREADS) {
+                    thread_manager.data[other_thread].state = THREAD_STATE_TERMINATING;
+                    pthread_cond_signal(&thread_manager.data[other_thread].thread_cond);
+                }
+                pthread_mutex_unlock(&thread_manager.mutex);
+                page_allocator_deinit(&data->page_allocator);
+                pthread_exit(NULL);
+            }
+            data->state = THREAD_STATE_WAITING;
+
+            while(data->state == THREAD_STATE_WAITING) {
+                pthread_cond_wait(&data->thread_cond, &thread_manager.mutex);
+            }
+            if(data->state == THREAD_STATE_TERMINATING) {
+                pthread_mutex_unlock(&thread_manager.mutex);
+                page_allocator_deinit(&data->page_allocator);
+                pthread_exit(NULL);
+            }
+            pthread_mutex_unlock(&thread_manager.mutex);
+        }
     };
 }
 
@@ -421,7 +335,6 @@ int main(int argc, char* argv[]) {
 
     pthread_mutex_init(&thread_manager.mutex, NULL);
     thread_manager.number_of_active_threads = NUM_THREADS;
-
 
     thread_data_init(&thread_manager.data[0]);
     
@@ -444,11 +357,10 @@ int main(int argc, char* argv[]) {
         printf("Waiting for thread %i successfully!\n", thread_number);
     }
 
-    for(int i = 1; i < MAX_SIZE; i++) {
-        int s = 0;
-        int t = 0;
-        for(int j = 0; j < (1 << i); j++) {
-            if(database_contains(j, i)) s++;
-        }
-    }
+    /* for(int i = 1; i < MAX_SIZE; i++) { */
+    /*     int s = 0; */
+    /*     for(int j = 0; j < (1 << i); j++) { */
+    /*         if(database_contains(j, i)) s++; */
+    /*     } */
+    /* } */
 }
