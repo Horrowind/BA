@@ -1,7 +1,10 @@
 #include <sys/mman.h>
 
-#include "util.h"
+#include "queue.h"
+
+#ifndef NULL
 #define NULL ((void*)0)
+#endif //NULL
 
 void page_allocator_init(page_allocator_t* page_allocator) {
     page_allocator->empty_list = NULL;
@@ -50,7 +53,7 @@ void queue_deinit(queue_t* queue) {
 
 
 inline
-void queue_enqueue(queue_t* queue, boundary_t item) {
+void queue_enqueue(queue_t* queue, boundary_bits_t item) {
     queue_page_t* queue_head_page = queue->head_page;
     if(queue->head_index < QUEUE_SIZE_PER_PAGE) {
         queue_head_page->entries[queue->head_index] = item;
@@ -69,8 +72,8 @@ b32 queue_is_empty(queue_t* queue) {
 }
 
 inline
-boundary_t queue_dequeue(queue_t* queue) {
-    boundary_t result;
+boundary_bits_t queue_dequeue(queue_t* queue) {
+    boundary_bits_t result;
     if(queue->tail_index < QUEUE_SIZE_PER_PAGE) {
         result = queue->tail_page->entries[queue->tail_index];
         queue->tail_index++;
